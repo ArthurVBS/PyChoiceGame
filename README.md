@@ -1,1 +1,2 @@
-# My_Video_Game
+# My Video Game
+- My first video game hub using the Python language
