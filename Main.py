@@ -803,10 +803,10 @@ def options(x):
         window.title(f"Level 0{w+1}")
         if x == "A":
             if foods >= 4:
-                lbl_toplevel = "Um urso é atrído pela\nsua comida e tem um\nbelo banquete"
+                lbl_toplevel = "Um urso é atraído pela\nsua comida e tem um\nbelo banquete"
                 losewin_hearts = 0
                 losewin_foods = 0
-                gameover()
+                gameover("True")
             else:
                 if random == 1 or random == 2:
                     lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu bem e partiu\nna manhã seguinte"
