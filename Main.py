@@ -7,7 +7,7 @@ from random import randint
 import os
 
 #____________________________________________________________________________________________________________
-#Functions and Variables
+#Functions
 
 def gameover(Value):
     if Value == "True":
@@ -310,6 +310,210 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods):
 
     win_toplevel.mainloop()
 
+def show_continue():
+    if ok_cancel_newgame == True:
+            window.title("Level 01")
+            btn_continue.config(fg = "#000", relief = "ridge", command = lambda: continuar(), activebackground="#ccc",
+                                activeforeground=fg, cursor="hand2")
+
+def show_game():
+    root_status.place(x = 0, y = 280, width = width - 23, height = 175)
+    root_narrative.place(x = 0, y = 0, width = width - 23, height = 280)
+    btn_back_newgame.place(x = 605, y = 60, width = 85, height = 45)
+
+    default()
+
+    show_heart()
+    show_food()
+    show_key()
+    show_way()
+    show_item()
+    show_labels_options()
+
+    clear_main_menu()
+
+def show_introduction_and_tutorial():
+    global ok_cancel_newgame
+    global executions_made
+    window.title("Introdução")
+    clear_main_menu()
+
+    #Show Introductions
+    def show_introduction_01():
+        global executions_made
+        introduction_text = "Tudo ia aos conformes naquela bela manhã em um\n" +\
+        "antigo e misterioso vilarejo, porém algo estranho\n" +\
+        "ocorreu, todos os moradores sumiram naquela manhã.\n\n" +\
+        "Contudo restou apenas uma pessoa, VOCÊ, uma garota\n" +\
+        "que por algum motivo você não sumiu e acordou\n" +\
+        "sem saber ao certo o que aconteceu."
+
+        lbl_int_and_tut.config(text = introduction_text)
+    
+    def show_introduction_02():
+        global executions_made
+        introduction_text = "Deseperada, você procurou em todo o vilarejo\n" +\
+        "por alguém, mas não teve sucesso, daí começa a sua\n" +\
+        "grande jornada, você busca saber o que aconteceu\n" +\
+        "com o seu vilarejo.\n\n" +\
+        "Então você percebe que para além do vilarejo há\n" +\
+        "três possíveis caminhos para procurar:\n\n" +\
+        "A Floresta - Os Alpes - Os Moinhos"
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    def show_introduction_03():
+        global executions_made
+        introduction_text = "A FLORESTA\n\n\n" +\
+        "Fica após o portão norte do vilarejo, no portão\n" +\
+        "há uma tranca de bronze e você possui essa chave,\n" +\
+        "pois a encontrou em uma das casas que estavam\n" +\
+        "abertas."
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    def show_introduction_04():
+        global executions_made
+        introduction_text = "OS ALPES\n\n\n" +\
+        "Ficam após o portão sul do vilarejo, no portão\n" +\
+        "há uma tranca de prata, você precisará de uma\n" +\
+        "chave para passar."
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    def show_introduction_05():
+        global executions_made
+        introduction_text = "OS MOINHOS\n\n\n" +\
+        "Ficam após o portão oeste do vilarejo, no portão\n" +\
+        "há uma tranca de ouro, você precisará também\n" +\
+        "de uma chave para passar."
+
+        lbl_int_and_tut.config(text = introduction_text)
+        
+    def show_introduction_06():
+        window.title("Introdução")
+        lbl_int_and_tut_main.config(text = "- Introdução -")
+
+        global executions_made
+        introduction_text = "Além dos caminhos há vários lugares com\n" +\
+        "trancas de ouro, prata, bronze e também\n" +\
+        "um símbolo peculiar.\n\n" +\
+        "Sua busca começará pela floresta.\n\n" +\
+        "Você pega tudo que tem e guarda em sua mochila\n" +\
+        "Nela há comida, a chave de bronze, um isqueiro\n"+\
+        "e também alguns frascos de remédios.\n"
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+
+    #Show Tutorial
+    def show_tutorial_01():
+        window.title("Tutorial")
+        lbl_int_and_tut_main.config(text = "- Tutorial -")
+
+        global executions_made
+        introduction_text = "Working" +\
+        "" +\
+        ""
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    #Next and Back
+    def next_(x):
+        global executions_made
+        if x == 1:
+            window.title("Introdução")
+            show_introduction_01()
+            executions_made +=1
+
+        elif x == 2:
+            show_introduction_02()
+            executions_made += 1
+
+        elif x == 3:
+            show_introduction_03()
+            executions_made += 1
+
+        elif x == 4:
+            show_introduction_04()
+            executions_made += 1
+
+        elif x == 5:
+            show_introduction_05()
+            executions_made += 1
+
+        elif x == 6:
+            show_introduction_06()
+            executions_made += 1
+
+        elif x == 7:
+            show_tutorial_01()
+            executions_made += 1
+
+        elif x == 8:
+            lbl_int_and_tut_main.place_forget()
+            lbl_int_and_tut.place_forget()
+            btn_int_and_tut_next.place_forget()
+            btn_int_and_tut_back.place_forget()
+            show_game()
+            show_continue()
+        
+    def back_(x):
+        global executions_made
+        x -= 2
+        if x == 0:
+            lbl_int_and_tut_main.place_forget()
+            lbl_int_and_tut.place_forget()
+            btn_int_and_tut_next.place_forget()
+            btn_int_and_tut_back.place_forget()
+            show_main_menu()
+
+        if x == 1:
+            show_introduction_01()
+            executions_made -= 1
+
+        if x == 2:
+            show_introduction_02()
+            executions_made -= 1
+
+        if x == 3:
+            show_introduction_03()
+            executions_made -= 1
+
+        if x == 4:
+            show_introduction_04()
+            executions_made -= 1
+
+        if x == 5:
+            show_introduction_05()
+            executions_made -= 1
+
+        if x == 6:
+            show_introduction_06()
+            executions_made -= 1
+
+        if x == 7:
+            show_tutorial_01()
+            executions_made -= 1
+
+    #Labels & Buttons
+    executions_made = 2
+
+    lbl_int_and_tut_main = Label(root, text = " - Introdução - ", bg=bg, font = "courier 40 bold")
+    lbl_int_and_tut = Label(root, text = "", bg=bg, bd = 5, relief = "solid", font = "courier 16 italic",
+    anchor = CENTER, justify = CENTER)
+    show_introduction_01()
+    btn_int_and_tut_next = Button(root, text= "Próximo", bg=bg, bd = 2, relief = "ridge", command = lambda: next_(executions_made), cursor="hand2",
+                    font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+    btn_int_and_tut_back = Button(root, text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: back_(executions_made), cursor="hand2",
+                    font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+
+    #Place
+    lbl_int_and_tut_main.place(x = 10, y = 10, width = width - 40, height = 65)
+    lbl_int_and_tut.place(x = 10, y = 80, width = width -40, height = 300)
+    btn_int_and_tut_next.place(x = 440, y = 390, width = 250, height = 50)
+    btn_int_and_tut_back.place(x = 10, y = 390, width = 250, height = 50)
+
 def show_main_menu():
     window.title("Main Menu")
     root.config(bg = bg)
@@ -353,12 +557,13 @@ def default():
     global wd
     global hearts
     global foods
+    global x
     bronze_key = silver_key = golden_key = wolfhide = False
     lighter = True
     op = 0
     world = level = wd = 1
     hearts = foods = 3
-#Editar
+#Editar - 8
 def options(x):
     global hearts
     global foods
@@ -738,7 +943,7 @@ def options(x):
                 losewin_foods = 0
             else:
                 if random == 1 or random == 2 or random == 3:
-                    lbl_toplevel = "Ao passar pelas espinhos\nvocê se corta várias vezes"
+                    lbl_toplevel = "Ao passar pelas espinhos\nvocê se corta várias executions_made"
                     losewin_hearts = -1
                     losewin_foods = 0
 
@@ -811,7 +1016,7 @@ def options(x):
             show_food()
 
             show_toplevel("Level 08 - C", lbl_toplevel, losewin_hearts, losewin_foods)
-#Editar
+#Editar - 8
 def show_labels_options():
     global op
     global wd
@@ -984,7 +1189,7 @@ def credits_():
 
 def nothing():
     messagebox.showerror(title = "Continuar - Error", icon = messagebox.INFO, detail = "\n",
-    message = "Inicie um Novo Jogo para que você possa continuar de onde parou")
+    message = "Inicie um Novo Jogo para que você\npossa continuar de onde parou.")
 
 def continuar():
     global level
@@ -999,30 +1204,15 @@ def continuar():
 #Novo Jogo
 
 def newgame():
-
+    global ok_cancel_newgame
     ok_cancel_newgame = messagebox.askokcancel(title = "Novo Jogo", message = "Desejas Iniciar um novo Jogo?",
     detail = "Caso possua um Save anterior ele será sobrescito")
 
+    btn_continue.config(command = lambda: nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
+                            activebackground=None, activeforeground=None)
+
     if ok_cancel_newgame == True:
-        window.title("Level 01")
-        btn_continue.config(fg = "#000", relief = "ridge", command = lambda: continuar(), activebackground="#ccc",
-                            activeforeground=fg, cursor="hand2")
-
-        root_status.place(x = 0, y = 280, width = width - 23, height = 175)
-        root_narrative.place(x = 0, y = 0, width = width - 23, height = 280)
-        btn_back_newgame.place(x = 605, y = 60, width = 85, height = 45)
-
-        default()
-
-        show_heart()
-        show_food()
-        show_key()
-        show_way()
-        show_item()
-        show_labels_options()
-
-        clear_main_menu()
-
+        show_introduction_and_tutorial()
 
 #Frame
 root_status = Frame(root, bd = 1, relief = "ridge", bg = bg)
