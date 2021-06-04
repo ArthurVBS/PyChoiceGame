@@ -2,6 +2,7 @@
 #Import
 
 from tkinter import *
+from tkinter import messagebox
 from random import randint
 import os
 
@@ -12,14 +13,29 @@ def gameover(Value):
     if Value == "True":
         root_status.place_forget()
         root_narrative.place_forget()
+        btn_continue.config(command = lambda: nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
+                            activebackground=None, activeforeground=None)
 
-        show_gameover()
-        
+        window.title("Game Over")
+        root.config(bg = "#000")
+
+        lbl_gameover_01 = Label(root, text = "- Game Over -", fg = fg, bg = "#000", font = "courier 50 bold")
+        lbl_gameover_02 = Label(root, text = "Tente Novamente", bg = "#000", fg = fg, font = "courier 32 bold", anchor = N)
+        btn_back_gameover = Button(root, text= "Voltar", bg = "#000", fg = fg, bd = 2, relief = "ridge", cursor="hand2",
+        command = lambda: back_gameover(), font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+
+        lbl_gameover_01.place(x = 10, y = 10, width = width - 40, height = 65)
+        lbl_gameover_02.place(x = 10, y = 110, width = width - 40, height = 65)
+        btn_back_gameover.place(x = 225, y = 365, width = 250, height = 60)
+
+        def back_gameover():
+            lbl_gameover_01.place_forget()
+            lbl_gameover_02.place_forget()
+            btn_back_gameover.place_forget()
+            show_main_menu()
+
     else:
         pass
-
-def show_gameover():
-    print("Game Over")
 
 def show_heart():
     global hearts
@@ -296,33 +312,52 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods):
 
 def show_main_menu():
     window.title("Main Menu")
+    root.config(bg = bg)
 
     lbl_01.place(x = 10, y = 10, width = width - 40, height = 65)
     lbl_02.place(x = 10, y = 75, width = width - 40, height = 65)
-    btn_start.place(x = 225, y = 140, width = 250, height = 60)
-    btn_tutorial.place(x = 225, y = 215, width = 250, height = 60)
+    btn_newgame.place(x = 225, y = 140, width = 250, height = 60)
+    btn_continue.place(x = 225, y = 215, width = 250, height = 60)
     btn_credits.place(x = 225, y = 290, width = 250, height = 60)
     btn_quit.place(x = 225, y = 365, width = 250, height = 60)
 
 def clear_main_menu():
     lbl_01.place_forget()
     lbl_02.place_forget()
-    btn_start.place_forget()
-    btn_tutorial.place_forget()
+    btn_newgame.place_forget()
+    btn_continue.place_forget()
     btn_credits.place_forget()
     btn_quit.place_forget()
 
 def back():
+    lbl_01.config(text = " - Lost - ", bg = bg, fg = "#000")
     lbl_01.place_forget()
     lbl_02.place_forget()
     lbl_credits.place_forget()
-    lbl_tutorial_01.place_forget()
     btn_back.place_forget()
-    btn_back_start.place_forget()
+    btn_back_newgame.place_forget()
     root_status.place_forget()
     root_narrative.place_forget()
+    
     show_main_menu()
 
+def default():
+    global bronze_key
+    global silver_key
+    global golden_key
+    global wolfhide
+    global lighter
+    global op
+    global world
+    global level
+    global wd
+    global hearts
+    global foods
+    bronze_key = silver_key = golden_key = wolfhide = False
+    lighter = True
+    op = 0
+    world = level = wd = 1
+    hearts = foods = 3
 #Editar
 def options(x):
     global hearts
@@ -544,6 +579,8 @@ def options(x):
         elif x == "C":
             if random == 1 or random == 2 or random == 3:
                 lbl_toplevel = "Não era tão raso assim,\na correnteza a leva e você\nse afoga"
+                losewin_hearts = 0
+                losewin_foods = 0
                 gameover("True")
             elif random == 4:
                 lbl_toplevel = "Shalow Now\nvocê consegue atravessar de boa"
@@ -562,6 +599,8 @@ def options(x):
         if x == "A":
             if foods >= 4:
                 lbl_toplevel = "Um urso é atrído pela\nsua comida e tem um\nbelo banquete"
+                losewin_hearts = 0
+                losewin_foods = 0
                 gameover()
             else:
                 if random == 1 or random == 2:
@@ -613,6 +652,8 @@ def options(x):
                 losewin_foods = -0.5
             elif random == 4:
                 lbl_toplevel = "O chão é o lar de\nmuitos animais, inclusive\nda cobra que te deu\num beijinho de boa noite"
+                losewin_hearts = 0
+                losewin_foods = 0
                 gameover("True")
 
             hearts += losewin_hearts
@@ -717,6 +758,8 @@ def options(x):
             if random == 1 or random == 2 or random == 3:
                 lbl_toplevel = "À medida que você caminhava\nno lamaceiro você começa\na afundar até que percebes\n" +\
                 "que era na verdade areia movediça"
+                losewin_hearts = 0
+                losewin_foods = 0
                 gameover("True")
             elif random == 4:
                 lbl_toplevel = "No meio para o final do\nlamaceiro você começa a\nafundar, porém consegue fugir\n" +\
@@ -864,11 +907,7 @@ directory = os.path.dirname(__file__)
 
 window = Tk()
 
-bronze_key = silver_key = golden_key = wolfhide = False
-lighter = True
-op = 0
-world = level = wd = 1
-hearts = foods = 3
+default()
 
 bg = fg = "#fafafa"
 bg_frames = "#f1f1f1"
@@ -897,65 +936,93 @@ root.place(x = 10, y = 10, width = width - 20, height = height - 20)
 #Labels
 lbl_01 = Label(root, text = " - Lost - ", bg=bg, font = "courier 40 bold")
 lbl_02 = Label(root, text = "a chronicle of choices", bg=bg, font = "courier 32 bold", anchor = N)
+#Credits - Labels & Buttons
+lbl_credits = Label(root, text="By: Arthur V.B.S.", bg=bg, font = "courier 18 italic")
+
+btn_back = Button(root, text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: back(), cursor="hand2",
+                    font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
 
 #Buttons
 
-btn_start = Button(root, text= "Start", bg=bg, bd = 2, relief = "ridge", command = lambda: start(), cursor="hand2",
+btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command = lambda: newgame(), cursor="hand2",
                     font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_tutorial = Button(root, text= "Tutorial", bg=bg, bd = 2, relief = "ridge", command = lambda: tutorial(), cursor="hand2",
+btn_continue = Button(root, text= "Continuar", bg=bg, bd = 2, relief = "flat", command = lambda: nothing(), cursor="arrow",
+                    font = "courier 27 bold", fg = "#ccc")
+btn_credits = Button(root, text= "Créditos", bg=bg, bd = 2, relief = "ridge", command = lambda: credits_(), cursor="hand2",
                     font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_credits = Button(root, text= "Credits", bg=bg, bd = 2, relief = "ridge", command = lambda: credits(), cursor="hand2",
-                    font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_quit = Button(root, text= "Quit", bg=bg, bd = 2, relief = "ridge", command = lambda: quit(), cursor="hand2",
+btn_quit = Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: quit_(), cursor="hand2",
                     font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
 
 show_main_menu()
 
 #____________________________________________________________________________________________________________
-#Tutorial
+#Sair
 
-def tutorial():
-    window.title("Tutorial")
+def quit_():
+    ok_cancel_quit = messagebox.askokcancel(title = "Sair", message = "Você realmente deseja sair?\t\t",
+    detail = "Desde já obrigado por jogar")
 
-    clear_main_menu()
-
-    btn_back.place(x = 225, y = 365, width = 250, height = 60)
-    lbl_tutorial_01.place(x = 225, y = 150, width = 250, height = 60)
-
-lbl_tutorial_01 = Label(root, text="By: Arthur V.B.S.", bg=bg, font = "courier 18 italic")
-btn_back = Button(root, text= "Back", bg=bg, bd = 2, relief = "ridge", command = lambda: back(), cursor="hand2",
-                    font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+    if ok_cancel_quit == True:
+        quit()
 
 #____________________________________________________________________________________________________________
-#Credits
+#Créditos
 
-def credits():
-    window.title("Credits")
+def credits_():
+    window.title("Créditos")
 
-    btn_start.place_forget()
-    btn_tutorial.place_forget()
+    btn_newgame.place_forget()
+    btn_continue.place_forget()
     btn_credits.place_forget()
     btn_quit.place_forget()
 
     btn_back.place(x = 225, y = 365, width = 250, height = 60)
     lbl_credits.place(x = 225, y = 150, width = 250, height = 60)
 
-lbl_credits = Label(root, text="By: Arthur V.B.S.", bg=bg, font = "courier 18 italic")
-
-btn_back = Button(root, text= "Back", bg=bg, bd = 2, relief = "ridge", command = lambda: back(), cursor="hand2",
-                    font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-
 #____________________________________________________________________________________________________________
-#Levels
+#Continuar
 
-def start():
-    window.title("Level 01")
+def nothing():
+    messagebox.showerror(title = "Continuar - Error", icon = messagebox.INFO, detail = "\n",
+    message = "Inicie um Novo Jogo para que você possa continuar de onde parou")
 
+def continuar():
+    global level
+    window.title(f"Level 0{level}")
     root_status.place(x = 0, y = 280, width = width - 23, height = 175)
     root_narrative.place(x = 0, y = 0, width = width - 23, height = 280)
-    btn_back_start.place(x = 610, y = 120, width = 80, height = 40)
+    btn_back_newgame.place(x = 610, y = 60, width = 80, height = 45)
 
     clear_main_menu()
+
+#____________________________________________________________________________________________________________
+#Novo Jogo
+
+def newgame():
+
+    ok_cancel_newgame = messagebox.askokcancel(title = "Novo Jogo", message = "Desejas Iniciar um novo Jogo?",
+    detail = "Caso possua um Save anterior ele será sobrescito")
+
+    if ok_cancel_newgame == True:
+        window.title("Level 01")
+        btn_continue.config(fg = "#000", relief = "ridge", command = lambda: continuar(), activebackground="#ccc",
+                            activeforeground=fg, cursor="hand2")
+
+        root_status.place(x = 0, y = 280, width = width - 23, height = 175)
+        root_narrative.place(x = 0, y = 0, width = width - 23, height = 280)
+        btn_back_newgame.place(x = 605, y = 60, width = 85, height = 45)
+
+        default()
+
+        show_heart()
+        show_food()
+        show_key()
+        show_way()
+        show_item()
+        show_labels_options()
+
+        clear_main_menu()
+
 
 #Frame
 root_status = Frame(root, bd = 1, relief = "ridge", bg = bg)
@@ -978,6 +1045,9 @@ root_way.place(x = 350, y = 0, width = 350, height = 50)
 
 root_options = Frame(root_narrative, bd = 1, relief = "sunken", bg = bg)
 root_options.place(x = -1, y = 220, width = 351, height = 60)
+
+root_scenario = Frame(root_status, bd = 0.5, relief = "groove", bg = bg_frames)
+root_scenario.place(x = 350, y = 60, width = 250, height = 100)
 
 root_item_main = Frame(root_status, bd = 1, relief = "sunken", bg = bg_frames)
 root_item_main.place(x = 180, y = 60, width = 160, height = 100)
@@ -1008,7 +1078,7 @@ root_item_08.place(x = 120, y = 55, width = 35, height = 40)
 
 #buttons
 
-btn_back_start = Button(root_status, text= "Menu", bg=bg, bd = 2, relief = "ridge", command = lambda: back(), cursor="hand2",
+btn_back_newgame = Button(root_status, text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: back(), cursor="hand2",
                     font = "courier 12 bold", activebackground="#ccc", activeforeground=fg)
 btn_opt_A = Button(root_narrative, text= "- A -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("A"),
                     cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg)
@@ -1017,7 +1087,7 @@ btn_opt_B = Button(root_narrative, text= "- B -", bg=bg_frames, bd = 2, relief =
 btn_opt_C = Button(root_narrative, text= "- C -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("C"),
                     cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg)
 
-btn_back_start.place(x = 610, y = 120, width = 80, height = 40)
+#btn_back_newgame.place(x = 610, y = 120, width = 80, height = 40)
 btn_opt_A.place(x = 10, y = 230, width = 100, height = 40)
 btn_opt_B.place(x = 125, y = 230, width = 100, height = 40)
 btn_opt_C.place(x = 240, y = 230, width = 100, height = 40)
@@ -1042,6 +1112,8 @@ lbl_opt_C.place(x = 360, y = 190, width = 330, height = 80)
 #Hearts, Foods and Keys - PhotoImage
 
 empty_00_dic = PhotoImage(file= directory + "/Arts/empty.png")
+main_dic = PhotoImage(file= directory + "/Arts/main.png")
+scenario_dic = PhotoImage(file= directory + "/Arts/Scenario.png")
 
 heart_11_dic = PhotoImage(file= directory + "/Arts/H_and_F/heart_11.png")
 heart_01_dic = PhotoImage(file= directory + "/Arts/H_and_F/heart_01.png")
@@ -1123,9 +1195,11 @@ lbl_just_way_07.place(x = 262.5, y = 5, width = 35, height = 35)
 lbl_just_way_08 = Label(root_way, image = just_way_dic, bg = bg_narrative)
 lbl_just_way_08.place(x = 305, y = 5, width = 35, height = 35)
 
-main_dic = PhotoImage(file= directory + "/Arts/main.png")
 lbl_main = Label(root_status, image = main_dic, bg = bg)
 lbl_main.place(x = 70, y = 60)
+
+lbl_scenario = Label(root_scenario, image = scenario_dic, bg = bg)
+lbl_scenario.place(x = 5, y = 5, width = 240, height = 90)
 
 show_heart()
 show_food()
