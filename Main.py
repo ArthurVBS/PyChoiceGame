@@ -1139,8 +1139,9 @@ root = Frame(window, bd = 1, relief = "sunken", bg = bg)
 root.place(x = 10, y = 10, width = width - 20, height = height - 20)
 
 #Labels
-lbl_01 = Label(root, text = " - Lost - ", bg=bg, font = "courier 40 bold")
-lbl_02 = Label(root, text = "a chronicle of choices", bg=bg, font = "courier 32 bold", anchor = N)
+lbl_01 = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
+lbl_02 = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
+
 #Credits - Labels & Buttons
 lbl_credits = Label(root, text="By: Arthur V.B.S.", bg=bg, font = "courier 18 italic")
 
