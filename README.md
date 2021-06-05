@@ -1,2 +1,5 @@
-# My Video Game
-- My first video game hub using the Python language
+# *Games developed by me in different programming languages*
+
+## Python: 
+
+> The Truth, a corrupted idea.
