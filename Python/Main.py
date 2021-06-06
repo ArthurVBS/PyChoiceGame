@@ -826,9 +826,9 @@ def options(x):
 
         elif x == "B":
             if foods >= 4:
-                lbl_toplevel = "As formigas são atraídas\npela sua comida e levam\nboa parte dela"
+                lbl_toplevel = "As formigas são atraídas\npela sua comida e levam\nparte dela"
                 losewin_hearts = 0
-                losewin_foods = -3
+                losewin_foods = -2
             else:
                 if random == 1 or random == 2:
                     lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu bem e partiu\nna manhã seguinte"
