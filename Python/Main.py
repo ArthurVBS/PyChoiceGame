@@ -13,6 +13,7 @@ def gameover(value):
     if value == "True":
         root_status.place_forget()
         root_narrative.place_forget()
+        clear_all()
         btn_continue.config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
                             activebackground=None, activeforeground=None)
 
@@ -51,6 +52,11 @@ def show_main_menu():
     btn_quit.place(x = 225, y = 365, width = 250, height = 60)
 
 def show_heart(hearts):
+    global game_over
+    #Heart - +5
+    if hearts > 5:
+        hearts = 5
+
     #Heart - 1
     if hearts >= 1:
         lbl_heart_01.config(image = heart_11_dic)
@@ -58,6 +64,7 @@ def show_heart(hearts):
         lbl_heart_01.config(image = heart_01_dic)
     elif hearts < 0.5:
         lbl_heart_01.config(image = heart_00_dic)
+        game_over = True
         gameover("True")
 
     #Heart - 2
@@ -92,11 +99,12 @@ def show_heart(hearts):
     elif hearts < 4.5:
         lbl_heart_05.config(image = heart_00_dic)
 
-    #Heart - +5
-    if hearts > 5:
-        hearts = 5
-
 def show_food(foods):
+    global game_over
+    #Foods - +5
+    if foods > 5:
+        foods = 5
+
     #Food - 1
     if foods >= 1:
         lbl_food_01.config(image = food_11_dic)
@@ -104,6 +112,7 @@ def show_food(foods):
         lbl_food_01.config(image = food_01_dic)
     elif foods < 0.5:
         lbl_food_01.config(image = food_00_dic)
+        game_over = True
         gameover("True")
 
     #Food - 2
@@ -138,11 +147,7 @@ def show_food(foods):
     elif foods < 4.5:
         lbl_food_05.config(image = food_00_dic)
 
-    #Foods - +5
-    if foods > 5:
-        foods = 5
-
-def show_item(lighter, wolfhide, future_friendship, nausea, shotgun):
+def show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear):
     #lighter
     if lighter == True:
         lbl_item_lighter.config(image = item_lighter_dic)
@@ -174,6 +179,22 @@ def show_item(lighter, wolfhide, future_friendship, nausea, shotgun):
         lbl_item_shotgun.config(image = empty_01_dic)
 
     #crowbar
+    """if crowbar == True:
+        lbl_item_crowbar.config(image = item_crowbar_dic)
+    elif crowbar == False:
+        lbl_item_crowbar.config(image = empty_01_dic)"""
+
+    #screwdriver
+    """if screwdriver == True:
+        lbl_item_screwdriver.config(image = item_screwdriver_dic)
+    elif screwdriver == False:
+        lbl_item_screwdriver.config(image = empty_01_dic)"""
+
+    #gear
+    """if gear == True:
+        lbl_item_gear.config(image = item_gear_dic)
+    elif gear == False:
+        lbl_item_gear.config(image = empty_01_dic)"""
 
 def show_key():
     #Key - B
@@ -253,6 +274,7 @@ def show_scenario():
 
 def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_option):
     global world
+    global game_over
 
     #Tkinter
     win_toplevel = Toplevel()
@@ -268,26 +290,29 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
     lbl_tl = Label(win_toplevel, text = f"{lbl_text}", justify=CENTER, font = "courier 14 italic",
                 anchor = N, bg = bg, bd = 1, relief = "sunken")
     btn_tl = Button(win_toplevel, text= "OK", bg=bg, bd = 2, relief = "ridge", command = lambda: show_narrative_01(),
-                    cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg)
+                    cursor="hand2", font = "courier 14 bold", activebackground="#ccc", activeforeground=fg)
 
     def show_narrative_01():
         win_toplevel.destroy()
 
     def show_narrative_02():
-        win_toplevel.destroy()
         show_introduction_and_tutorial_02()
-    
-    """def show_narrative_03():
         win_toplevel.destroy()
-        show_introduction_and_tutorial_03()"""
-
     
-    if gameover("False"):
+    def show_narrative_03():
+        """show_introduction_and_tutorial_03()"""
+        win_toplevel.destroy()
+
+    if game_over != True:
         if w == 8:
+            lbl_next = Label(win_toplevel, text = "Clique em Ok para avançar!!!", font = "courier 14 italic", bg=bg_frames)
+            lbl_next.place(x=10, y = 235, width = 350, height = 30)
             if world == 2:
                 btn_tl.config(command= lambda: show_narrative_02())
-            """if world == 3:
-                btn_tl.config(command= lambda: show_narrative_03())"""
+            if world == 3:
+                btn_tl.config(command= lambda: show_narrative_03())
+        else:
+            pass
 
     #Frame and Labels (PhotoImage)
 
@@ -430,7 +455,7 @@ def show_game():
 
     show_heart(hearts)
     show_food(foods)
-    show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+    show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
     show_key()
     show_way()
     show_labels_options()
@@ -622,7 +647,7 @@ def show_introduction_and_tutorial_01():
 def show_introduction_and_tutorial_02():
     global ok_cancel_newgame
     global executions_made
-    window.title("Introdução")
+    window.title("Avançando")
     clear_all()
 
     #Show Introductions
@@ -678,9 +703,6 @@ def show_introduction_and_tutorial_02():
         lbl_int_and_tut.config(text = introduction_text)
         
     def show_introduction_06():
-        window.title("Introdução")
-        lbl_int_and_tut_main.config(text = "- Introdução -")
-
         global executions_made
         introduction_text = "Além dos caminhos há vários lugares com\n" +\
         "trancas de ouro, prata, bronze e também\n" +\
@@ -692,24 +714,11 @@ def show_introduction_and_tutorial_02():
 
         lbl_int_and_tut.config(text = introduction_text)
 
-
-    #Show Tutorial
-    def show_tutorial_01():
-        window.title("Tutorial")
-        lbl_int_and_tut_main.config(text = "- Tutorial -")
-
-        global executions_made
-        introduction_text = "Working" +\
-        "" +\
-        ""
-
-        lbl_int_and_tut.config(text = introduction_text)
-
     #Next and Back
     def next_(x):
         global executions_made
         if x == 1:
-            window.title("Introdução")
+            window.title("Avançando")
             show_introduction_01()
             executions_made +=1
 
@@ -734,15 +743,11 @@ def show_introduction_and_tutorial_02():
             executions_made += 1
 
         elif x == 7:
-            show_tutorial_01()
-            executions_made += 1
-
-        elif x == 8:
             lbl_int_and_tut_main.place_forget()
             lbl_int_and_tut.place_forget()
             btn_int_and_tut_next.place_forget()
             btn_int_and_tut_back.place_forget()
-            show_game()
+            click_continue()
             show_button_continue()
         
     def back_(x):
@@ -779,14 +784,10 @@ def show_introduction_and_tutorial_02():
             show_introduction_06()
             executions_made -= 1
 
-        if x == 7:
-            show_tutorial_01()
-            executions_made -= 1
-
     #Labels & Buttons
     executions_made = 2
 
-    lbl_int_and_tut_main = Label(root, text = " - Introdução - ", bg=bg, font = "courier 40 bold")
+    lbl_int_and_tut_main = Label(root, text = " - Avançando - ", bg=bg, font = "courier 40 bold")
     lbl_int_and_tut = Label(root, text = "", bg=bg, bd = 5, relief = "solid", font = "courier 16 italic",
     anchor = CENTER, justify = CENTER)
     show_introduction_01()
@@ -970,6 +971,10 @@ def default():
     global bronze_key
     global silver_key
     global golden_key
+    global game_over
+    global gear
+    global screwdriver
+    global crowbar
     global shotgun
     global nausea
     global future_friendship
@@ -984,10 +989,12 @@ def default():
     global x
     bronze_key = silver_key = golden_key = False
     shotgun = nausea = future_friendship = wolfhide = False
+    gear = screwdriver = crowbar = False
     lighter = True
     op = 0
     world = level = wd = 1
     hearts = foods = 3
+    game_over = False
 
 def music():
     mixer.init()
@@ -995,9 +1002,13 @@ def music():
     mixer.music.play(-1)
 
 def options(selected_option):
+    global game_over
     global hearts
     global foods
     global level
+    global gear
+    global screwdriver
+    global crowbar
     global shotgun
     global nausea
     global future_friendship
@@ -1080,7 +1091,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
             show_toplevel("Level 02 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
@@ -1099,13 +1110,13 @@ def options(selected_option):
             if random == 1 or random == 2 or random == 3:
                 lbl_toplevel = "O lobo dá seu último uivo e\nvocê consegue o seu couro e\ncarne, então você parte em\nfrente"
                 losewin_hearts = 0
-                losewin_foods = +1.5
+                losewin_foods = +1
                 wolfhide = True
             elif random == 4:
                 lbl_toplevel = "O lobo dá seu último uivo,\nvocê pega o seu couro e carne,\nmas ao longe vem vindo outro\n" + \
                 "lobo então você corre, foge,\nmas havia se arranhado na mata"
-                losewin_hearts = -1.5
-                losewin_foods = +1.5
+                losewin_hearts = -1
+                losewin_foods = +1
                 wolfhide = True
 
             hearts += losewin_hearts
@@ -1113,7 +1124,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
             show_toplevel("Level 02 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 3:
@@ -1222,6 +1233,7 @@ def options(selected_option):
                 lbl_toplevel = "Não era tão raso assim,\na correnteza a leva e você\nse afoga"
                 losewin_hearts = 0
                 losewin_foods = 0
+                game_over = True
                 gameover("True")
             elif random == 4:
                 lbl_toplevel = "Shalow Now\nvocê consegue atravessar de boa"
@@ -1242,6 +1254,7 @@ def options(selected_option):
                 lbl_toplevel = "Um urso é atraído pela\nsua comida e tem um\nbelo banquete"
                 losewin_hearts = 0
                 losewin_foods = 0
+                game_over = True
                 gameover("True")
             else:
                 if random == 1 or random == 2:
@@ -1295,6 +1308,7 @@ def options(selected_option):
                 lbl_toplevel = "O chão é o lar de\nmuitos animais, inclusive\nda cobra que te deu\num beijinho de boa noite"
                 losewin_hearts = 0
                 losewin_foods = 0
+                game_over = True
                 gameover("True")
 
             hearts += losewin_hearts
@@ -1359,7 +1373,7 @@ def options(selected_option):
             losewin_hearts = 0
             losewin_foods = 0
             nausea = True
-            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
 
             hearts += losewin_hearts
             show_heart(hearts)
@@ -1397,6 +1411,7 @@ def options(selected_option):
                 "que era na verdade\nareia movediça"
                 losewin_hearts = 0
                 losewin_foods = 0
+                game_over = True
                 gameover("True")
             elif random == 4:
                 lbl_toplevel = "No meio para o final do\nlamaceiro você começa a\nafundar, porém consegue fugir\n" +\
@@ -1418,6 +1433,7 @@ def options(selected_option):
             lbl_toplevel = "Uma mina explode em sua\nfrente, devido a sua falta\nde cuidado"
             losewin_hearts = 0
             losewin_foods = 0
+            game_over = True
             gameover("True")
 
             hearts += losewin_hearts
@@ -1426,7 +1442,7 @@ def options(selected_option):
             show_food(foods)
 
             shotgun = True
-            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
             show_toplevel("Level 08 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
@@ -1441,20 +1457,21 @@ def options(selected_option):
             show_food(foods)
 
             shotgun = True
-            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
             show_toplevel("Level 08 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2 or random == 3:
                 lbl_toplevel = "Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n" +\
-                "decide desaramar, com êxito\nvocê desarma a armadilha"
+                "decide desarmar, com êxito\nvocê desarma a armadilha"
                 losewin_hearts = 0
                 losewin_foods = 0
             elif random == 4:
                 lbl_toplevel = "Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n" +\
-                "decide desaramar, com êxito\na mina terrestre é acionada"
+                "decide desarmar, com êxito\na mina terrestre é acionada"
                 losewin_hearts = 0
                 losewin_foods = 0
+                game_over = True
                 gameover("True")
 
 
@@ -1464,7 +1481,7 @@ def options(selected_option):
             show_food(foods)
 
             shotgun = True
-            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
             show_toplevel("Level 08 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
 #____________________________________________________________________________________________________________
@@ -1474,7 +1491,7 @@ bg_frames = "#f1f1f1"
 bg_narrative = "#252525"
 directory = os.path.dirname(__file__)
 default()
-#music()
+music()
 #____________________________________________________________________________________________________________
 #Init Tkinter
 window = Tk()
@@ -1623,6 +1640,12 @@ item_future_friendship_dic = PhotoImage(file = directory + "/Images/Items/item_f
 item_nausea_dic = PhotoImage(file = directory + "/Images/Items/item_nausea.png")
 item_shotgun_dic = PhotoImage(file = directory + "/Images/Items/item_shotgun.png")
 
+#EDITAR
+"""
+item_crowbar_dic = PhotoImage(file = directory + "/Images/Items/item_crowbar.png")
+item_screwdriver_dic = PhotoImage(file = directory + "/Images/Items/item_screwdriver.png")
+item_gear_dic = PhotoImage(file = directory + "/Images/Items/item_gear.png")
+"""
 #____________________________________________________________________________________________________________
 #Hearts, Foods and Keys - Labels
 
@@ -1682,11 +1705,17 @@ lbl_item_wolfhide = Label(root_item_02, image = empty_01_dic, bg = bg)
 lbl_item_future_friendship = Label(root_item_03, image = empty_01_dic, bg = bg)
 lbl_item_nausea = Label(root_item_04, image = empty_01_dic, bg = bg)
 lbl_item_shotgun = Label(root_item_05, image = empty_01_dic, bg = bg)
+lbl_item_crowbar = Label(root_item_06, image = empty_01_dic, bg = bg)
+lbl_item_screwdriver = Label(root_item_07, image = empty_01_dic, bg = bg)
+lbl_item_gear = Label(root_item_08, image = empty_01_dic, bg = bg)
 
 lbl_item_lighter.place(x = 0, y = 2.5, width = 30, height = 30)
 lbl_item_wolfhide.place(x = 0, y = 2.5, width = 30, height = 30)
 lbl_item_future_friendship.place(x = 0, y = 2.5, width = 30, height = 30)
 lbl_item_nausea.place(x = 0, y = 2.5, width = 30, height = 30)
 lbl_item_shotgun.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_crowbar.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_screwdriver.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_gear.place(x = 0, y = 2.5, width = 30, height = 30)
 
 window.mainloop()
