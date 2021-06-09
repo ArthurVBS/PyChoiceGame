@@ -5,7 +5,6 @@ from tkinter import messagebox
 from random import randint
 from pygame import mixer
 import os
-
 #____________________________________________________________________________________________________________
 #Functions
 
@@ -148,31 +147,33 @@ def show_item(lighter, wolfhide, future_friendship, nausea, shotgun):
     if lighter == True:
         lbl_item_lighter.config(image = item_lighter_dic)
     elif lighter == False:
-        lbl_item_lighter.config(image = empty_00_dic)
+        lbl_item_lighter.config(image = empty_01_dic)
     
     #wolfhide
     if wolfhide == True:
-        lbl_item_wolfhide.config(image = item_lighter_dic) #Alterar!!!
+        lbl_item_wolfhide.config(image = item_wolfhide_dic)
     elif wolfhide == False:
-        lbl_item_wolfhide.config(image = empty_00_dic)
+        lbl_item_wolfhide.config(image = empty_01_dic)
 
     #future_friendship
     if future_friendship == True:
-        lbl_item_future_friendship.config(image = item_lighter_dic) #Alterar!!!
+        lbl_item_future_friendship.config(image = item_future_friendship_dic)
     elif future_friendship == False:
-        lbl_item_future_friendship.config(image = empty_00_dic)
+        lbl_item_future_friendship.config(image = empty_01_dic)
 
     #nausea
     if nausea == True:
-        lbl_item_nausea.config(image = item_lighter_dic) #Alterar!!!
+        lbl_item_nausea.config(image = item_nausea_dic)
     elif nausea == False:
-        lbl_item_nausea.config(image = empty_00_dic)
+        lbl_item_nausea.config(image = empty_01_dic)
 
     #shotgun
     if shotgun == True:
-        lbl_item_shotgun.config(image = item_lighter_dic) #Alterar!!!
+        lbl_item_shotgun.config(image = item_shotgun_dic)
     elif shotgun == False:
-        lbl_item_shotgun.config(image = empty_00_dic)
+        lbl_item_shotgun.config(image = empty_01_dic)
+
+    #crowbar
 
 def show_key():
     #Key - B
@@ -250,7 +251,7 @@ def show_scenario():
     elif world == 3:
         lbl_scenario.config(image = scenario_03_dic)
 
-def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w):
+def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_option):
     global world
 
     #Tkinter
@@ -292,8 +293,9 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w):
 
     frame_toplevel_heart = Frame(win_toplevel, bd = 1, relief = "sunken", bg = bg)
     frame_toplevel_food = Frame(win_toplevel, bd = 1, relief = "sunken", bg = bg)
-    frame_toplevel_item_or_key = Frame(win_toplevel, bd = 1, relief = "sunken", bg = bg)
+    frame_toplevel_item_key = Frame(win_toplevel, bd = 1, relief = "sunken", bg = bg)
 
+    #Hearts
     if losewin_hearts >= 0:
         sinal_hearts = "+"
 
@@ -320,6 +322,7 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w):
         phImg_heart_01 = heart_11_dic
         phImg_heart_02 = heart_11_dic
 
+    #Foods
     if losewin_foods >= 0:
         sinal_foods = "+"
 
@@ -346,15 +349,46 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w):
         phImg_food_01 = food_11_dic
         phImg_food_02 = food_11_dic
 
+    #Item / Key
+    if w == 2 and selected_option == "A": #friendship
+        phImg_item_01 = item_future_friendship_dic
+        phImg_item_02 = empty_00_dic
+
+    elif w  == 2 and selected_option == "C": #wolfhide
+        phImg_item_01 = item_wolfhide_dic
+        phImg_item_02 = empty_00_dic
+
+    elif w == 7 and selected_option == "A": #nausea
+        phImg_item_01 = item_nausea_dic
+        phImg_item_02 = empty_00_dic
+
+    elif w == 8: #shotgun and key silver
+        phImg_item_01 = item_shotgun_dic
+        phImg_item_02 = key_S_dic
+
+    else:
+        phImg_item_01 = empty_00_dic
+        phImg_item_02 = empty_00_dic
+
+    if phImg_item_01 != empty_00_dic or phImg_item_02 != empty_00_dic:
+        sinal_item_key = "+"
+    elif phImg_item_01 == empty_00_dic and phImg_item_02 == empty_00_dic:
+        sinal_item_key = ""
+
 
     lbl_heart = Label(frame_toplevel_heart, text = sinal_hearts, justify=CENTER, font = "courier 16 italic", bg = bg)
     lbl_food = Label(frame_toplevel_food, text = sinal_foods, justify=CENTER, font = "courier 16 italic", bg = bg)
+    lbl_item_key = Label(frame_toplevel_item_key, text = sinal_item_key, justify=CENTER, font = "courier 16 italic", bg = bg)
 
     lbl_heart_losewin_01 = Label(frame_toplevel_heart, image = phImg_heart_01, bg = bg)
     lbl_heart_losewin_02 = Label(frame_toplevel_heart, image = phImg_heart_02, bg = bg)
 
     lbl_food_losewin_01 = Label(frame_toplevel_food, image = phImg_food_01, bg = bg)
     lbl_food_losewin_02 = Label(frame_toplevel_food, image = phImg_food_02, bg = bg)
+
+    lbl_item_key_01 = Label(frame_toplevel_item_key, image = phImg_item_01, bg = bg)
+    lbl_item_key_02 = Label(frame_toplevel_item_key, image = phImg_item_02, bg = bg)
+
 
     #.Place
 
@@ -364,16 +398,20 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w):
 
     frame_toplevel_heart.place(x = 10, y = 180, width = 110, height = 45)
     frame_toplevel_food.place(x = 130, y = 180, width = 110, height = 45)
-    frame_toplevel_item_or_key.place(x = 250, y = 180, width = 110, height = 45)
+    frame_toplevel_item_key.place(x = 250, y = 180, width = 110, height = 45)
 
     lbl_heart.place(x = 5, y = 5, width = 30, height = 35)
     lbl_food.place(x = 5, y = 5, width = 30, height = 35)
+    lbl_item_key.place(x = 5, y = 5, width = 30, height = 35)
 
     lbl_heart_losewin_01.place(x = 35, y = 5, width = 35, height = 35)
     lbl_heart_losewin_02.place(x = 70, y = 5, width = 35, height = 35)
 
     lbl_food_losewin_01.place(x = 35, y = 5, width = 35, height = 35)
     lbl_food_losewin_02.place(x = 70, y = 5, width = 35, height = 35)
+
+    lbl_item_key_01.place(x = 35, y = 5, width = 35, height = 35)
+    lbl_item_key_02.place(x = 70, y = 5, width = 35, height = 35)
 
     win_toplevel.mainloop()
 
@@ -782,7 +820,7 @@ def show_labels_options():
             opt_B_text = "456;"
             opt_C_text = "789;"
 
-        elif wd == 3: #OS Moinhos
+        elif wd == 3: #AS Minas
             crossroads_text = "hi."
             opt_A_text = "123;"
             opt_B_text = "456;"
@@ -836,12 +874,13 @@ def show_labels_options():
             opt_B_text = "Passar pelo caminho\nespinhoso;"
             opt_C_text = "Passar por um lamaceiro"
 
-    elif op == 8:#Editar
+    elif op == 8:
         if wd == 1:
-            crossroads_text = "8"
-            opt_A_text = "0"
-            opt_B_text = "1"
-            opt_C_text = "2"
+            crossroads_text = "Ao caminhar você sente um\nfio esticar em sua perna\ndireita, seu corpo para e reflete\n" +\
+            "rapidamente no que fazer..."
+            opt_A_text = "Tentar avançar, ignorando\n o fio;"
+            opt_B_text = "Tentar voltar e passar\npor cima do fio;"
+            opt_C_text = "Tentar ir até a fonte\ndo fio e tentar desarma-lo;"
         
         op = 0
         wd += 1
@@ -959,6 +998,7 @@ def options(selected_option):
     global hearts
     global foods
     global level
+    global shotgun
     global nausea
     global future_friendship
     global wolfhide
@@ -989,7 +1029,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 01 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 01 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             lbl_toplevel = "A caminhada é longa e a\nfome é sua inimiga, ignora-lá\né custoso."
@@ -1001,7 +1041,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 01 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 01 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2 or random == 3:
@@ -1018,7 +1058,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 01 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 01 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 2:
         window.title(f"Level 0{w+1}")
@@ -1041,7 +1081,7 @@ def options(selected_option):
             show_food(foods)
 
             show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
-            show_toplevel("Level 02 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 02 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             lbl_toplevel = "Nada ocorre, você segue\nem frente"
@@ -1053,7 +1093,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 02 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 02 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2 or random == 3:
@@ -1074,7 +1114,7 @@ def options(selected_option):
             show_food(foods)
 
             show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
-            show_toplevel("Level 02 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 02 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 3:
         window.title(f"Level 0{w+1}")
@@ -1101,7 +1141,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 03 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 03 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             if random == 1 or random == 2 or random == 3:
@@ -1118,7 +1158,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 03 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 03 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2 or random == 3:
@@ -1135,7 +1175,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 03 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 03 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 4:
         window.title(f"Level 0{w+1}")
@@ -1156,7 +1196,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 04 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 04 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             if random == 1 or random == 2 or random == 3:
@@ -1175,7 +1215,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 04 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 04 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2 or random == 3:
@@ -1193,7 +1233,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 04 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 04 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 5:
         window.title(f"Level 0{w+1}")
@@ -1218,7 +1258,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 05 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 05 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             if foods >= 4:
@@ -1240,7 +1280,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 05 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 05 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2:
@@ -1262,7 +1302,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 05 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 05 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 6:
         window.title(f"Level 0{w+1}")
@@ -1281,7 +1321,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 06 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 06 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             if random == 1 or random == 2:                   
@@ -1298,7 +1338,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 06 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 06 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             lbl_toplevel = "Você segue em frente e\ncome algo de sua mochila"
@@ -1310,28 +1350,23 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 06 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 06 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif w == 7:
         window.title(f"Level 0{w+1}")
         if selected_option == "A":
-            if random == 1 or random == 2 or random == 3:
-                lbl_toplevel = "Ao passar pelas flores\nvocê sente náuseas"
-                losewin_hearts = 0
-                losewin_foods = 0
-                nausea = True
-                show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
-            elif random == 4:
-                lbl_toplevel = "Você passa pelas flores\ne nada ocorre"
-                losewin_hearts = 0
-                losewin_foods = 0
+            lbl_toplevel = "Ao passar pelas flores\nvocê sente náuseas"
+            losewin_hearts = 0
+            losewin_foods = 0
+            nausea = True
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
 
             hearts += losewin_hearts
             show_heart(hearts)
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 07 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 07 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
             if wolfhide == True: #Couro de lobo
@@ -1340,7 +1375,7 @@ def options(selected_option):
                 losewin_foods = 0
             else:
                 if random == 1 or random == 2 or random == 3:
-                    lbl_toplevel = "Ao passar pelas espinhos\nvocê se corta várias executions_made"
+                    lbl_toplevel = "Ao passar pelas espinhos\nvocê se corta várias vezes"
                     losewin_hearts = -1
                     losewin_foods = 0
 
@@ -1354,7 +1389,7 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 07 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 07 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
             if random == 1 or random == 2 or random == 3:
@@ -1374,25 +1409,30 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 07 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            show_toplevel("Level 07 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
-    elif w == 8:#Editar
+    elif w == 8:
         window.title(f"Level 01")
+
         if selected_option == "A":
-            lbl_toplevel = "Abcd"
+            lbl_toplevel = "Uma mina explode em sua\nfrente, devido a sua falta\nde cuidado"
             losewin_hearts = 0
-            losewin_foods = -0.5
+            losewin_foods = 0
+            gameover("True")
 
             hearts += losewin_hearts
             show_heart(hearts)
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 08 - A", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            shotgun = True
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_toplevel("Level 08 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "B":
-            lbl_toplevel = "Abcd"
-            losewin_hearts = -1
+            lbl_toplevel = "É voltando que se pega\nimpulso, você passa pela\narmadilha com calma e tudo\n"  +\
+            "ocorre bem"
+            losewin_hearts = 0
             losewin_foods = 0
 
             hearts += losewin_hearts
@@ -1400,19 +1440,32 @@ def options(selected_option):
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 08 - B", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            shotgun = True
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_toplevel("Level 08 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif selected_option == "C":
-            lbl_toplevel = "Abcd"
-            losewin_hearts = -0.5
-            losewin_foods = +1.5
+            if random == 1 or random == 2 or random == 3:
+                lbl_toplevel = "Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n" +\
+                "decide desaramar, com êxito\nvocê desarma a armadilha"
+                losewin_hearts = 0
+                losewin_foods = 0
+            elif random == 4:
+                lbl_toplevel = "Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n" +\
+                "decide desaramar, com êxito\na mina terrestre é acionada"
+                losewin_hearts = 0
+                losewin_foods = 0
+                gameover("True")
+
 
             hearts += losewin_hearts
             show_heart(hearts)
             foods += losewin_foods
             show_food(foods)
 
-            show_toplevel("Level 08 - C", lbl_toplevel, losewin_hearts, losewin_foods, w)
+            shotgun = True
+            show_item(lighter, wolfhide, future_friendship, nausea, shotgun)
+            show_toplevel("Level 08 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
 #____________________________________________________________________________________________________________
 #Others
@@ -1421,7 +1474,7 @@ bg_frames = "#f1f1f1"
 bg_narrative = "#252525"
 directory = os.path.dirname(__file__)
 default()
-music()
+#music()
 #____________________________________________________________________________________________________________
 #Init Tkinter
 window = Tk()
@@ -1541,6 +1594,7 @@ lbl_opt_C.place(x = 360, y = 190, width = 330, height = 80)
 #Hearts, Foods and Keys - PhotoImage
 
 empty_00_dic = PhotoImage(file= directory + "/Images/empty.png")
+empty_01_dic = PhotoImage(file= directory + "/Images/empty_plus.png")
 Sam_dic = PhotoImage(file= directory + "/Images/Sam.png")
 
 scenario_01_dic = PhotoImage(file= directory + "/Images/Scenarios/Scenario_01.png")
@@ -1564,6 +1618,10 @@ just_way_dic = PhotoImage(file = directory + "/Images/Ways/just_way.png")
 way_dic = PhotoImage(file = directory + "/Images/Ways/way.png")
 
 item_lighter_dic = PhotoImage(file = directory + "/Images/Items/item_lighter.png")
+item_wolfhide_dic = PhotoImage(file = directory + "/Images/Items/item_wolfhide.png")
+item_future_friendship_dic = PhotoImage(file = directory + "/Images/Items/item_future_friendship.png")
+item_nausea_dic = PhotoImage(file = directory + "/Images/Items/item_nausea.png")
+item_shotgun_dic = PhotoImage(file = directory + "/Images/Items/item_shotgun.png")
 
 #____________________________________________________________________________________________________________
 #Hearts, Foods and Keys - Labels
@@ -1619,11 +1677,11 @@ lbl_just_way_07.place(x = 262.5, y = 5, width = 35, height = 35)
 lbl_just_way_08 = Label(root_way, image = just_way_dic, bg = bg_narrative)
 lbl_just_way_08.place(x = 305, y = 5, width = 35, height = 35)
 
-lbl_item_lighter = Label(root_item_01, image = empty_00_dic, bg = bg)
-lbl_item_wolfhide = Label(root_item_02, image = empty_00_dic, bg = bg)
-lbl_item_future_friendship = Label(root_item_03, image = empty_00_dic, bg = bg)
-lbl_item_nausea = Label(root_item_04, image = empty_00_dic, bg = bg)
-lbl_item_shotgun = Label(root_item_05, image = empty_00_dic, bg = bg)
+lbl_item_lighter = Label(root_item_01, image = empty_01_dic, bg = bg)
+lbl_item_wolfhide = Label(root_item_02, image = empty_01_dic, bg = bg)
+lbl_item_future_friendship = Label(root_item_03, image = empty_01_dic, bg = bg)
+lbl_item_nausea = Label(root_item_04, image = empty_01_dic, bg = bg)
+lbl_item_shotgun = Label(root_item_05, image = empty_01_dic, bg = bg)
 
 lbl_item_lighter.place(x = 0, y = 2.5, width = 30, height = 30)
 lbl_item_wolfhide.place(x = 0, y = 2.5, width = 30, height = 30)
