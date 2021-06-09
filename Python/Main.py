@@ -46,6 +46,7 @@ def show_main_menu():
 
     lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
     lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
+    lbl_version.place(x = 585, y = 420, width = 110, height = 25)
     btn_newgame.place(x = 225, y = 140, width = 250, height = 60)
     btn_continue.place(x = 225, y = 215, width = 250, height = 60)
     btn_credits.place(x = 225, y = 290, width = 250, height = 60)
@@ -179,22 +180,22 @@ def show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, sc
         lbl_item_shotgun.config(image = empty_01_dic)
 
     #crowbar
-    """if crowbar == True:
+    if crowbar == True:
         lbl_item_crowbar.config(image = item_crowbar_dic)
     elif crowbar == False:
-        lbl_item_crowbar.config(image = empty_01_dic)"""
+        lbl_item_crowbar.config(image = empty_01_dic)
 
     #screwdriver
-    """if screwdriver == True:
+    if screwdriver == True:
         lbl_item_screwdriver.config(image = item_screwdriver_dic)
     elif screwdriver == False:
-        lbl_item_screwdriver.config(image = empty_01_dic)"""
+        lbl_item_screwdriver.config(image = empty_01_dic)
 
     #gear
-    """if gear == True:
+    if gear == True:
         lbl_item_gear.config(image = item_gear_dic)
     elif gear == False:
-        lbl_item_gear.config(image = empty_01_dic)"""
+        lbl_item_gear.config(image = empty_01_dic)
 
 def show_key():
     #Key - B
@@ -400,7 +401,6 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
     elif phImg_item_01 == empty_00_dic and phImg_item_02 == empty_00_dic:
         sinal_item_key = ""
 
-
     lbl_heart = Label(frame_toplevel_heart, text = sinal_hearts, justify=CENTER, font = "courier 16 italic", bg = bg)
     lbl_food = Label(frame_toplevel_food, text = sinal_foods, justify=CENTER, font = "courier 16 italic", bg = bg)
     lbl_item_key = Label(frame_toplevel_item_key, text = sinal_item_key, justify=CENTER, font = "courier 16 italic", bg = bg)
@@ -413,7 +413,6 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
 
     lbl_item_key_01 = Label(frame_toplevel_item_key, image = phImg_item_01, bg = bg)
     lbl_item_key_02 = Label(frame_toplevel_item_key, image = phImg_item_02, bg = bg)
-
 
     #.Place
 
@@ -895,6 +894,7 @@ def show_labels_options():
 def clear_main_menu():
     lbl_title.place_forget()
     lbl_subtitle.place_forget()
+    lbl_version.place_forget()
     btn_newgame.place_forget()
     btn_continue.place_forget()
     btn_credits.place_forget()
@@ -908,6 +908,7 @@ def clear_all():
     #Labels
     lbl_title.place_forget()
     lbl_subtitle.place_forget()
+    lbl_version.place_forget()
     lbl_credits_01.place_forget()
     lbl_credits_02.place_forget()
 
@@ -950,6 +951,7 @@ def click_credits():
 
     lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
     lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
+    lbl_version.place(x = 585, y = 420, width = 110, height = 25)
     btn_back.place(x = 225, y = 365, width = 250, height = 60)
     lbl_credits_01.place(x = 125, y = 145, width = 210, height = 210)
     lbl_credits_02.place(x = 375, y = 145, width = 210, height = 210)
@@ -1520,6 +1522,7 @@ txt_credits_02 = f"{my_name}\n{my_name}\n{my_name}"
 
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
+lbl_version = Label(root, text = "alpha v 0.1", bg=bg, font = "courier 10 bold", anchor = E) #VERSION
 lbl_credits_01 = Label(root, text=txt_credits_01, bg=bg, font = "courier 18 italic", anchor = N, justify = RIGHT)
 lbl_credits_02 = Label(root, text=txt_credits_02, bg=bg, font = "courier 18 italic", anchor = N, justify = LEFT)
 
@@ -1639,13 +1642,10 @@ item_wolfhide_dic = PhotoImage(file = directory + "/Images/Items/item_wolfhide.p
 item_future_friendship_dic = PhotoImage(file = directory + "/Images/Items/item_future_friendship.png")
 item_nausea_dic = PhotoImage(file = directory + "/Images/Items/item_nausea.png")
 item_shotgun_dic = PhotoImage(file = directory + "/Images/Items/item_shotgun.png")
-
-#EDITAR
-"""
 item_crowbar_dic = PhotoImage(file = directory + "/Images/Items/item_crowbar.png")
 item_screwdriver_dic = PhotoImage(file = directory + "/Images/Items/item_screwdriver.png")
 item_gear_dic = PhotoImage(file = directory + "/Images/Items/item_gear.png")
-"""
+
 #____________________________________________________________________________________________________________
 #Hearts, Foods and Keys - Labels
 
