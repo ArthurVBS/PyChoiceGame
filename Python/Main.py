@@ -470,70 +470,93 @@ def show_introduction_and_tutorial_01():
     #Show Introductions
     def show_introduction_01():
         global executions_made
-        introduction_text = "Tudo ia aos conformes naquela bela manhã em um\n" +\
-        "antigo e misterioso vilarejo, porém algo estranho\n" +\
-        "ocorreu, todos os moradores sumiram naquela manhã.\n\n" +\
-        "Contudo restou apenas uma pessoa, VOCÊ, uma garota\n" +\
-        "que por algum motivo você não sumiu e acordou\n" +\
-        "sem saber ao certo o que aconteceu."
+        introduction_text = "Buscando descanso, após um longo e\n" +\
+        "complicado ano na capital, Sam - Você -\n" +\
+        "decide visitar os seus pais que moram num\n" +\
+        "antigo vilarejo bem distante da capital.\n\n" +\
+        "Você pega seu carro e parte na estrada\n" +\
+        "até o vilarejo."
 
         lbl_int_and_tut.config(text = introduction_text)
     
     def show_introduction_02():
         global executions_made
-        introduction_text = "Deseperada, você procurou em todo o vilarejo\n" +\
-        "por alguém, mas não teve sucesso, daí começa a sua\n" +\
-        "grande jornada, você busca saber o que aconteceu\n" +\
-        "com o seu vilarejo.\n\n" +\
-        "Então você percebe que para além do vilarejo há\n" +\
-        "três possíveis caminhos para procurar:\n\n" +\
-        "A Floresta - Os Alpes - Os Moinhos"
+        introduction_text = "Chegando próximo a principal entrada do\n" +\
+        "vilarejo, o portão leste, você observa que ele\n" +\
+        "se encontra entreaberto e que há uma mensagem\n" +\
+        "escrita em um tom de vermelho bem peculiar.\n\n\n" +\
+        "Não ultrapasse!!! Não ultrapasse!!!\n"
 
         lbl_int_and_tut.config(text = introduction_text)
 
     def show_introduction_03():
         global executions_made
-        introduction_text = "A FLORESTA\n\n\n" +\
-        "Fica após o portão norte do vilarejo, no portão\n" +\
-        "há uma tranca de bronze e você possui essa chave,\n" +\
-        "pois a encontrou em uma das casas que estavam\n" +\
-        "abertas."
+        introduction_text = "Você se pergunta o motivo, mas segue em\n" +\
+        "frente, ao adentrar no vilarejo, você\n" +\
+        "busca a casa de seus pais, chegando lá\n" +\
+        "você não os encontra e começa a notar o\n" +\
+        "silêncio eloquente daquele vilarejo.\n"
 
         lbl_int_and_tut.config(text = introduction_text)
 
     def show_introduction_04():
         global executions_made
-        introduction_text = "OS ALPES\n\n\n" +\
-        "Ficam após o portão sul do vilarejo, no portão\n" +\
-        "há uma tranca de prata, você precisará de uma\n" +\
-        "chave para passar."
+        introduction_text = "Na tentavia de perguntar a alguém onde\n" +\
+        "estão seus pais, Você falha miseravelmente,\n" +\
+        "afinal você não encontrou uma alma sequer,\n" +\
+        "somente um caderno de anotação de um outro\n" +\
+        "morador do vilarejo que dizia:\n"
 
         lbl_int_and_tut.config(text = introduction_text)
 
     def show_introduction_05():
         global executions_made
-        introduction_text = "OS MOINHOS\n\n\n" +\
-        "Ficam após o portão oeste do vilarejo, no portão\n" +\
-        "há uma tranca de ouro, você precisará também\n" +\
-        "de uma chave para passar."
+        introduction_text = "2005/03/22 - Página 1/3\n\n" +\
+        "O vilarejo já não é mais o mesmo,\n" +\
+        "desde que aquele estranho minerador\n" +\
+        "encontrou um minério nas [...]\n\n" +\
+        "- O resto dessa página foi arrancado às pressas -\n"
 
         lbl_int_and_tut.config(text = introduction_text)
         
     def show_introduction_06():
+        global executions_made
+        introduction_text = "2005/03/23 - Página 2/3\n\n" +\
+        "As pessoas estão indo cegamente até\n" +\
+        "esse lugar para conseguir mais daquele\n" +\
+        "minério bobo, todos querem ficar ricos.\n\n" +\
+        "O vilarejo tem ficado bem vazio desde então.\n"
+
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    def show_introduction_07():
+        global executions_made
+        introduction_text = "2005/03/24 - Página 3/3\n\n" +\
+        "Prefiro como era antes, uma vida mais\n" +\
+        "animada, sem perda de tempo atrás de\n" +\
+        "riquezas, por isso optei em viver em\n" +\
+        "minha casa na árvore, longe de todo e\n" +\
+        "qualquer tipo de ganância.\n\n" +\
+        "A Floresta tornou-se meu novo lar."
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    def show_introduction_08():
         window.title("Introdução")
         lbl_int_and_tut_main.config(text = "- Introdução -")
 
         global executions_made
-        introduction_text = "Além dos caminhos há vários lugares com\n" +\
-        "trancas de ouro, prata, bronze e também\n" +\
-        "um símbolo peculiar.\n\n" +\
-        "Sua busca começará pela floresta.\n\n" +\
-        "Você pega tudo que tem e guarda em sua mochila\n" +\
-        "Nela há comida, a chave de bronze, um isqueiro\n"+\
-        "e também alguns frascos de remédios.\n"
+        introduction_text = "Tendo somente essa informação, Você se\n" +\
+        "direciona ao portão norte do Vilarejo,\n" +\
+        "trancado por um cadeado de bronze, o portão\n" +\
+        "pode ser aberto através da chave de bronze\n" +\
+        "que você portava.\n\n" +\
+        "Esse caminho dá direto para a Floresta\n" +\
+        "A sua busca para saber o que houve\n" +\
+        " naquele vilarejo começa aqui..."
 
         lbl_int_and_tut.config(text = introduction_text)
-
 
     #Show Tutorial
     def show_tutorial_01():
@@ -541,11 +564,24 @@ def show_introduction_and_tutorial_01():
         lbl_int_and_tut_main.config(text = "- Tutorial -")
 
         global executions_made
-        introduction_text = "Working" +\
-        "" +\
-        ""
+        introduction_text = "O jogo consiste em sobreviver e avançar na\n" +\
+        "história, possuindo portanto o efeito borboleta.\n\n" +\
+        "Sendo exposto a várias perguntas suas\n" +\
+        "decisões tem consequências a longo e curto prazo.\n\n" +\
+        "Possuindo um número limitado de vida e de comida\n" +\
+        "em sua mochila você deve fazer escolhas sábias\n" +\
+        "para que nada lhe falte."
 
         lbl_int_and_tut.config(text = introduction_text)
+
+    def show_tutorial_02():
+        global executions_made
+        introduction_text = "O número de comida e de vida variam entre\n" +\
+        "0 e 5, ao chegar em 0 game over.\n\n" +\
+        "O jogo se inicia com 3 de vida, 3 de comidas\n" +\
+        "na mochila, uma chave de bronze e um isqueiro."
+
+        lbl_int_and_tut.config(text = introduction_text) 
 
     #Next and Back
     def next_(x):
@@ -576,10 +612,22 @@ def show_introduction_and_tutorial_01():
             executions_made += 1
 
         elif x == 7:
-            show_tutorial_01()
+            show_introduction_07()
             executions_made += 1
 
         elif x == 8:
+            show_introduction_08()
+            executions_made += 1
+
+        elif x == 9:
+            show_tutorial_01()
+            executions_made += 1
+
+        elif x == 10:
+            show_tutorial_02()
+            executions_made += 1
+
+        elif x == 11:
             lbl_int_and_tut_main.place_forget()
             lbl_int_and_tut.place_forget()
             btn_int_and_tut_next.place_forget()
@@ -597,32 +645,44 @@ def show_introduction_and_tutorial_01():
             btn_int_and_tut_back.place_forget()
             show_main_menu()
 
-        if x == 1:
+        elif x == 1:
             show_introduction_01()
             executions_made -= 1
 
-        if x == 2:
+        elif x == 2:
             show_introduction_02()
             executions_made -= 1
 
-        if x == 3:
+        elif x == 3:
             show_introduction_03()
             executions_made -= 1
 
-        if x == 4:
+        elif x == 4:
             show_introduction_04()
             executions_made -= 1
 
-        if x == 5:
+        elif x == 5:
             show_introduction_05()
             executions_made -= 1
 
-        if x == 6:
+        elif x == 6:
             show_introduction_06()
             executions_made -= 1
 
-        if x == 7:
+        elif x == 7:
+            show_introduction_07()
+            executions_made -= 1
+
+        elif x == 8:
+            show_introduction_08()
+            executions_made -= 1
+
+        elif x == 9:
             show_tutorial_01()
+            executions_made -= 1
+
+        elif x == 10:
+            show_tutorial_02()
             executions_made -= 1
 
     #Labels & Buttons
@@ -652,64 +712,89 @@ def show_introduction_and_tutorial_02():
     #Show Introductions
     def show_introduction_01():
         global executions_made
-        introduction_text = "Tudo ia aos conformes naquela bela manhã em um\n" +\
-        "antigo e misterioso vilarejo, porém algo estranho\n" +\
-        "ocorreu, todos os moradores sumiram naquela manhã.\n\n" +\
-        "Contudo restou apenas uma pessoa, VOCÊ, uma garota\n" +\
-        "que por algum motivo você não sumiu e acordou\n" +\
-        "sem saber ao certo o que aconteceu."
+        introduction_text = "Chegando na casa da árvore você encontra\n" +\
+        "um homem falando consigo mesmo e repetindo\n" +\
+        "as seguintes palavras:\n\n" +\
+        "\"Não não não, a verdade não pode pegar o\n" +\
+        "Lucas, o Lucas é bonzinho, aquela verdade\n" +\
+        "não é de verdade, não é, não é...\""
 
         lbl_int_and_tut.config(text = introduction_text)
     
     def show_introduction_02():
         global executions_made
-        introduction_text = "Deseperada, você procurou em todo o vilarejo\n" +\
-        "por alguém, mas não teve sucesso, daí começa a sua\n" +\
-        "grande jornada, você busca saber o que aconteceu\n" +\
-        "com o seu vilarejo.\n\n" +\
-        "Então você percebe que para além do vilarejo há\n" +\
-        "três possíveis caminhos para procurar:\n\n" +\
-        "A Floresta - Os Alpes - Os Moinhos"
+        introduction_text = "Você decide se aproximar um pouco mais e\n" +\
+        "chamar a atenção dele, Lucas então se vira\n" +\
+        "para você perplexo mandando você se afastar,\n" +\
+        "dizendo as seguintes palavras:\n\n" +\
+        "\"Não chegue perto, saí, você não é de verdade,\n" +\
+        "a Verdade não pode pegar o Lucas, o Lucas\n" +\
+        "não foi ganancioso, não chega mais perto!\""
 
         lbl_int_and_tut.config(text = introduction_text)
 
     def show_introduction_03():
         global executions_made
-        introduction_text = "A FLORESTA\n\n\n" +\
-        "Fica após o portão norte do vilarejo, no portão\n" +\
-        "há uma tranca de bronze e você possui essa chave,\n" +\
-        "pois a encontrou em uma das casas que estavam\n" +\
-        "abertas."
+        introduction_text = "Então você para, e tenta conversar com o\n" +\
+        "Lucas para saber o que aconteceu, todavia sem\n" +\
+        "sucesso ele fica te olhando com os olhos\n" +\
+        "vermelhos, repetindo as seguintes palavras:\n\n" +\
+        "\"A verdade veio buscar o Lucas, não, ,não, não!\n" +\
+        "Essa verdade não existe! Isso é coisa de\n" +\
+        "minha cabeça, não, não, não!\""
 
         lbl_int_and_tut.config(text = introduction_text)
 
     def show_introduction_04():
         global executions_made
-        introduction_text = "OS ALPES\n\n\n" +\
-        "Ficam após o portão sul do vilarejo, no portão\n" +\
-        "há uma tranca de prata, você precisará de uma\n" +\
-        "chave para passar."
+        introduction_text = "Você decide se aproximar um pouco mais\n" +\
+        "para tentar conversar com ele, todavia Lucas\n" +\
+        "se treme ao te ver chegar e pega uma escopeta\n" +\
+        "e aponta para a sua direção, você para, e pede\n" +\
+        "para ele abaixar a arma, todavia ele lhe diz:\n\n" +\
+        "\"Não, não, não, a verdade nunca vai pegar\n" +\
+        " o Lucas, essa verdade está corrompida!!!\""
 
         lbl_int_and_tut.config(text = introduction_text)
 
     def show_introduction_05():
         global executions_made
-        introduction_text = "OS MOINHOS\n\n\n" +\
-        "Ficam após o portão oeste do vilarejo, no portão\n" +\
-        "há uma tranca de ouro, você precisará também\n" +\
-        "de uma chave para passar."
+        introduction_text = "Em meio àquela floresta ouve-se ao longe\n" +\
+        "um disparo de escopeta, era O Lucas seifando\n" +\
+        "a sua prória vida com um tiro na cabeça!\n\n" +\
+        "Você fica estagnada, não consegue nem\n" +\
+        "acreditar, até que a consciência volta em si.\n\n" +\
+        "Você toma para si aquela escopeta de chumbinho\n" +\
+        "que possui apenas uma munição, você também\n" +\
+        "encontra a chave de prata e além disso você\n" +\
+        "acha outra anotação do Lucas, que diz:"
 
         lbl_int_and_tut.config(text = introduction_text)
         
     def show_introduction_06():
         global executions_made
-        introduction_text = "Além dos caminhos há vários lugares com\n" +\
-        "trancas de ouro, prata, bronze e também\n" +\
-        "um símbolo peculiar.\n\n" +\
-        "Sua busca começará pela floresta.\n\n" +\
-        "Você pega tudo que tem e guarda em sua mochila\n" +\
-        "Nela há comida, a chave de bronze, um isqueiro\n"+\
-        "e também alguns frascos de remédios.\n"
+        introduction_text = "2005/03/25 - Página 1/1\n\n" +\
+        "Voltei ao vilarejo, mas não encontrei\n" +\
+        "ninguém, somente vi indo em direção\n" +\
+        "aos Alpes aquele minerador, ele me viu\n" +\
+        "e vindo até mim, me ofereceu um cristal\n" +\
+        "que revelaria a verdade, eu de imediato\n"+\
+        "recusei, mas o vislumbre daquele cristal\n" +\
+        "está me enlouquecendo!"
+
+        lbl_int_and_tut.config(text = introduction_text)
+
+    def show_introduction_07():
+        global executions_made
+        introduction_text = "Com isso você decide ir até os Alpes e\n" +\
+        "questionar a esse tal de \"Minerador\" o\n" +\
+        "que está acontecendo e o que é esse cristal.\n\n" +\
+        "Ao sair pelos fundos da casa da árvore\n" +\
+        "você encontra uma trilha em direção ao\n" +\
+        "vilarejo, seguindo toda vida você abre\n"+\
+        "com a chave de prata uma antiga porta\n" +\
+        "enferrujada na área nordeste do vilarejo, já \n" +\
+        "é noite, mas você está de volta ao vilarejo."
 
         lbl_int_and_tut.config(text = introduction_text)
 
@@ -742,6 +827,10 @@ def show_introduction_and_tutorial_02():
             executions_made += 1
 
         elif x == 7:
+            show_introduction_07()
+            executions_made += 1
+
+        elif x == 8:
             lbl_int_and_tut_main.place_forget()
             lbl_int_and_tut.place_forget()
             btn_int_and_tut_next.place_forget()
@@ -753,34 +842,34 @@ def show_introduction_and_tutorial_02():
         global executions_made
         x -= 2
         if x == 0:
-            lbl_int_and_tut_main.place_forget()
-            lbl_int_and_tut.place_forget()
-            btn_int_and_tut_next.place_forget()
-            btn_int_and_tut_back.place_forget()
-            show_main_menu()
+            pass
 
-        if x == 1:
+        elif x == 1:
             show_introduction_01()
             executions_made -= 1
 
-        if x == 2:
+        elif x == 2:
             show_introduction_02()
             executions_made -= 1
 
-        if x == 3:
+        elif x == 3:
             show_introduction_03()
             executions_made -= 1
 
-        if x == 4:
+        elif x == 4:
             show_introduction_04()
             executions_made -= 1
 
-        if x == 5:
+        elif x == 5:
             show_introduction_05()
             executions_made -= 1
 
-        if x == 6:
+        elif x == 6:
             show_introduction_06()
+            executions_made -= 1
+
+        elif x == 7:
+            show_introduction_07()
             executions_made -= 1
 
     #Labels & Buttons
@@ -1522,7 +1611,7 @@ txt_credits_02 = f"{my_name}\n{my_name}\n{my_name}"
 
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 0.1", bg=bg, font = "courier 10 bold", anchor = E) #VERSION
+lbl_version = Label(root, text = "alpha v 0.2", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
 lbl_credits_01 = Label(root, text=txt_credits_01, bg=bg, font = "courier 18 italic", anchor = N, justify = RIGHT)
 lbl_credits_02 = Label(root, text=txt_credits_02, bg=bg, font = "courier 18 italic", anchor = N, justify = LEFT)
 
