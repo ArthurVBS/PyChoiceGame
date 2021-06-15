@@ -271,7 +271,7 @@ def show_scenario():
     elif world == 3:
         lbl_scenario.config(image = scenario_03_dic)
 
-def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_option):
+def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_option):#Alterações Futuras
     global world
     global game_over
 
@@ -311,9 +311,6 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
                 btn_tl.config(command= lambda: show_narrative_02())
             if world == 3:
                 btn_tl.config(command= lambda: show_narrative_03())
-
-        else:
-            pass
 
     #Frame and Labels (PhotoImage)
 
@@ -402,9 +399,37 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
             phImg_item_01 = empty_00_dic
             phImg_item_02 = empty_00_dic
 
-    elif world == 2:
-        pass
+    if world == 2:#Alterações Futuras
+        if 10 == 9:
+            print("")
 
+        else:
+            phImg_item_01 = empty_00_dic
+            phImg_item_02 = empty_00_dic
+
+    elif world - 1 == 2:#Alterações Futuras
+        if 10 == 9:
+            print("")
+
+        else:
+            phImg_item_01 = empty_00_dic
+            phImg_item_02 = empty_00_dic
+
+    if world == 3:#Alterações Futuras
+        if 10 == 9:
+            print("")
+            
+        else:
+            phImg_item_01 = empty_00_dic
+            phImg_item_02 = empty_00_dic
+
+    elif world - 3 == 2:#Alterações Futuras
+        if 10 == 9:
+            print("")
+
+        else:
+            phImg_item_01 = empty_00_dic
+            phImg_item_02 = empty_00_dic
 
     if phImg_item_01 != empty_00_dic or phImg_item_02 != empty_00_dic:
         sinal_item_key = "+"
@@ -903,7 +928,7 @@ def show_introduction_and_tutorial_02():
     btn_int_and_tut_next.place(x = 440, y = 390, width = 250, height = 50)
     btn_int_and_tut_back.place(x = 10, y = 390, width = 250, height = 50)
 
-def show_labels_options():
+def show_labels_options():#Alterações Futuras
     global op
     global wd
     op += 1
@@ -943,6 +968,12 @@ def show_labels_options():
             opt_B_text = "56"
             opt_C_text = "78" 
 
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
+
     elif op == 3:
         if wd == 1:
             crossroads_text = "Seguindo a caminhada, uma\nlonga chuva toma a floresta.\nNa sua frente há um abrigo\n" +\
@@ -950,6 +981,18 @@ def show_labels_options():
             opt_A_text = "Entrar na casa, explorar e\nesperar a chuva passar;"
             opt_B_text = "Seguir em frente, apesar\n da chuva pesada;"
             opt_C_text = "Esperar a chuva passar na\n sacada do abrigo;"
+
+        elif wd == 2:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78" 
+
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
 
     elif op == 4:
         if wd == 1:
@@ -959,6 +1002,18 @@ def show_labels_options():
             opt_B_text = "Atravessar pela margem\nque está distante;"
             opt_C_text = "Atravessar pela parte\naparentemente mais rasa;"
 
+        elif wd == 2:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78" 
+
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
+
     elif op == 5:
         if wd == 1:
             crossroads_text = "Ate aqui o sol a acompanhava,\nporém a noite vem a espreita,\né necessário parar, comer e\n" +\
@@ -966,6 +1021,18 @@ def show_labels_options():
             opt_A_text = "Dormir na caverna;"
             opt_B_text = "Dormir nas copas das\nárvores;"
             opt_C_text = "Dormir no chão da\nfloresta;"
+
+        elif wd == 2:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78" 
+
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
 
     elif op == 6:
         if wd == 1:
@@ -975,6 +1042,18 @@ def show_labels_options():
             opt_B_text = "Comer o cogumelo Vermelho;"
             opt_C_text = "Seguir em frente, ignorar\nos cogumelos, pois não sou o\nMario;"
 
+        elif wd == 2:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78" 
+
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
+
     elif op == 7:
         if wd == 1:
             crossroads_text = "Próximo ao fim da floresta\nvocê encontra uma trifurcação,\nhá um caminho cheio de flores\n" +\
@@ -983,6 +1062,18 @@ def show_labels_options():
             opt_B_text = "Passar pelo caminho\nespinhoso;"
             opt_C_text = "Passar por um lamaceiro"
 
+        elif wd == 2:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78" 
+
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
+
     elif op == 8:
         if wd == 1:
             crossroads_text = "Ao caminhar você sente um\nfio esticar em sua perna\ndireita, seu corpo para e\n" +\
@@ -990,6 +1081,18 @@ def show_labels_options():
             opt_A_text = "Tentar avançar, ignorando\n o fio;"
             opt_B_text = "Tentar voltar e passar\npor cima do fio;"
             opt_C_text = "Tentar ir até a fonte\ndo fio e tentar desarma-lo;"
+        
+        elif wd == 2:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78" 
+
+        elif wd == 3:
+            crossroads_text = "12"
+            opt_A_text = "34"
+            opt_B_text = "56"
+            opt_C_text = "78"
         
         op = 0
         wd += 1
@@ -1112,7 +1215,7 @@ def music():
     mixer.music.load(directory + '/Sound/soundtrack.mp3')
     mixer.music.play(-1)
 
-def options(selected_option):
+def options(selected_option):#Alterações Futuras
     global game_over
     global hearts
     global foods
@@ -1133,7 +1236,6 @@ def options(selected_option):
     show_labels_options()
 
     if world == 1:
-
         if w == 1:
             window.title(f"Level 0{w+1}")
             if selected_option == "A":
@@ -1141,50 +1243,32 @@ def options(selected_option):
                     lbl_toplevel = "As frutinhas não eram tão\ncomestíveis assim."
                     losewin_hearts = -0.5
                     losewin_foods = 0
+
                 elif random == 3:
                     lbl_toplevel = "As frutinhas até que são\ncomestíveis."
                     losewin_hearts = 0
                     losewin_foods = 0
+
                 elif random == 4:
                     lbl_toplevel = "As frutinhas são simplesmente\ndeliciosas, levarei um pouco\npara mais tarde."
                     losewin_hearts = 0
                     losewin_foods = +0.5
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 01 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "B":
                 lbl_toplevel = "A caminhada é longa e a\nfome é sua inimiga, ignora-lá\né custoso."
                 losewin_hearts = -0.5
                 losewin_foods = 0
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 01 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
                     lbl_toplevel = "Uma simples fruta, isso\nsacia a sua fome."
                     losewin_hearts = 0
                     losewin_foods = -0.5
+
                 elif random == 4:
                     lbl_toplevel = "Guloseimas são tão gostosas,\npegarei só mais uma, ~Ops~\nacabei exagerando..."
                     losewin_hearts = 0
                     losewin_foods = -1
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 01 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif w == 2:
             window.title(f"Level 0{w+1}")
@@ -1194,32 +1278,18 @@ def options(selected_option):
                     losewin_hearts = 0
                     losewin_foods = 0
                     future_friendship = True
+
                 elif random == 3 or random == 4:
                     lbl_toplevel = "Ao libertar o lobinho você se\nmachuca com a armadilha, mas\nconsegue libertar o lobinho que\n" +\
                     "corre de volta para a mata"
                     losewin_hearts = -0.5
                     losewin_foods = 0
-                    future_friendship = True          
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
-                show_toplevel("Level 02 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
+                    future_friendship = True
 
             elif selected_option == "B":
                 lbl_toplevel = "Nada ocorre, você segue\nem frente"
                 losewin_hearts = 0
                 losewin_foods = 0
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 02 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
@@ -1227,20 +1297,13 @@ def options(selected_option):
                     losewin_hearts = 0
                     losewin_foods = +1
                     wolfhide = True
+
                 elif random == 4:
                     lbl_toplevel = "O lobo dá seu último uivo,\nvocê pega o seu couro e carne,\nmas ao longe vem vindo outro\n" + \
                     "lobo então você corre, foge,\nmas havia se arranhado na mata"
                     losewin_hearts = -1
                     losewin_foods = +1
                     wolfhide = True
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
-                show_toplevel("Level 02 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif w == 3:
             window.title(f"Level 0{w+1}")
@@ -1249,59 +1312,43 @@ def options(selected_option):
                     lbl_toplevel = "Em um vão da casa você\nencontra um remédio"
                     losewin_hearts = 0.5
                     losewin_foods = 0
+
                 elif random == 2:
                     lbl_toplevel = "Em um vão da casa você\nencontra uma fruta intacta"
                     losewin_hearts = 0
                     losewin_foods = 0.5
+
                 elif random == 3:
                     lbl_toplevel = "Em um vão da casa você\ntropeça e se machuca"
                     losewin_hearts = -0.5
                     losewin_foods = 0
+
                 elif random == 4:
                     lbl_toplevel = "Você não acho nada de\ninteressante na casa"
                     losewin_hearts = 0
                     losewin_foods = 0
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 03 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "B":
                 if random == 1 or random == 2 or random == 3:
                     lbl_toplevel = "A constante chuva a\ndeixou resfriada"
                     losewin_hearts = -1
                     losewin_foods = 0
+
                 elif random == 4:
                     lbl_toplevel = "Você andou por debaixo\ndas copas e você nem nota\na chuva constante"
                     losewin_hearts = 0
                     losewin_foods = 0
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 03 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
                     lbl_toplevel = "A chuva passou e você\nsegue o seu caminho"
                     losewin_hearts = 0
                     losewin_foods = 0
+                
                 elif random == 4:
                     lbl_toplevel = "A chuva veio, mas a\ndona aranha continuou a\nsubir e a picou"
                     losewin_hearts = -1
                     losewin_foods = 0
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 03 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif w == 4:
             window.title(f"Level 0{w+1}")
@@ -1317,31 +1364,18 @@ def options(selected_option):
                     losewin_hearts = -0.5
                     losewin_foods = 0
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 04 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "B":
                 if random == 1 or random == 2 or random == 3:
                     lbl_toplevel = "Ao caminhar tanto você\ncomeça a sentir muita fome,\nportanto você come algo\n" +\
                     "de sua mochila"
                     losewin_hearts = 0
                     losewin_foods = -1
+
                 elif random == 4:
                     lbl_toplevel = "Ao caminhar tanto você\ncomeça a sentir muita fome,\nentão você come algo da\n" +\
                     "mochila, além disso\nseus pés estão doendo"
                     losewin_hearts = -0.5
                     losewin_foods = -1
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 04 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
@@ -1350,17 +1384,11 @@ def options(selected_option):
                     losewin_foods = 0
                     game_over = True
                     gameover("True")
+
                 elif random == 4:
                     lbl_toplevel = "Shalow Now\nvocê consegue atravessar de boa"
                     losewin_hearts = 0
                     losewin_foods = 0
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 04 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif w == 5:
             window.title(f"Level 0{w+1}")
@@ -1371,54 +1399,46 @@ def options(selected_option):
                     losewin_foods = 0
                     game_over = True
                     gameover("True")
+
                 else:
                     if random == 1 or random == 2:
                         lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu bem e partiu\nna manhã seguinte"
                         losewin_hearts = 0
                         losewin_foods = -0.5
+
                     elif random == 3 or random == 4:
                         lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu mal e teve de partir\nna manhã seguinte"
                         losewin_hearts = -0.5
                         losewin_foods = -0.5
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 05 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "B":
                 if foods >= 4:
                     lbl_toplevel = "As formigas são atraídas\npela sua comida e levam\nparte dela"
                     losewin_hearts = 0
                     losewin_foods = -2
+
                 else:
                     if random == 1 or random == 2:
                         lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu bem e partiu\nna manhã seguinte"
                         losewin_hearts = 0
                         losewin_foods = -0.5
+
                     elif random == 3 or random == 4:
                         lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu mal e teve de partir\nna manhã seguinte"
                         losewin_hearts = -0.5
                         losewin_foods = -0.5
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 05 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "C":
                 if random == 1 or random == 2:
                     lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu mal e teve de partir\nna manhã seguinte"
                     losewin_hearts = -0.5
                     losewin_foods = -0.5
+
                 elif random == 3:
                     lbl_toplevel = "A noite foi longa,\nvocê se alimentou,\ndormiu bem e partiu\nna manhã seguinte"
                     losewin_hearts = 0
                     losewin_foods = -0.5
+
                 elif random == 4:
                     lbl_toplevel = "O chão é o lar de\nmuitos animais, inclusive\nda cobra que te deu\num beijinho de boa noite"
                     losewin_hearts = 0
@@ -1426,60 +1446,34 @@ def options(selected_option):
                     game_over = True
                     gameover("True")
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 05 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
         elif w == 6:
             window.title(f"Level 0{w+1}")
             if selected_option == "A":
-                if random == 1 or random == 2:                   
+                if random == 1 or random == 2:
                     lbl_toplevel = "O cogumelo Azul lhe traz\numa sensação de fraqueza"
                     losewin_hearts = -1
                     losewin_foods = 0
+
                 elif random == 3 or random == 4:
                     lbl_toplevel = "O cogumelo Azul lhe traz\numa sensação de saciedade"
                     losewin_hearts = 0
                     losewin_foods = 1
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 06 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "B":
-                if random == 1 or random == 2:                   
+                if random == 1 or random == 2:
                     lbl_toplevel = "O cogumelo Vermelho\nlhe traz uma sensação\nde força"
                     losewin_hearts = 1
                     losewin_foods = 0
+
                 elif random == 3 or random == 4:
                     lbl_toplevel = "O cogumelo Vermelho\nlhe traz uma fome\nimensa"
                     losewin_hearts = 0
                     losewin_foods = -1
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 06 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "C":
                 lbl_toplevel = "Você segue em frente e\ncome algo de sua mochila"
                 losewin_hearts = 0
                 losewin_foods = -0.5
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 06 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
         elif w == 7:
             window.title(f"Level 0{w+1}")
@@ -1490,18 +1484,12 @@ def options(selected_option):
                 nausea = True
                 show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 07 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "B":
                 if wolfhide == True: #Couro de lobo
                     lbl_toplevel = "Tudo ocorreu bem,\nafinal o couro de lobo a\nprotegeu dos espinhos"
                     losewin_hearts = 0
                     losewin_foods = 0
+
                 else:
                     if random == 1 or random == 2 or random == 3:
                         lbl_toplevel = "Ao passar pelas espinhos\nvocê se corta várias vezes"
@@ -1513,13 +1501,6 @@ def options(selected_option):
                         losewin_hearts = -0.5
                         losewin_foods = 0
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 07 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
                     lbl_toplevel = "À medida que você caminhava\nno lamaceiro você começa\na afundar até que percebes\n" +\
@@ -1528,22 +1509,16 @@ def options(selected_option):
                     losewin_foods = 0
                     game_over = True
                     gameover("True")
+
                 elif random == 4:
                     lbl_toplevel = "No meio para o final do\nlamaceiro você começa a\nafundar, porém consegue fugir\n" +\
                     "da então areia movediça"
                     losewin_hearts = -0.5
                     losewin_foods = 0
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                show_toplevel("Level 07 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
         elif w == 8:
             window.title(f"Level 01")
-
+            shotgun = True
             if selected_option == "A":
                 lbl_toplevel = "Uma mina explode em sua\nfrente, devido a sua falta\nde cuidado"
                 losewin_hearts = 0
@@ -1551,29 +1526,11 @@ def options(selected_option):
                 game_over = True
                 gameover("True")
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                shotgun = True
-                show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
-                show_toplevel("Level 08 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
-
             elif selected_option == "B":
                 lbl_toplevel = "É voltando que se pega\nimpulso, você passa pela\narmadilha com calma e tudo\n"  +\
                 "ocorre bem"
                 losewin_hearts = 0
                 losewin_foods = 0
-
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                shotgun = True
-                show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
-                show_toplevel("Level 08 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
@@ -1581,6 +1538,7 @@ def options(selected_option):
                     "decide desarmar, com êxito\nvocê desarma a armadilha"
                     losewin_hearts = 0
                     losewin_foods = 0
+
                 elif random == 4:
                     lbl_toplevel = "Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n" +\
                     "decide desarmar, com êxito\na mina terrestre é acionada"
@@ -1589,21 +1547,18 @@ def options(selected_option):
                     game_over = True
                     gameover("True")
 
+        hearts += losewin_hearts
+        foods += losewin_foods
+        show_heart(hearts)
+        show_food(foods)
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
-
-                shotgun = True
-                show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
-                show_toplevel("Level 08 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
+        show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
+        show_toplevel(f"Level 0{w} - {selected_option}", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
     elif world == 2:
 
         if w == 1:
             window.title(f"Level 0{w+1}")
-
             if selected_option == "A":
                 if future_friendship == True: #Futura Amizade
                         lbl_toplevel = "Indo em direção ao urso\nvocê o ataca e tem uma ajuda\nespecial de um certo lobinho\n" +\
@@ -1628,12 +1583,49 @@ def options(selected_option):
                         game_over = True
                         gameover("True")
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
 
-                show_toplevel("Level 01 - A", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 2:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
 
             elif selected_option == "B":
                 if random == 1 or random == 2 or random == 3:
@@ -1649,12 +1641,49 @@ def options(selected_option):
                     game_over = True
                     gameover("True")
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
 
-                show_toplevel("Level 01 - B", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 3:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
 
             elif selected_option == "C":
                 if random == 1 or random == 2 or random == 3:
@@ -1667,12 +1696,602 @@ def options(selected_option):
                     losewin_hearts = 0
                     losewin_foods = 0
 
-                hearts += losewin_hearts
-                show_heart(hearts)
-                foods += losewin_foods
-                show_food(foods)
+        elif w == 4:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
 
-                show_toplevel("Level 01 - C", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 5:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 6:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 7:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 8:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        hearts += losewin_hearts
+        foods += losewin_foods
+        show_heart(hearts)
+        show_food(foods)
+
+        show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
+        show_toplevel(f"Level 0{w} - {selected_option}", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
+
+    elif world == 3:
+
+        if w == 1:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if future_friendship == True: #Futura Amizade
+                        lbl_toplevel = "Indo em direção ao urso\nvocê o ataca e tem uma ajuda\nespecial de um certo lobinho\n" +\
+                        "que retribuiu e partiu de\nvolta a mata."
+                        losewin_hearts = 0
+                        losewin_foods = 0
+
+                else:
+                    if random == 1 or random == 2 or random == 3:
+                        lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                        "o urso veio e a pegou."
+                        losewin_hearts = 0
+                        losewin_foods = 0
+                        game_over = True
+                        gameover("True")
+
+                    elif random == 4:
+                        lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                        "todavia estava sem munição,\nentão o urso a pegou."
+                        losewin_hearts = 0
+                        losewin_foods = 0
+                        game_over = True
+                        gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 2:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 3:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 4:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 5:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 6:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 7:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        elif w == 8:
+            window.title(f"Level 0{w+1}")
+            if selected_option == "A":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Para uma escopeta funcionar\né necessário ter munição,\nvocê tentou atirar e falhou,\n" +\
+                    "o urso veio e a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+                elif random == 4:
+                    lbl_toplevel = "O urso é atingido, porém\nele vem ferozmente em sua\ndireção e você tenta atirar,\n" +\
+                    "todavia estava sem munição,\nentão o urso a pegou."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "B":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Aguardando pacientemente o\nurso partir, você sente\nfome e decide comer,\n" +\
+                    "não se dando conta de que\nvocê se tornou uma isca."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+                    game_over = True
+                    gameover("True")
+
+            elif selected_option == "C":
+                if random == 1 or random == 2 or random == 3:
+                    lbl_toplevel = "Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso."
+                    losewin_hearts = -0.5
+                    losewin_foods = 0
+
+                elif random == 4:
+                    lbl_toplevel = "Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal."
+                    losewin_hearts = 0
+                    losewin_foods = 0
+
+        hearts += losewin_hearts
+        foods += losewin_foods
+        show_heart(hearts)
+        show_food(foods)
+
+        show_item(lighter, wolfhide, future_friendship, nausea, shotgun, crowbar, screwdriver, gear)
+        show_toplevel(f"Level 0{w} - {selected_option}", lbl_toplevel, losewin_hearts, losewin_foods, w, selected_option)
 
 #____________________________________________________________________________________________________________
 #Others
@@ -1710,7 +2329,7 @@ txt_credits_02 = f"{my_name}\n{my_name}\n{my_name}"
 
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 0.3", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
+lbl_version = Label(root, text = "alpha v 0.4", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
 lbl_credits_01 = Label(root, text=txt_credits_01, bg=bg, font = "courier 18 italic", anchor = N, justify = RIGHT)
 lbl_credits_02 = Label(root, text=txt_credits_02, bg=bg, font = "courier 18 italic", anchor = N, justify = LEFT)
 
