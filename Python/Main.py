@@ -1121,8 +1121,7 @@ def clear_all():
     lbl_title.place_forget()
     lbl_subtitle.place_forget()
     lbl_version.place_forget()
-    lbl_credits_01.place_forget()
-    lbl_credits_02.place_forget()
+    lbl_credits.place_forget()
 
     #Buttons
     btn_newgame.place_forget()
@@ -1165,8 +1164,7 @@ def click_credits():
     lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
     lbl_version.place(x = 585, y = 420, width = 110, height = 25)
     btn_back.place(x = 225, y = 365, width = 250, height = 60)
-    lbl_credits_01.place(x = 125, y = 145, width = 210, height = 210)
-    lbl_credits_02.place(x = 375, y = 145, width = 210, height = 210)
+    lbl_credits.place(x = 10, y = 145, width = width - 40, height = 210)
 
 def click_quit():
     ok_cancel_quit = messagebox.askokcancel(title = "Sair?", message = "Você realmente deseja sair?\t\t",
@@ -2323,15 +2321,14 @@ window.configure(background = "#000")
 root = Frame(window, bd = 1, relief = "sunken", bg = bg)
 root.place(x = 10, y = 10, width = width - 20, height = height - 20)
 
-my_name = "Arthur V.B.S."
-txt_credits_01 = "Producer\nDesigner\nDeveloper"
-txt_credits_02 = f"{my_name}\n{my_name}\n{my_name}"
+txt_credits = "Aluno: Arthur Vinícius Bezerra da Silva\n" +\
+"Curso: ADS - IFPE - 1º período - 2021.1\n\n" +\
+"Início: 2021.05.31      Fim: 2021.--.--\n"
 
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 0.4", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
-lbl_credits_01 = Label(root, text=txt_credits_01, bg=bg, font = "courier 18 italic", anchor = N, justify = RIGHT)
-lbl_credits_02 = Label(root, text=txt_credits_02, bg=bg, font = "courier 18 italic", anchor = N, justify = LEFT)
+lbl_version = Label(root, text = "alpha v 0.5", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
+lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
 
 btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
                         cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
