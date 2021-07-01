@@ -1,10 +1,10 @@
 #____________________________________________________________________________________________________________
 #Import
+import os
 from tkinter import *
 from tkinter import messagebox
 from random import randint
-from pygame import mixer
-import os
+from Def_Sound import music
 #____________________________________________________________________________________________________________
 #Functions
 
@@ -1208,11 +1208,6 @@ def default():
     hearts = foods = 3
     game_over = False
 
-def music():
-    mixer.init()
-    mixer.music.load(directory + '/Sound/soundtrack.mp3')
-    mixer.music.play(-1)
-
 def options(selected_option):#Alterações Futuras
     global game_over
     global hearts
@@ -2298,7 +2293,7 @@ bg_frames = "#f1f1f1"
 bg_narrative = "#252525"
 directory = os.path.dirname(__file__)
 default()
-music()
+music(directory)
 #____________________________________________________________________________________________________________
 #Init Tkinter
 window = Tk()
@@ -2315,20 +2310,14 @@ window.title("The Truth")
 window.iconbitmap(directory + "/Images/Icons/icon_01.ico")
 window.resizable(False,False)
 window.configure(background = "#000")
-#____________________________________________________________________________________________________________
-#Create - Main Menu and Credits
 
 root = Frame(window, bd = 1, relief = "sunken", bg = bg)
 root.place(x = 10, y = 10, width = width - 20, height = height - 20)
-
-txt_credits = "Aluno: Arthur Vinícius Bezerra da Silva\n" +\
-"Curso: ADS - IFPE - 1º período - 2021.1\n\n" +\
-"Início: 2021.05.31      Fim: 2021.--.--\n"
-
+#____________________________________________________________________________________________________________
+#Main Menu
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 0.5", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
-lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
+lbl_version = Label(root, text = "alpha v 0.6", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
 
 btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
                         cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
@@ -2338,10 +2327,17 @@ btn_credits = Button(root, text= "Créditos", bg=bg, bd = 2, relief = "ridge", c
                         cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
 btn_quit = Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: click_quit(),
                         cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_back = Button(root, text= "Voltar", bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
-                cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
 
 show_main_menu()
+#____________________________________________________________________________________________________________
+#Credits
+txt_credits = "Aluno: Arthur Vinícius Bezerra da Silva\n" +\
+"Curso: ADS - IFPE - 1º período - 2021.1\n\n" +\
+"Início: 2021.05.31      Fim: 2021.--.--\n"
+lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
+
+btn_back = Button(root, text= "Voltar", bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
+                cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
 #____________________________________________________________________________________________________________
 #Create - Game
 
@@ -2505,21 +2501,20 @@ lbl_just_way_08 = Label(root_way, image = just_way_dic, bg = bg_narrative)
 lbl_just_way_08.place(x = 305, y = 5, width = 35, height = 35)
 
 lbl_item_lighter = Label(root_item_01, image = empty_01_dic, bg = bg)
-lbl_item_wolfhide = Label(root_item_02, image = empty_01_dic, bg = bg)
-lbl_item_future_friendship = Label(root_item_03, image = empty_01_dic, bg = bg)
-lbl_item_nausea = Label(root_item_04, image = empty_01_dic, bg = bg)
-lbl_item_shotgun = Label(root_item_05, image = empty_01_dic, bg = bg)
-lbl_item_crowbar = Label(root_item_06, image = empty_01_dic, bg = bg)
-lbl_item_screwdriver = Label(root_item_07, image = empty_01_dic, bg = bg)
-lbl_item_gear = Label(root_item_08, image = empty_01_dic, bg = bg)
-
 lbl_item_lighter.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_wolfhide = Label(root_item_02, image = empty_01_dic, bg = bg)
 lbl_item_wolfhide.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_future_friendship = Label(root_item_03, image = empty_01_dic, bg = bg)
 lbl_item_future_friendship.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_nausea = Label(root_item_04, image = empty_01_dic, bg = bg)
 lbl_item_nausea.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_shotgun = Label(root_item_05, image = empty_01_dic, bg = bg)
 lbl_item_shotgun.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_crowbar = Label(root_item_06, image = empty_01_dic, bg = bg)
 lbl_item_crowbar.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_screwdriver = Label(root_item_07, image = empty_01_dic, bg = bg)
 lbl_item_screwdriver.place(x = 0, y = 2.5, width = 30, height = 30)
+lbl_item_gear = Label(root_item_08, image = empty_01_dic, bg = bg)
 lbl_item_gear.place(x = 0, y = 2.5, width = 30, height = 30)
 
 window.mainloop()
