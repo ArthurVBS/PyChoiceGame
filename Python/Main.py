@@ -1,13 +1,14 @@
 #Import - Libraries _________________________________________________________________________________________
 import os
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
 from random import randint
 
 #Import - Modules ___________________________________________________________________________________________
-from Defs_Sound import music
-from Defs_Texts import world_01, world_02, world_03, menu
-from Defs_Images import images, roots, sub_roots, sub_sub_roots, labels, buttons
+from Utils.Defs_Sound import sound, mixer_plus, mixer_minus
+from Utils.Defs_Texts import world_01, world_02, world_03, menu
+from Utils.Defs_Images import images, roots, sub_roots, sub_sub_roots, labels, buttons
 
 #Functions - Show ___________________________________________________________________________________________
 def show_main_menu():
@@ -17,10 +18,11 @@ def show_main_menu():
     lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
     lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
     lbl_version.place(x = 585, y = 420, width = 110, height = 25)
-    btn_newgame.place(x = 225, y = 140, width = 250, height = 60)
-    btn_continue.place(x = 225, y = 215, width = 250, height = 60)
-    btn_credits.place(x = 225, y = 290, width = 250, height = 60)
-    btn_quit.place(x = 225, y = 365, width = 250, height = 60)
+    btn_newgame.place(x = 225, y = 145, width = 250, height = 50)
+    btn_continue.place(x = 225, y = 205, width = 250, height = 50)
+    btn_options.place(x = 225, y = 265, width = 250, height = 50)
+    btn_credits.place(x = 225, y = 325, width = 250, height = 50)
+    btn_quit.place(x = 225, y = 385, width = 250, height = 50)
 
 def show_heart(hearts):
     global game_over
@@ -454,7 +456,7 @@ def show_button_continue():
 def show_game():
     roots['root_status'].place(x = 0, y = 280, width = width - 23, height = 175)
     roots['root_narrative'].place(x = 0, y = 0, width = width - 23, height = 280)
-    buttons['btn_back_newgame'].place(x = 610, y = 60, width = 80, height = 45)
+    buttons['btn_back_newgame'].place(x = 610, y = 60, width = 80, height = 100)
 
     default()
 
@@ -628,6 +630,7 @@ def show_introduction_and_tutorial_01():
             lbl_int_and_tut.place_forget()
             btn_int_and_tut_next.place_forget()
             btn_int_and_tut_back.place_forget()
+            sound(directory, vol = vol, sound = 1)
             show_game()
             show_button_continue()
         
@@ -902,6 +905,7 @@ def clear_main_menu():
     lbl_version.place_forget()
     btn_newgame.place_forget()
     btn_continue.place_forget()
+    btn_options.place_forget()
     btn_credits.place_forget()
     btn_quit.place_forget()
 
@@ -909,16 +913,26 @@ def clear_all():
     roots['root_status'].place_forget()
     roots['root_narrative'].place_forget()
 
+    pb_vol.place_forget()
+
     lbl_title.place_forget()
     lbl_subtitle.place_forget()
     lbl_version.place_forget()
     lbl_credits.place_forget()
+    lbl_vol.place_forget()
+    lbl_volume.place_forget()
+    lbl_language.place_forget()
 
     btn_newgame.place_forget()
     btn_continue.place_forget()
+    btn_options.place_forget()
     btn_credits.place_forget()
     btn_quit.place_forget()
     btn_back.place_forget()
+    btn_vol_max.place_forget()
+    btn_vol_plus.place_forget()
+    btn_vol_minus.place_forget()
+    btn_vol_mute.place_forget()
     buttons['btn_back_newgame'].place_forget()
 
 #Functions - Click __________________________________________________________________________________________
@@ -946,6 +960,55 @@ def click_continue():
 
     clear_main_menu()
 
+def click_options():
+    window.title('Ajustes')
+    clear_all()
+    vol_pb()
+
+    lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
+    lbl_title.configure(text = '- Ajustes -')
+    lbl_volume.place(x = 10, y = 85, width = 335, height = 65)
+    lbl_language.place(x = 355, y = 85, width = 335, height = 65)
+
+    btn_vol_max.place(x = 270, y = 370, width = 75, height = 65)
+    btn_vol_plus.place(x = 185, y = 370, width = 75, height = 65)
+    btn_vol_minus.place(x = 97.5, y = 370, width = 75, height = 65)
+    btn_vol_mute.place(x = 10, y = 370, width = 75, height = 65)
+
+    btn_back.place(x = 355, y = 370, width = 335, height = 65)
+
+def vol_pb():
+    global vol
+    var_barra = DoubleVar()
+    var_barra.set(vol)
+    text_vol = f'{vol*100:.1f}%'
+
+    pb_vol.configure(variable = var_barra)
+    pb_vol.place(x = 10 , y = 155, width = 335, height = 40)
+
+    lbl_vol.configure(text = text_vol)
+    lbl_vol.place(x = 10, y = 200, width = 335, height = 30)
+
+def vol_max():
+    global vol
+    vol = round(mixer_plus(1), 2)
+    vol_pb()
+
+def vol_plus():
+    global vol
+    vol = round(mixer_plus(vol), 2)
+    vol_pb()
+
+def vol_minus():
+    global vol
+    vol = round(mixer_minus(vol), 2)
+    vol_pb()
+
+def vol_mute():
+    global vol
+    vol = round(mixer_minus(0), 2)
+    vol_pb()
+
 def click_credits():
     window.title("Créditos")
     clear_all()
@@ -953,15 +1016,20 @@ def click_credits():
     lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
     lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
     lbl_version.place(x = 585, y = 420, width = 110, height = 25)
-    btn_back.place(x = 225, y = 365, width = 250, height = 60)
+    btn_back.place(x = 225, y = 380, width = 250, height = 50)
     lbl_credits.place(x = 10, y = 145, width = width - 40, height = 210)
 
 def click_quit():
     ok_cancel_quit = messagebox.askokcancel(title = "Sair?", message = "Você realmente deseja sair?\t\t",
     detail = "Desde já obrigado por jogar")
-
     if ok_cancel_quit == True:
         quit()
+
+def click_back_with_sound():
+    clear_all()
+    lbl_title.config(text = " - The Truth - ", bg = bg, fg = "#000")
+    sound(directory, vol = vol, sound = 0)
+    show_main_menu()
 
 def click_back_to_main_menu():
     clear_all()
@@ -1078,36 +1146,49 @@ root.place(x = 10, y = 10, width = width - 20, height = height - 20)
 #Main Menu ___________________________________________________________________________________________________
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 1.0", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
-
-btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_continue = Button(root, text= "Continuar", bg=bg, bd = 2, relief = "flat", command= lambda: click_nothing(), 
-                        cursor="arrow", font = "courier 27 bold", fg = "#ccc")
-btn_credits = Button(root, text= "Créditos", bg=bg, bd = 2, relief = "ridge", command= lambda: click_credits(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_quit = Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: click_quit(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-
-show_main_menu()
-
-#Credits ____________________________________________________________________________________________________
+lbl_version = Label(root, text = "alpha v 1.1", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
+lbl_volume = Label(root, text = "Volume", bg=bg, font = "courier 32 bold")
+lbl_language = Label(root, text = "Idioma", bg=bg, font = "courier 32 bold")
 txt_credits = "Aluno: Arthur Vinícius Bezerra da Silva\n" +\
 "Curso: ADS - IFPE - 1º período - 2021.1\n\n" +\
 "Início: 2021.05.31      Fim: 2021.--.--\n"
 lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
 
-btn_back = Button(root, text= "Voltar", bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
-                cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+var_barra = DoubleVar()
+var_barra.set(0.5)
+text_vol = f'{50}%'
+pb_vol = ttk.Progressbar(root, variable = var_barra, maximum = 1)
+lbl_vol = Label(root, text = text_vol, bg=bg, font = "courier 16 bold")
 
-#Roots, Labels, Buttons, Images and Music ___________________________________________________________________
 default()
-music = music(directory)
 img = images(directory)
+vol = sound(directory, vol = 0.5, sound = 0)
 roots = roots(root, bg, bg_frames, bg_narrative)
 sub_roots = sub_roots(roots, bg, bg_frames, bg_narrative)
 sub_sub_roots = sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative)
 labels = labels(roots, bg, bg_frames, bg_narrative, fg, img, sub_roots, sub_sub_roots)
-buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu)
+buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_with_sound)
 
+btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_continue = Button(root, text= "Continuar", bg=bg, bd = 2, relief = "flat", command= lambda: click_nothing(), 
+                        cursor="arrow", font = "courier 25 bold", fg = "#ccc")
+btn_credits = Button(root, text= "Créditos", bg=bg, bd = 2, relief = "ridge", command= lambda: click_credits(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_options = Button(root, text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge", command = lambda: click_options(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_quit = Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: click_quit(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_back = Button(root, text = 'Voltar', bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
+                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+btn_vol_max = Button(root, image = img['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_max(),
+                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+btn_vol_plus = Button(root, image = img['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_plus(),
+                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+btn_vol_minus = Button(root, image = img['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_minus(),
+                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+btn_vol_mute = Button(root, image = img['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_mute(),
+                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+
+show_main_menu()
 window.mainloop()

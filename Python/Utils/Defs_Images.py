@@ -5,6 +5,11 @@ def images(directory):
         'empty_00_dic' : PhotoImage(file= directory + "/Images/empty.png"),
         'empty_01_dic' : PhotoImage(file= directory + "/Images/empty_plus.png"),
         'Sam_dic' : PhotoImage(file= directory + "/Images/Sam.png"),
+
+        'vol_max_dic' : PhotoImage(file= directory + "/Images/Volume/vol_max.png"),
+        'vol_plus_dic' : PhotoImage(file= directory + "/Images/Volume/vol_plus.png"),
+        'vol_minus_dic' : PhotoImage(file= directory + "/Images/Volume/vol_minus.png"),
+        'vol_mute_dic' : PhotoImage(file= directory + "/Images/Volume/vol_mute.png"),
         
         'scenario_01_dic' : PhotoImage(file= directory + "/Images/Scenarios/Scenario_01.png"),
         'scenario_02_dic' : PhotoImage(file= directory + "/Images/Scenarios/Scenario_02.png"),
@@ -35,13 +40,13 @@ def images(directory):
         'item_screwdriver_dic' : PhotoImage(file = directory + "/Images/Items/item_screwdriver.png"),
         'item_gear_dic' : PhotoImage(file = directory + "/Images/Items/item_gear.png")}
 
-
     return images
 
 def roots(root, bg, bg_frames, bg_narrative):
     roots = {
         'root_status' : Frame(root, bd = 1, relief = "ridge", bg = bg),
-        'root_narrative' : Frame(root, bd = 1, relief = "ridge", bg = bg_narrative)}
+        'root_narrative' : Frame(root, bd = 1, relief = "ridge", bg = bg_narrative),
+        'root_volume' : Frame(root, bd = 1, relief = "ridge", bg = bg)}
 
     return roots
 
@@ -179,9 +184,9 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
 
     return labels
 
-def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu):
+def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_with_sound):
     buttons = {
-        'btn_back_newgame' : Button(roots['root_status'], text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: click_back_to_main_menu(), cursor="hand2",
+        'btn_back_newgame' : Button(roots['root_status'], text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: click_back_with_sound(), cursor="hand2",
                             font = "courier 12 bold", activebackground="#ccc", activeforeground=fg),
         'btn_opt_A' : Button(roots['root_narrative'], text= "- A -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("A"),
                             cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg),
@@ -190,7 +195,7 @@ def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_
         'btn_opt_C' : Button(roots['root_narrative'], text= "- C -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("C"),
                             cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg)}
 
-    buttons['btn_back_newgame'].place(x = 610, y = 60, width = 80, height = 45)
+    #buttons['btn_back_newgame'].place(x = 610, y = 60, width = 80, height = 100)
     buttons['btn_opt_A'].place(x = 10, y = 230, width = 100, height = 40)
     buttons['btn_opt_B'].place(x = 125, y = 230, width = 100, height = 40)
     buttons['btn_opt_C'].place(x = 240, y = 230, width = 100, height = 40)
