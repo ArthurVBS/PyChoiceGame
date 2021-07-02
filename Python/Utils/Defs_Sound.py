@@ -16,18 +16,16 @@ def sound(directory, vol, sound = 0):
     mixer.music.play(-1)
     return vol
 
-def mixer_plus(vol):
-    vol += 0.05
+def mixer_pm(vol, p_or_m):
+    if p_or_m == "plus":
+        vol += 0.05
+    elif p_or_m == "minus":
+        vol -= 0.05
+
     if vol > 1:
         vol = 1
-    mixer.music.set_volume(vol)
-
-    return vol
-
-def mixer_minus(vol):
-    vol -= 0.05
-    if vol < 0:
+    elif vol < 0:
         vol = 0
-    mixer.music.set_volume(vol)
 
+    mixer.music.set_volume(vol)
     return vol

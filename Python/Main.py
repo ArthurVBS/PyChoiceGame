@@ -6,7 +6,7 @@ from tkinter import messagebox
 from random import randint
 
 #Import - Modules ___________________________________________________________________________________________
-from Utils.Defs_Sound import sound, mixer_plus, mixer_minus
+from Utils.Defs_Sound import sound, mixer_pm
 from Utils.Defs_Texts import world_01, world_02, world_03, menu
 from Utils.Defs_Images import images, roots, sub_roots, sub_sub_roots, labels, buttons
 
@@ -914,6 +914,17 @@ def clear_all():
     roots['root_narrative'].place_forget()
 
     pb_vol.place_forget()
+    rb_lan_UK.place_forget()
+    rb_lan_FR.place_forget()
+    rb_lan_BR.place_forget()
+    rb_lan_SP.place_forget()
+    rb_lan_GE.place_forget()
+
+    labels['lbl_flag_UK'].place_forget()
+    labels['lbl_flag_FR'].place_forget()
+    labels['lbl_flag_BR'].place_forget()
+    labels['lbl_flag_SP'].place_forget()
+    labels['lbl_flag_GE'].place_forget()
 
     lbl_title.place_forget()
     lbl_subtitle.place_forget()
@@ -922,7 +933,7 @@ def clear_all():
     lbl_vol.place_forget()
     lbl_volume.place_forget()
     lbl_language.place_forget()
-
+    
     btn_newgame.place_forget()
     btn_continue.place_forget()
     btn_options.place_forget()
@@ -953,10 +964,11 @@ def click_nothing():
 
 def click_continue():
     global level
+    sound(directory, vol = vol, sound = 1) #Caso esteja no mundo 1
     window.title(f"Level 0{level}")
     roots['root_status'].place(x = 0, y = 280, width = width - 23, height = 175)
     roots['root_narrative'].place(x = 0, y = 0, width = width - 23, height = 280)
-    buttons['btn_back_newgame'].place(x = 610, y = 60, width = 80, height = 45)
+    buttons['btn_back_newgame'].place(x = 610, y = 60, width = 80, height = 100)
 
     clear_main_menu()
 
@@ -965,48 +977,54 @@ def click_options():
     clear_all()
     vol_pb()
 
+    labels['lbl_flag_UK'].place(x = 360, y = 145, width = 50, height = 50)
+    labels['lbl_flag_FR'].place(x = 360, y = 205, width = 50, height = 50)
+    labels['lbl_flag_BR'].place(x = 360, y = 265, width = 50, height = 50)
+    labels['lbl_flag_SP'].place(x = 360, y = 325, width = 50, height = 50)
+    labels['lbl_flag_GE'].place(x = 360, y = 385, width = 50, height = 50)
+
+    rb_lan_UK.place(x = 440, y = 145, width = 225, height = 50)
+    rb_lan_FR.place(x = 440, y = 205, width = 225, height = 50)
+    rb_lan_BR.place(x = 440, y = 265, width = 225, height = 50)
+    rb_lan_SP.place(x = 440, y = 325, width = 225, height = 50)
+    rb_lan_GE.place(x = 440, y = 385, width = 225, height = 50)
+
     lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
     lbl_title.configure(text = '- Ajustes -')
     lbl_volume.place(x = 10, y = 85, width = 335, height = 65)
     lbl_language.place(x = 355, y = 85, width = 335, height = 65)
 
-    btn_vol_max.place(x = 270, y = 370, width = 75, height = 65)
-    btn_vol_plus.place(x = 185, y = 370, width = 75, height = 65)
-    btn_vol_minus.place(x = 97.5, y = 370, width = 75, height = 65)
-    btn_vol_mute.place(x = 10, y = 370, width = 75, height = 65)
+    btn_vol_max.place(x = 270, y = 290, width = 75, height = 70)
+    btn_vol_plus.place(x = 185, y = 290, width = 75, height = 70)
+    btn_vol_minus.place(x = 97.5, y = 290, width = 75, height = 70)
+    btn_vol_mute.place(x = 10, y = 290, width = 75, height = 70)
 
-    btn_back.place(x = 355, y = 370, width = 335, height = 65)
+    btn_back.place(x = 10, y = 370, width = 335, height = 65)# x = 355
 
 def vol_pb():
     global vol
-    var_barra = DoubleVar()
-    var_barra.set(vol)
+    var_progressBar = DoubleVar()
+    var_progressBar.set(vol)
     text_vol = f'{vol*100:.1f}%'
 
-    pb_vol.configure(variable = var_barra)
+    pb_vol.configure(variable = var_progressBar)
     pb_vol.place(x = 10 , y = 155, width = 335, height = 40)
 
     lbl_vol.configure(text = text_vol)
     lbl_vol.place(x = 10, y = 200, width = 335, height = 30)
 
-def vol_max():
+def volume(option):
     global vol
-    vol = round(mixer_plus(1), 2)
-    vol_pb()
+    
+    if option == "max":
+        vol = round(mixer_pm(vol = 1, p_or_m = "plus"), 2)
+    elif option == "plus":
+        vol = round(mixer_pm(vol, p_or_m = "plus"), 2)
+    elif option == "minus":
+        vol = round(mixer_pm(vol, p_or_m = "minus"), 2)
+    elif option == "mute":
+        vol = round(mixer_pm(vol = 0, p_or_m = "minus"), 2)
 
-def vol_plus():
-    global vol
-    vol = round(mixer_plus(vol), 2)
-    vol_pb()
-
-def vol_minus():
-    global vol
-    vol = round(mixer_minus(vol), 2)
-    vol_pb()
-
-def vol_mute():
-    global vol
-    vol = round(mixer_minus(0), 2)
     vol_pb()
 
 def click_credits():
@@ -1025,16 +1043,19 @@ def click_quit():
     if ok_cancel_quit == True:
         quit()
 
-def click_back_with_sound():
-    clear_all()
-    lbl_title.config(text = " - The Truth - ", bg = bg, fg = "#000")
-    sound(directory, vol = vol, sound = 0)
-    show_main_menu()
+def click_back_to_main_menu(with_sound = False):
+    value_var_language = var_language.get()
+    if with_sound == True:
+        sound(directory, vol = vol, sound = 0)
 
-def click_back_to_main_menu():
-    clear_all()
-    lbl_title.config(text = " - The Truth - ", bg = bg, fg = "#000")
-    show_main_menu()
+    if value_var_language != "BR":
+        messagebox.showerror(title = "Idioma Indisponível", icon = messagebox.INFO,
+        message = "O idioma selecionado encontra-se\nindisponível no momento.\n\n" +\
+        "Por favor, selecione um idioma\ndisponível para prosseguir.")
+    else:
+        clear_all()
+        lbl_title.config(text = " - The Truth - ", bg = bg, fg = "#000")
+        show_main_menu()
 
 #Functions - Others _________________________________________________________________________________________
 def default():
@@ -1146,19 +1167,14 @@ root.place(x = 10, y = 10, width = width - 20, height = height - 20)
 #Main Menu ___________________________________________________________________________________________________
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 1.1", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
-lbl_volume = Label(root, text = "Volume", bg=bg, font = "courier 32 bold")
-lbl_language = Label(root, text = "Idioma", bg=bg, font = "courier 32 bold")
+lbl_version = Label(root, text = "alpha v 1.2", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
+lbl_volume = Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold")
+lbl_language = Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold")
+
 txt_credits = "Aluno: Arthur Vinícius Bezerra da Silva\n" +\
 "Curso: ADS - IFPE - 1º período - 2021.1\n\n" +\
 "Início: 2021.05.31      Fim: 2021.--.--\n"
 lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
-
-var_barra = DoubleVar()
-var_barra.set(0.5)
-text_vol = f'{50}%'
-pb_vol = ttk.Progressbar(root, variable = var_barra, maximum = 1)
-lbl_vol = Label(root, text = text_vol, bg=bg, font = "courier 16 bold")
 
 default()
 img = images(directory)
@@ -1166,8 +1182,26 @@ vol = sound(directory, vol = 0.5, sound = 0)
 roots = roots(root, bg, bg_frames, bg_narrative)
 sub_roots = sub_roots(roots, bg, bg_frames, bg_narrative)
 sub_sub_roots = sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative)
-labels = labels(roots, bg, bg_frames, bg_narrative, fg, img, sub_roots, sub_sub_roots)
-buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_with_sound)
+labels = labels(roots, bg, bg_frames, bg_narrative, fg, img, sub_roots, sub_sub_roots, root)
+buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu)
+
+var_language = StringVar()
+var_language.set("BR")
+var_progressBar = DoubleVar()
+var_progressBar.set(0.5)
+text_vol = f'{vol*100:.1f}%'
+pb_vol = ttk.Progressbar(root, variable = var_progressBar, maximum = 1)
+lbl_vol = Label(root, text = text_vol, bg=bg, font = "courier 16 bold")
+rb_lan_UK = Radiobutton(root, text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "UK", relief = "flat", bd=4)
+rb_lan_FR = Radiobutton(root, text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "FR", relief = "flat", bd=4)
+rb_lan_BR = Radiobutton(root, text = "Português", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#000",
+                    variable = var_language, value = "BR", relief = "flat", bd=4)
+rb_lan_SP = Radiobutton(root, text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "SP", relief = "flat", bd=4)
+rb_lan_GE = Radiobutton(root, text = "Deutsche", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "GE", relief = "flat", bd=4)
 
 btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
                         cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
@@ -1180,15 +1214,15 @@ btn_options = Button(root, text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge", c
 btn_quit = Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: click_quit(),
                         cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
 btn_back = Button(root, text = 'Voltar', bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_vol_max = Button(root, image = img['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_max(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_vol_plus = Button(root, image = img['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_plus(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_vol_minus = Button(root, image = img['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_minus(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
-btn_vol_mute = Button(root, image = img['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: vol_mute(),
-                        cursor="hand2", font = "courier 27 bold", activebackground="#ccc", activeforeground=fg)
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_vol_max = Button(root, image = img['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("max"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
+btn_vol_plus = Button(root, image = img['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("plus"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
+btn_vol_minus = Button(root, image = img['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("minus"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
+btn_vol_mute = Button(root, image = img['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("mute"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
 
 show_main_menu()
 window.mainloop()

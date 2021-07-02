@@ -6,6 +6,12 @@ def images(directory):
         'empty_01_dic' : PhotoImage(file= directory + "/Images/empty_plus.png"),
         'Sam_dic' : PhotoImage(file= directory + "/Images/Sam.png"),
 
+        'flag_UK_dic' : PhotoImage(file= directory + "/Images/Nations/UK.png"),
+        'flag_FR_dic' : PhotoImage(file= directory + "/Images/Nations/FR.png"),
+        'flag_BR_dic' : PhotoImage(file= directory + "/Images/Nations/BR.png"),
+        'flag_SP_dic' : PhotoImage(file= directory + "/Images/Nations/SP.png"),
+        'flag_GE_dic' : PhotoImage(file= directory + "/Images/Nations/GE.png"),
+
         'vol_max_dic' : PhotoImage(file= directory + "/Images/Volume/vol_max.png"),
         'vol_plus_dic' : PhotoImage(file= directory + "/Images/Volume/vol_plus.png"),
         'vol_minus_dic' : PhotoImage(file= directory + "/Images/Volume/vol_minus.png"),
@@ -45,8 +51,7 @@ def images(directory):
 def roots(root, bg, bg_frames, bg_narrative):
     roots = {
         'root_status' : Frame(root, bd = 1, relief = "ridge", bg = bg),
-        'root_narrative' : Frame(root, bd = 1, relief = "ridge", bg = bg_narrative),
-        'root_volume' : Frame(root, bd = 1, relief = "ridge", bg = bg)}
+        'root_narrative' : Frame(root, bd = 1, relief = "ridge", bg = bg_narrative)}
 
     return roots
 
@@ -92,10 +97,16 @@ def sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative):
 
     return sub_sub_roots
 
-def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots):
+def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots, root):
     labels = {
         'lbl_Sam' : Label(roots['root_status'], image = images['Sam_dic'], bg = bg, anchor = CENTER),
         'lbl_scenario' : Label(sub_roots['root_scenario'], image = images['empty_00_dic'], bg = bg),
+
+        'lbl_flag_UK': Label(root, image = images['flag_UK_dic'], bg=bg),
+        'lbl_flag_FR': Label(root, image = images['flag_FR_dic'], bg=bg),
+        'lbl_flag_BR': Label(root, image = images['flag_BR_dic'], bg=bg),
+        'lbl_flag_SP': Label(root, image = images['flag_SP_dic'], bg=bg),
+        'lbl_flag_GE': Label(root, image = images['flag_GE_dic'], bg=bg),
 
         'lbl_heart_01' : Label(sub_roots['root_hearts'], image = images['empty_00_dic'], bg = bg_frames),
         'lbl_heart_02' : Label(sub_roots['root_hearts'], image = images['empty_00_dic'], bg = bg_frames),
@@ -184,9 +195,9 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
 
     return labels
 
-def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_with_sound):
+def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu):
     buttons = {
-        'btn_back_newgame' : Button(roots['root_status'], text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: click_back_with_sound(), cursor="hand2",
+        'btn_back_newgame' : Button(roots['root_status'], text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: click_back_to_main_menu(with_sound = True), cursor="hand2",
                             font = "courier 12 bold", activebackground="#ccc", activeforeground=fg),
         'btn_opt_A' : Button(roots['root_narrative'], text= "- A -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("A"),
                             cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg),
