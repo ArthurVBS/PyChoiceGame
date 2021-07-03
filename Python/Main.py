@@ -8,21 +8,21 @@ from random import randint
 #Import - Modules ___________________________________________________________________________________________
 from Utils.Defs_Sound import soundtrack, soundEffect, mixer_pm
 from Utils.Defs_Texts import world_01, world_02, world_03, menu
-from Utils.Defs_Images import images, roots, sub_roots, sub_sub_roots, labels, buttons
+from Utils.Defs_Tkinter import images, roots, sub_roots, sub_sub_roots, labels, buttons, radioButtons, progressBar
 
 #Functions - Show ___________________________________________________________________________________________
 def show_main_menu():
     window.title("Main Menu")
     root.config(bg = bg)
 
-    lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
-    lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
-    lbl_version.place(x = 585, y = 420, width = 110, height = 25)
-    btn_newgame.place(x = 225, y = 145, width = 250, height = 50)
-    btn_continue.place(x = 225, y = 205, width = 250, height = 50)
-    btn_options.place(x = 225, y = 265, width = 250, height = 50)
-    btn_credits.place(x = 225, y = 325, width = 250, height = 50)
-    btn_quit.place(x = 225, y = 385, width = 250, height = 50)
+    labels['lbl_title'].place(x = 10, y = 10, width = width - 40, height = 65)
+    labels['lbl_subtitle'].place(x = 10, y = 75, width = width - 40, height = 65)
+    labels['lbl_version'].place(x = 585, y = 420, width = 110, height = 25)
+    buttons['btn_newgame'].place(x = 225, y = 145, width = 250, height = 50)
+    buttons['btn_continue'].place(x = 225, y = 205, width = 250, height = 50)
+    buttons['btn_options'].place(x = 225, y = 265, width = 250, height = 50)
+    buttons['btn_credits'].place(x = 225, y = 325, width = 250, height = 50)
+    buttons['btn_quit'].place(x = 225, y = 385, width = 250, height = 50)
 
 def show_heart(hearts):
     global game_over
@@ -32,45 +32,45 @@ def show_heart(hearts):
 
     #Heart - 1
     if hearts >= 1:
-        labels['lbl_heart_01'].config(image = img['heart_11_dic'])
+        labels['lbl_heart_01'].config(image = images['heart_11_dic'])
     elif hearts == 0.5:
-        labels['lbl_heart_01'].config(image = img['heart_01_dic'])
+        labels['lbl_heart_01'].config(image = images['heart_01_dic'])
     elif hearts < 0.5:
-        labels['lbl_heart_01'].config(image = img['heart_00_dic'])
+        labels['lbl_heart_01'].config(image = images['heart_00_dic'])
         game_over = True
         gameover("True")
 
     #Heart - 2
     if hearts >= 2:
-        labels['lbl_heart_02'].config(image = img['heart_11_dic'])
+        labels['lbl_heart_02'].config(image = images['heart_11_dic'])
     elif hearts == 1.5:
-        labels['lbl_heart_02'].config(image = img['heart_01_dic'])
+        labels['lbl_heart_02'].config(image = images['heart_01_dic'])
     elif hearts < 1.5:
-        labels['lbl_heart_02'].config(image = img['heart_00_dic'])
+        labels['lbl_heart_02'].config(image = images['heart_00_dic'])
 
     #Heart - 3
     if hearts >= 3:
-        labels['lbl_heart_03'].config(image = img['heart_11_dic'])
+        labels['lbl_heart_03'].config(image = images['heart_11_dic'])
     elif hearts == 2.5:
-        labels['lbl_heart_03'].config(image = img['heart_01_dic'])
+        labels['lbl_heart_03'].config(image = images['heart_01_dic'])
     elif hearts < 2.5:
-        labels['lbl_heart_03'].config(image = img['heart_00_dic'])
+        labels['lbl_heart_03'].config(image = images['heart_00_dic'])
 
     #Heart - 4
     if hearts >= 4:
-        labels['lbl_heart_04'].config(image = img['heart_11_dic'])
+        labels['lbl_heart_04'].config(image = images['heart_11_dic'])
     elif hearts == 3.5:
-        labels['lbl_heart_04'].config(image = img['heart_01_dic'])
+        labels['lbl_heart_04'].config(image = images['heart_01_dic'])
     elif hearts < 3.5:
-        labels['lbl_heart_04'].config(image = img['heart_00_dic'])
+        labels['lbl_heart_04'].config(image = images['heart_00_dic'])
 
     #Heart - 5
     if hearts == 5:
-        labels['lbl_heart_05'].config(image = img['heart_11_dic'])
+        labels['lbl_heart_05'].config(image = images['heart_11_dic'])
     elif hearts == 4.5:
-        labels['lbl_heart_05'].config(image = img['heart_01_dic'])
+        labels['lbl_heart_05'].config(image = images['heart_01_dic'])
     elif hearts < 4.5:
-        labels['lbl_heart_05'].config(image = img['heart_00_dic'])
+        labels['lbl_heart_05'].config(image = images['heart_00_dic'])
 
 def show_food(foods):
     global game_over
@@ -80,147 +80,147 @@ def show_food(foods):
 
     #Food - 1
     if foods >= 1:
-        labels['lbl_food_01'].config(image = img['food_11_dic'])
+        labels['lbl_food_01'].config(image = images['food_11_dic'])
     elif foods == 0.5:
-        labels['lbl_food_01'].config(image = img['food_01_dic'])
+        labels['lbl_food_01'].config(image = images['food_01_dic'])
     elif foods < 0.5:
-        labels['lbl_food_01'].config(image = img['food_00_dic'])
+        labels['lbl_food_01'].config(image = images['food_00_dic'])
         game_over = True
         gameover("True")
 
     #Food - 2
     if foods >= 2:
-        labels['lbl_food_02'].config(image = img['food_11_dic'])
+        labels['lbl_food_02'].config(image = images['food_11_dic'])
     elif foods == 1.5:
-        labels['lbl_food_02'].config(image = img['food_01_dic'])
+        labels['lbl_food_02'].config(image = images['food_01_dic'])
     elif foods < 1.5:
-        labels['lbl_food_02'].config(image = img['food_00_dic'])
+        labels['lbl_food_02'].config(image = images['food_00_dic'])
 
     #Food - 3
     if foods >= 3:
-        labels['lbl_food_03'].config(image = img['food_11_dic'])
+        labels['lbl_food_03'].config(image = images['food_11_dic'])
     elif foods == 2.5:
-        labels['lbl_food_03'].config(image = img['food_01_dic'])
+        labels['lbl_food_03'].config(image = images['food_01_dic'])
     elif foods < 2.5:
-        labels['lbl_food_03'].config(image = img['food_00_dic'])
+        labels['lbl_food_03'].config(image = images['food_00_dic'])
 
     #Food - 4
     if foods >= 4:
-        labels['lbl_food_04'].config(image = img['food_11_dic'])
+        labels['lbl_food_04'].config(image = images['food_11_dic'])
     elif foods == 3.5:
-        labels['lbl_food_04'].config(image = img['food_01_dic'])
+        labels['lbl_food_04'].config(image = images['food_01_dic'])
     elif foods < 3.5:
-        labels['lbl_food_04'].config(image = img['food_00_dic'])
+        labels['lbl_food_04'].config(image = images['food_00_dic'])
 
     #Food - 5
     if foods >= 5:
-        labels['lbl_food_05'].config(image = img['food_11_dic'])
+        labels['lbl_food_05'].config(image = images['food_11_dic'])
     elif foods == 4.5:
-        labels['lbl_food_05'].config(image = img['food_01_dic'])
+        labels['lbl_food_05'].config(image = images['food_01_dic'])
     elif foods < 4.5:
-        labels['lbl_food_05'].config(image = img['food_00_dic'])
+        labels['lbl_food_05'].config(image = images['food_00_dic'])
 
 def show_item(items):
     #lighter
     if items['lighter'] == True:
-        labels['lbl_item_lighter'].config(image = img['item_lighter_dic'])
+        labels['lbl_item_lighter'].config(image = images['item_lighter_dic'])
     elif items['lighter'] == False:
-        labels['lbl_item_lighter'].config(image = img['empty_01_dic'])
+        labels['lbl_item_lighter'].config(image = images['empty_01_dic'])
     
     #wolfhide
     if items['wolfhide'] == True:
-        labels['lbl_item_wolfhide'].config(image = img['item_wolfhide_dic'])
+        labels['lbl_item_wolfhide'].config(image = images['item_wolfhide_dic'])
     elif items['wolfhide'] == False:
-        labels['lbl_item_wolfhide'].config(image = img['empty_01_dic'])
+        labels['lbl_item_wolfhide'].config(image = images['empty_01_dic'])
 
     #future_friendship
     if items['future_friendship'] == True:
-        labels['lbl_item_future_friendship'].config(image = img['item_future_friendship_dic'])
+        labels['lbl_item_future_friendship'].config(image = images['item_future_friendship_dic'])
     elif items['future_friendship'] == False:
-        labels['lbl_item_future_friendship'].config(image = img['empty_01_dic'])
+        labels['lbl_item_future_friendship'].config(image = images['empty_01_dic'])
 
     #nausea
     if items['nausea'] == True:
-        labels['lbl_item_nausea'].config(image = img['item_nausea_dic'])
+        labels['lbl_item_nausea'].config(image = images['item_nausea_dic'])
     elif items['nausea'] == False:
-        labels['lbl_item_nausea'].config(image = img['empty_01_dic'])
+        labels['lbl_item_nausea'].config(image = images['empty_01_dic'])
 
     #shotgun
     if items['shotgun'] == True:
-        labels['lbl_item_shotgun'].config(image = img['item_shotgun_dic'])
+        labels['lbl_item_shotgun'].config(image = images['item_shotgun_dic'])
     elif items['shotgun'] == False:
-        labels['lbl_item_shotgun'].config(image = img['empty_01_dic'])
+        labels['lbl_item_shotgun'].config(image = images['empty_01_dic'])
 
     #crowbar
     if items['crowbar'] == True:
-        labels['lbl_item_crowbar'].config(image = img['item_crowbar_dic'])
+        labels['lbl_item_crowbar'].config(image = images['item_crowbar_dic'])
     elif items['crowbar'] == False:
-        labels['lbl_item_crowbar'].config(image = img['empty_01_dic'])
+        labels['lbl_item_crowbar'].config(image = images['empty_01_dic'])
 
     #screwdriver
     if items['screwdriver'] == True:
-        labels['lbl_item_screwdriver'].config(image = img['item_screwdriver_dic'])
+        labels['lbl_item_screwdriver'].config(image = images['item_screwdriver_dic'])
     elif items['screwdriver'] == False:
-        labels['lbl_item_screwdriver'].config(image = img['empty_01_dic'])
+        labels['lbl_item_screwdriver'].config(image = images['empty_01_dic'])
 
     #gear
     if items['gear'] == True:
-        labels['lbl_item_gear'].config(image = img['item_gear_dic'])
+        labels['lbl_item_gear'].config(image = images['item_gear_dic'])
     elif items['gear'] == False:
-        labels['lbl_item_gear'].config(image = img['empty_01_dic'])
+        labels['lbl_item_gear'].config(image = images['empty_01_dic'])
 
 def show_key(keys):
     #Key - B
     if keys['bronze_key'] == True:
-        labels['lbl_key_B'].config(image = img['key_B_dic'])
+        labels['lbl_key_B'].config(image = images['key_B_dic'])
     elif keys['bronze_key'] == False:
-        labels['lbl_key_B'].config(image = img['key_E_dic'])
+        labels['lbl_key_B'].config(image = images['key_E_dic'])
 
     #Key - S
     if keys['silver_key'] == True:
-        labels['lbl_key_S'].config(image = img['key_S_dic'])
+        labels['lbl_key_S'].config(image = images['key_S_dic'])
     elif keys['silver_key'] == False:
-        labels['lbl_key_S'].config(image = img['key_E_dic'])
+        labels['lbl_key_S'].config(image = images['key_E_dic'])
 
     #Key - G
     if keys['golden_key'] == True:
-        labels['lbl_key_G'].config(image = img['key_G_dic'])
+        labels['lbl_key_G'].config(image = images['key_G_dic'])
     elif keys['golden_key'] == False:
-        labels['lbl_key_G'].config(image = img['key_E_dic'])
+        labels['lbl_key_G'].config(image = images['key_E_dic'])
 
 def show_way():
     global level
     global keys
     global world
 
-    labels['lbl_just_way_01'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_02'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_03'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_04'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_05'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_06'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_07'].config(image = img['just_way_dic'])
-    labels['lbl_just_way_08'].config(image = img['just_way_dic'])
+    labels['lbl_just_way_01'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_02'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_03'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_04'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_05'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_06'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_07'].config(image = images['just_way_dic'])
+    labels['lbl_just_way_08'].config(image = images['just_way_dic'])
 
     if level == 1:
-        labels['lbl_just_way_01'].config(image = img['way_dic'])
+        labels['lbl_just_way_01'].config(image = images['way_dic'])
     elif level == 2:
-        labels['lbl_just_way_02'].config(image = img['way_dic'])
+        labels['lbl_just_way_02'].config(image = images['way_dic'])
     elif level == 3:
-        labels['lbl_just_way_03'].config(image = img['way_dic'])
+        labels['lbl_just_way_03'].config(image = images['way_dic'])
     elif level == 4:
-        labels['lbl_just_way_04'].config(image = img['way_dic'])
+        labels['lbl_just_way_04'].config(image = images['way_dic'])
     elif level == 5:
-        labels['lbl_just_way_05'].config(image = img['way_dic'])
+        labels['lbl_just_way_05'].config(image = images['way_dic'])
     elif level == 6:
-        labels['lbl_just_way_06'].config(image = img['way_dic'])
+        labels['lbl_just_way_06'].config(image = images['way_dic'])
     elif level == 7:
-        labels['lbl_just_way_07'].config(image = img['way_dic'])
+        labels['lbl_just_way_07'].config(image = images['way_dic'])
     elif level == 8:
-        labels['lbl_just_way_08'].config(image = img['way_dic'])
+        labels['lbl_just_way_08'].config(image = images['way_dic'])
     else:
         level = 1
-        labels['lbl_just_way_01'].config(image = img['way_dic'])
+        labels['lbl_just_way_01'].config(image = images['way_dic'])
 
     if world == 1:
         keys['bronze_key'] = True
@@ -235,11 +235,11 @@ def show_way():
 def show_scenario():
     global world
     if world == 1:
-        labels['lbl_scenario'].config(image = img['scenario_01_dic'])
+        labels['lbl_scenario'].config(image = images['scenario_01_dic'])
     elif world == 2:
-        labels['lbl_scenario'].config(image = img['scenario_02_dic'])
+        labels['lbl_scenario'].config(image = images['scenario_02_dic'])
     elif world == 3:
-        labels['lbl_scenario'].config(image = img['scenario_03_dic'])
+        labels['lbl_scenario'].config(image = images['scenario_03_dic'])
 
 def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_option):#Alterações Futuras
     global world
@@ -296,24 +296,24 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
         sinal_hearts = "-" 
 
     if losewin_hearts == 0:
-        phImg_heart_01 = img['heart_00_dic']
-        phImg_heart_02 = img['heart_00_dic']
+        phImg_heart_01 = images['heart_00_dic']
+        phImg_heart_02 = images['heart_00_dic']
 
     elif losewin_hearts == 0.5 or losewin_hearts == -0.5:
-        phImg_heart_01 = img['heart_01_dic']
-        phImg_heart_02 = img['heart_00_dic']
+        phImg_heart_01 = images['heart_01_dic']
+        phImg_heart_02 = images['heart_00_dic']
 
     elif losewin_hearts == 1 or losewin_hearts == -1:
-        phImg_heart_01 = img['heart_11_dic']
-        phImg_heart_02 = img['heart_00_dic']
+        phImg_heart_01 = images['heart_11_dic']
+        phImg_heart_02 = images['heart_00_dic']
 
     elif losewin_hearts == 1.5 or losewin_hearts == -1.5:
-        phImg_heart_01 = img['heart_11_dic']
-        phImg_heart_02 = img['heart_01_dic']
+        phImg_heart_01 = images['heart_11_dic']
+        phImg_heart_02 = images['heart_01_dic']
 
     elif losewin_hearts == 2 or losewin_hearts == -2:
-        phImg_heart_01 = img['heart_11_dic']
-        phImg_heart_02 = img['heart_11_dic']
+        phImg_heart_01 = images['heart_11_dic']
+        phImg_heart_02 = images['heart_11_dic']
 
     #Foods
     if losewin_foods >= 0:
@@ -323,88 +323,88 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
         sinal_foods = "-"
 
     if losewin_foods == 0:
-        phImg_food_01 = img['food_00_dic']
-        phImg_food_02 = img['food_00_dic']
+        phImg_food_01 = images['food_00_dic']
+        phImg_food_02 = images['food_00_dic']
 
     elif losewin_foods == 0.5 or losewin_foods == -0.5:
-        phImg_food_01 = img['food_01_dic']
-        phImg_food_02 = img['food_00_dic']
+        phImg_food_01 = images['food_01_dic']
+        phImg_food_02 = images['food_00_dic']
 
     elif losewin_foods == 1 or losewin_foods == -1:
-        phImg_food_01 = img['food_11_dic']
-        phImg_food_02 = img['food_00_dic']
+        phImg_food_01 = images['food_11_dic']
+        phImg_food_02 = images['food_00_dic']
 
     elif losewin_foods == 1.5 or losewin_foods == -1.5:
-        phImg_food_01 = img['food_11_dic']
-        phImg_food_02 = img['food_01_dic']
+        phImg_food_01 = images['food_11_dic']
+        phImg_food_02 = images['food_01_dic']
 
     elif losewin_foods == 2 or losewin_foods == -2:
-        phImg_food_01 = img['food_11_dic']
-        phImg_food_02 = img['food_11_dic']
+        phImg_food_01 = images['food_11_dic']
+        phImg_food_02 = images['food_11_dic']
 
     #Item / Key
     if world == 1:
         if w == 2 and selected_option == "A": #friendship
-            phImg_item_01 = img['item_future_friendship_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['item_future_friendship_dic']
+            phImg_item_02 = images['empty_00_dic']
 
         elif w == 2 and selected_option == "C": #wolfhide
-            phImg_item_01 = img['item_wolfhide_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['item_wolfhide_dic']
+            phImg_item_02 = images['empty_00_dic']
 
         elif w == 7 and selected_option == "A": #nausea
-            phImg_item_01 = img['item_nausea_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['item_nausea_dic']
+            phImg_item_02 = images['empty_00_dic']
 
         else:
-            phImg_item_01 = img['empty_00_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['empty_00_dic']
+            phImg_item_02 = images['empty_00_dic']
 
     elif world - 1 == 1:
         if w == 8: #shotgun and key silver
-            phImg_item_01 = img['item_shotgun_dic']
-            phImg_item_02 = img['key_S_dic']
+            phImg_item_01 = images['item_shotgun_dic']
+            phImg_item_02 = images['key_S_dic']
 
         else:
-            phImg_item_01 = img['empty_00_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['empty_00_dic']
+            phImg_item_02 = images['empty_00_dic']
 
     if world == 2:#Alterações Futuras
         if 10 == 9:
             print("")
 
         else:
-            phImg_item_01 = img['empty_00_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['empty_00_dic']
+            phImg_item_02 = images['empty_00_dic']
 
     elif world - 1 == 2:#Alterações Futuras
         if 10 == 9:
             print("")
 
         else:
-            phImg_item_01 = img['empty_00_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['empty_00_dic']
+            phImg_item_02 = images['empty_00_dic']
 
     if world == 3:#Alterações Futuras
         if 10 == 9:
             print("")
             
         else:
-            phImg_item_01 = img['empty_00_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['empty_00_dic']
+            phImg_item_02 = images['empty_00_dic']
 
     elif world - 3 == 2:#Alterações Futuras
         if 10 == 9:
             print("")
 
         else:
-            phImg_item_01 = img['empty_00_dic']
-            phImg_item_02 = img['empty_00_dic']
+            phImg_item_01 = images['empty_00_dic']
+            phImg_item_02 = images['empty_00_dic']
 
-    if phImg_item_01 != img['empty_00_dic'] or phImg_item_02 != img['empty_00_dic']:
+    if phImg_item_01 != images['empty_00_dic'] or phImg_item_02 != images['empty_00_dic']:
         sinal_item_key = "+"
         
-    elif phImg_item_01 == img['empty_00_dic'] and phImg_item_02 == img['empty_00_dic']:
+    elif phImg_item_01 == images['empty_00_dic'] and phImg_item_02 == images['empty_00_dic']:
         sinal_item_key = ""
 
     lbl_heart = Label(frame_toplevel_heart, text = sinal_hearts, justify=CENTER, font = "courier 16 italic", bg = bg)
@@ -450,7 +450,7 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
 def show_button_continue():
     if ok_cancel_newgame == True:
         window.title("Level 01")
-        btn_continue.config(fg = "#000", relief = "ridge", command = lambda: click_continue(), activebackground="#ccc",
+        buttons['btn_continue'].config(fg = "#000", relief = "ridge", command = lambda: click_continue(), activebackground="#ccc",
                             activeforeground=fg, cursor="hand2")
 
 def show_game():
@@ -900,25 +900,25 @@ def show_labels_options():#Alterações Futuras
 
 #Functions - Delete _________________________________________________________________________________________
 def clear_main_menu():
-    lbl_title.place_forget()
-    lbl_subtitle.place_forget()
-    lbl_version.place_forget()
-    btn_newgame.place_forget()
-    btn_continue.place_forget()
-    btn_options.place_forget()
-    btn_credits.place_forget()
-    btn_quit.place_forget()
+    labels['lbl_title'].place_forget()
+    labels['lbl_subtitle'].place_forget()
+    labels['lbl_version'].place_forget()
+    buttons['btn_newgame'].place_forget()
+    buttons['btn_continue'].place_forget()
+    buttons['btn_options'].place_forget()
+    buttons['btn_credits'].place_forget()
+    buttons['btn_quit'].place_forget()
 
 def clear_all():
     roots['root_status'].place_forget()
     roots['root_narrative'].place_forget()
 
-    pb_vol.place_forget()
-    rb_lan_UK.place_forget()
-    rb_lan_FR.place_forget()
-    rb_lan_BR.place_forget()
-    rb_lan_SP.place_forget()
-    rb_lan_GE.place_forget()
+    progressBar['pb_vol'].place_forget()
+    radioButtons['rb_lan_UK'].place_forget()
+    radioButtons['rb_lan_FR'].place_forget()
+    radioButtons['rb_lan_BR'].place_forget()
+    radioButtons['rb_lan_SP'].place_forget()
+    radioButtons['rb_lan_GE'].place_forget()
 
     labels['lbl_flag_UK'].place_forget()
     labels['lbl_flag_FR'].place_forget()
@@ -926,24 +926,24 @@ def clear_all():
     labels['lbl_flag_SP'].place_forget()
     labels['lbl_flag_GE'].place_forget()
 
-    lbl_title.place_forget()
-    lbl_subtitle.place_forget()
-    lbl_version.place_forget()
-    lbl_credits.place_forget()
-    lbl_vol.place_forget()
-    lbl_volume.place_forget()
-    lbl_language.place_forget()
+    labels['lbl_title'].place_forget()
+    labels['lbl_subtitle'].place_forget()
+    labels['lbl_version'].place_forget()
+    labels['lbl_credits'].place_forget()
+    labels['lbl_vol'].place_forget()
+    labels['lbl_volume'].place_forget()
+    labels['lbl_language'].place_forget()
     
-    btn_newgame.place_forget()
-    btn_continue.place_forget()
-    btn_options.place_forget()
-    btn_credits.place_forget()
-    btn_quit.place_forget()
-    btn_back.place_forget()
-    btn_vol_max.place_forget()
-    btn_vol_plus.place_forget()
-    btn_vol_minus.place_forget()
-    btn_vol_mute.place_forget()
+    buttons['btn_newgame'].place_forget()
+    buttons['btn_continue'].place_forget()
+    buttons['btn_options'].place_forget()
+    buttons['btn_credits'].place_forget()
+    buttons['btn_quit'].place_forget()
+    buttons['btn_back'].place_forget()
+    buttons['btn_vol_max'].place_forget()
+    buttons['btn_vol_plus'].place_forget()
+    buttons['btn_vol_minus'].place_forget()
+    buttons['btn_vol_mute'].place_forget()
     buttons['btn_back_newgame'].place_forget()
 
 #Functions - Click __________________________________________________________________________________________
@@ -953,7 +953,7 @@ def click_newgame():
     detail = "Caso possua um Save anterior ele será sobrescito")
 
     if ok_cancel_newgame == True:
-        btn_continue.config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
+        buttons['btn_continue'].config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
                             activebackground=None, activeforeground=None)
 
         show_introduction_and_tutorial_01()
@@ -983,33 +983,33 @@ def click_options():
     labels['lbl_flag_SP'].place(x = 360, y = 325, width = 50, height = 50)
     labels['lbl_flag_GE'].place(x = 360, y = 385, width = 50, height = 50)
 
-    rb_lan_UK.place(x = 440, y = 145, width = 225, height = 50)
-    rb_lan_FR.place(x = 440, y = 205, width = 225, height = 50)
-    rb_lan_BR.place(x = 440, y = 265, width = 225, height = 50)
-    rb_lan_SP.place(x = 440, y = 325, width = 225, height = 50)
-    rb_lan_GE.place(x = 440, y = 385, width = 225, height = 50)
+    radioButtons['rb_lan_UK'].place(x = 440, y = 145, width = 225, height = 50)
+    radioButtons['rb_lan_FR'].place(x = 440, y = 205, width = 225, height = 50)
+    radioButtons['rb_lan_BR'].place(x = 440, y = 265, width = 225, height = 50)
+    radioButtons['rb_lan_SP'].place(x = 440, y = 325, width = 225, height = 50)
+    radioButtons['rb_lan_GE'].place(x = 440, y = 385, width = 225, height = 50)
 
-    lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
-    lbl_title.configure(text = '- Ajustes -')
-    lbl_volume.place(x = 10, y = 85, width = 335, height = 65)
-    lbl_language.place(x = 355, y = 85, width = 335, height = 65)
+    labels['lbl_title'].place(x = 10, y = 10, width = width - 40, height = 65)
+    labels['lbl_title'].configure(text = '- Ajustes -')
+    labels['lbl_volume'].place(x = 10, y = 85, width = 335, height = 65)
+    labels['lbl_language'].place(x = 355, y = 85, width = 335, height = 65)
 
-    btn_vol_max.place(x = 270, y = 290, width = 75, height = 70)
-    btn_vol_plus.place(x = 185, y = 290, width = 75, height = 70)
-    btn_vol_minus.place(x = 97.5, y = 290, width = 75, height = 70)
-    btn_vol_mute.place(x = 10, y = 290, width = 75, height = 70)
+    buttons['btn_vol_max'].place(x = 270, y = 290, width = 75, height = 70)
+    buttons['btn_vol_plus'].place(x = 185, y = 290, width = 75, height = 70)
+    buttons['btn_vol_minus'].place(x = 97.5, y = 290, width = 75, height = 70)
+    buttons['btn_vol_mute'].place(x = 10, y = 290, width = 75, height = 70)
 
-    btn_back.place(x = 10, y = 370, width = 335, height = 65)# x = 355
+    buttons['btn_back'].place(x = 10, y = 370, width = 335, height = 65)# x = 355
 
 def click_credits():
     window.title("Créditos")
     clear_all()
 
-    lbl_title.place(x = 10, y = 10, width = width - 40, height = 65)
-    lbl_subtitle.place(x = 10, y = 75, width = width - 40, height = 65)
-    lbl_version.place(x = 585, y = 420, width = 110, height = 25)
-    btn_back.place(x = 225, y = 380, width = 250, height = 50)
-    lbl_credits.place(x = 10, y = 145, width = width - 40, height = 210)
+    labels['lbl_title'].place(x = 10, y = 10, width = width - 40, height = 65)
+    labels['lbl_subtitle'].place(x = 10, y = 75, width = width - 40, height = 65)
+    labels['lbl_version'].place(x = 585, y = 420, width = 110, height = 25)
+    labels['lbl_credits'].place(x = 10, y = 145, width = width - 40, height = 210)
+    buttons['btn_back'].place(x = 225, y = 380, width = 250, height = 50)
 
 def click_quit():
     ok_cancel_quit = messagebox.askokcancel(title = "Sair?", message = "Você realmente deseja sair?\t\t",
@@ -1018,7 +1018,7 @@ def click_quit():
         quit()
 
 def click_back_to_main_menu(with_sound = False):
-    value_var_language = var_language.get()
+    value_var_language = radioButtons['var_language'].get()
     if with_sound == True:
         soundtrack(directory, vol = vol, soundtrack = 0)
 
@@ -1028,7 +1028,7 @@ def click_back_to_main_menu(with_sound = False):
         "Por favor, selecione um idioma\ndisponível para prosseguir.")
     else:
         clear_all()
-        lbl_title.config(text = " - The Truth - ", bg = bg, fg = "#000")
+        labels['lbl_title'].config(text = " - The Truth - ", bg = bg, fg = "#000")
         show_main_menu()
 
 #Functions - Others _________________________________________________________________________________________
@@ -1058,11 +1058,11 @@ def vol_pb():
     var_progressBar.set(vol)
     text_vol = f'{vol*100:.1f}%'
 
-    pb_vol.configure(variable = var_progressBar)
-    pb_vol.place(x = 10 , y = 155, width = 335, height = 40)
+    progressBar['pb_vol'].configure(variable = var_progressBar)
+    progressBar['pb_vol'].place(x = 10 , y = 155, width = 335, height = 40)
 
-    lbl_vol.configure(text = text_vol)
-    lbl_vol.place(x = 10, y = 200, width = 335, height = 30)
+    labels['lbl_vol'].configure(text = text_vol)
+    labels['lbl_vol'].place(x = 10, y = 200, width = 335, height = 30)
 
 def volume(option):
     global vol
@@ -1114,7 +1114,7 @@ def gameover(value):
         roots['root_status'].place_forget()
         roots['root_narrative'].place_forget()
         clear_all()
-        btn_continue.config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
+        buttons['btn_continue'].config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
                             activebackground=None, activeforeground=None)
 
         window.title("Game Over")
@@ -1128,8 +1128,10 @@ def gameover(value):
         lbl_gameover_01.place(x = 10, y = 10, width = width - 40, height = 65)
         lbl_gameover_02.place(x = 10, y = 110, width = width - 40, height = 65)
         btn_back_gameover.place(x = 225, y = 365, width = 250, height = 60)
+        soundtrack(directory, vol = vol, soundtrack = 3) #Alterar e colocar som de game over
 
         def back_gameover():
+            soundtrack(directory, vol = vol, soundtrack = 0)
             lbl_gameover_01.place_forget()
             lbl_gameover_02.place_forget()
             btn_back_gameover.place_forget()
@@ -1155,75 +1157,26 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
+root = Frame(window, bd = 1, relief = "sunken", bg = bg)
+root.place(x = 10, y = 10, width = width - 20, height = height - 20)
+
 window.geometry(f"{width}x{height}+{pos_x}+{pos_y}")
 window.title("The Truth")
 window.iconbitmap(directory + "/Images/Icons/icon_01.ico")
 window.resizable(False,False)
 window.configure(background = "#000")
 
-root = Frame(window, bd = 1, relief = "sunken", bg = bg)
-root.place(x = 10, y = 10, width = width - 20, height = height - 20)
-
-#Main Menu ___________________________________________________________________________________________________
-lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
-lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 1.3", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
-lbl_volume = Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold")
-lbl_language = Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold")
-
-txt_credits = "Aluno: Arthur Vinícius Bezerra da Silva\n" +\
-"Curso: ADS - IFPE - 1º período - 2021.1\n\n" +\
-"Início: 2021.05.31      Fim: 2021.--.--\n"
-lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
-
 default()
-img = images(directory)
+images = images(directory)
+progressBar = progressBar(root, ttk)
+radioButtons = radioButtons(root, bg)
 vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
 roots = roots(root, bg, bg_frames, bg_narrative)
 sub_roots = sub_roots(roots, bg, bg_frames, bg_narrative)
 sub_sub_roots = sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative)
-labels = labels(roots, bg, bg_frames, bg_narrative, fg, img, sub_roots, sub_sub_roots, root)
-buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu)
-
-var_language = StringVar()
-var_language.set("BR")
-var_progressBar = DoubleVar()
-var_progressBar.set(0.5)
-text_vol = f'{vol*100:.1f}%'
-pb_vol = ttk.Progressbar(root, variable = var_progressBar, maximum = 1)
-lbl_vol = Label(root, text = text_vol, bg=bg, font = "courier 16 bold")
-
-rb_lan_UK = Radiobutton(root, text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
-                    variable = var_language, value = "UK", relief = "flat", bd=4)
-rb_lan_FR = Radiobutton(root, text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
-                    variable = var_language, value = "FR", relief = "flat", bd=4)
-rb_lan_BR = Radiobutton(root, text = "Português", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#000",
-                    variable = var_language, value = "BR", relief = "flat", bd=4)
-rb_lan_SP = Radiobutton(root, text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
-                    variable = var_language, value = "SP", relief = "flat", bd=4)
-rb_lan_GE = Radiobutton(root, text = "Deutsch", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
-                    variable = var_language, value = "GE", relief = "flat", bd=4)
-
-btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
-                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
-btn_continue = Button(root, text= "Continuar", bg=bg, bd = 2, relief = "flat", command= lambda: click_nothing(), 
-                        cursor="arrow", font = "courier 25 bold", fg = "#ccc")
-btn_credits = Button(root, text= "Créditos", bg=bg, bd = 2, relief = "ridge", command= lambda: click_credits(),
-                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
-btn_options = Button(root, text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge", command = lambda: click_options(),
-                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
-btn_quit = Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: click_quit(),
-                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
-btn_back = Button(root, text = 'Voltar', bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
-                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
-btn_vol_max = Button(root, image = img['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("max"),
-                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
-btn_vol_plus = Button(root, image = img['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("plus"),
-                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
-btn_vol_minus = Button(root, image = img['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("minus"),
-                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
-btn_vol_mute = Button(root, image = img['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("mute"),
-                        cursor="hand2", activebackground="#ccc", activeforeground=fg)
+labels = labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots, root, vol)
+buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu, images,
+root, click_newgame, click_nothing, click_continue, click_credits, click_options, click_quit, volume)
 
 show_main_menu()
 window.mainloop()

@@ -5,6 +5,7 @@ def images(directory):
         'empty_00_dic' : PhotoImage(file= directory + "/Images/empty.png"),
         'empty_01_dic' : PhotoImage(file= directory + "/Images/empty_plus.png"),
         'Sam_dic' : PhotoImage(file= directory + "/Images/Sam.png"),
+        'back_dic' : PhotoImage(file= directory + "/Images/back.png"),
 
         'flag_UK_dic' : PhotoImage(file= directory + "/Images/Nations/UK.png"),
         'flag_FR_dic' : PhotoImage(file= directory + "/Images/Nations/FR.png"),
@@ -97,7 +98,7 @@ def sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative):
 
     return sub_sub_roots
 
-def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots, root):
+def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots, root, vol):
     labels = {
         'lbl_Sam' : Label(roots['root_status'], image = images['Sam_dic'], bg = bg, anchor = CENTER),
         'lbl_scenario' : Label(sub_roots['root_scenario'], image = images['empty_00_dic'], bg = bg),
@@ -149,7 +150,16 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
         'lbl_opt_B' : Label(roots['root_narrative'], text = "", anchor = NW, justify=LEFT, font = "courier 12 italic",
                                 bg = bg_narrative, fg = fg),
         'lbl_opt_C' : Label(roots['root_narrative'], text = "", anchor = NW, justify=LEFT, font = "courier 12 italic",
-                                bg = bg_narrative, fg = fg)}
+                                bg = bg_narrative, fg = fg),
+        'lbl_vol' : Label(root, text = f'{vol*100:.1f}%', bg=bg, font = "courier 16 bold"),
+
+        'lbl_title' : Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold"),
+        'lbl_subtitle' : Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N),
+        'lbl_version' : Label(root, text = "alpha v 1.4", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
+        'lbl_volume' : Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold"),
+        'lbl_language' : Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold"),
+        'lbl_credits' : Label(root, font = "courier 20 italic", text="Aluno: Arthur Vinícius Bezerra da Silva\n" +\
+        "Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.--.--\n", bg=bg)}
 
     labels['lbl_Sam'].place(x = 70, y = 60)
 
@@ -193,12 +203,37 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
     labels['lbl_opt_B'].place(x = 360, y = 100, width = 330, height = 80)
     labels['lbl_opt_C'].place(x = 360, y = 190, width = 330, height = 80)
 
+
+
     return labels
 
-def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu):
+def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu, images, root, click_newgame,
+            click_nothing, click_continue, click_credits, click_options, click_quit, volume):
     buttons = {
-        'btn_back_newgame' : Button(roots['root_status'], text= "Voltar", bg=bg, bd = 2, relief = "ridge", command = lambda: click_back_to_main_menu(with_sound = True), cursor="hand2",
-                            font = "courier 12 bold", activebackground="#ccc", activeforeground=fg),
+        'btn_newgame' : Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg),
+        'btn_continue' : Button(root, text= "Continuar", bg=bg, bd = 2, relief = "flat", command= lambda: click_nothing(), 
+                        cursor="arrow", font = "courier 25 bold", fg = "#ccc"),
+        'btn_credits' : Button(root, text= "Créditos", bg=bg, bd = 2, relief = "ridge", command= lambda: click_credits(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg),
+        'btn_options' : Button(root, text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge", command = lambda: click_options(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg),
+        'btn_quit' : Button(root, text= "Sair", bg=bg, bd = 2, relief = "ridge", command = lambda: click_quit(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg),
+        'btn_back' : Button(root, text = 'Voltar', bg=bg, bd = 2, relief = "ridge",command= lambda: click_back_to_main_menu(),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg),
+
+        'btn_vol_max' : Button(root, image = images['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("max"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg),
+        'btn_vol_plus' : Button(root, image = images['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("plus"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg),
+        'btn_vol_minus' : Button(root, image = images['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("minus"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg),
+        'btn_vol_mute' : Button(root, image = images['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("mute"),
+                        cursor="hand2", activebackground="#ccc", activeforeground=fg),
+
+        'btn_back_newgame' : Button(roots['root_status'], image = images['back_dic'], bg=bg, bd = 2, relief = "ridge",
+                            command = lambda: click_back_to_main_menu(with_sound = True), cursor="hand2"),
         'btn_opt_A' : Button(roots['root_narrative'], text= "- A -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("A"),
                             cursor="hand2", font = "courier 16 bold", activebackground="#ccc", activeforeground=fg),
         'btn_opt_B' : Button(roots['root_narrative'], text= "- B -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("B"),
@@ -212,3 +247,33 @@ def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_
     buttons['btn_opt_C'].place(x = 240, y = 230, width = 100, height = 40)
 
     return buttons
+
+def radioButtons(root, bg):
+    var_language = StringVar()
+    var_language.set("BR")
+
+    radioButtons = {
+        'var_language' : var_language,
+
+        'rb_lan_UK' : Radiobutton(root, text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "UK", relief = "flat", bd=4),
+        'rb_lan_FR' : Radiobutton(root, text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "FR", relief = "flat", bd=4),
+        'rb_lan_BR' : Radiobutton(root, text = "Português", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#000",
+                    variable = var_language, value = "BR", relief = "flat", bd=4),
+        'rb_lan_SP' : Radiobutton(root, text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "SP", relief = "flat", bd=4),
+        'rb_lan_GE' : Radiobutton(root, text = "Deutsch", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                    variable = var_language, value = "GE", relief = "flat", bd=4)}
+
+    return radioButtons
+
+def progressBar(root, ttk):
+    var_progressBar = DoubleVar()
+    var_progressBar.set(0.5)
+
+    progressBar = {
+        'var_progressBar' : var_progressBar,
+        'pb_vol' : ttk.Progressbar(root, variable = var_progressBar, maximum = 1)}
+
+    return progressBar
