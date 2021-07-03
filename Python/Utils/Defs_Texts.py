@@ -1,9 +1,8 @@
-def world_01(selected_option, random, window, w, items, foods):
+def world_01(selected_option, random, window, w, items, foods, directory, vol, soundEffect):
     global game_over
     global level
     global world
     global hearts
-
     game_over = False
 
     if w == 1:
@@ -78,6 +77,7 @@ def world_01(selected_option, random, window, w, items, foods):
     elif w == 3:
         window.title(f"Level 0{w+1}")
         if selected_option == "A":
+            soundEffect(directory, vol, soundEffect = "Door")
             if random == 1:
                 lbl_toplevel = "Em um vão da casa você\nencontra um remédio"
                 losewin_hearts = 0.5
@@ -319,7 +319,7 @@ def world_01(selected_option, random, window, w, items, foods):
 
     return resume
 
-def world_02(selected_option, random, window, w, items, foods):
+def world_02(selected_option, random, window, w, items, foods, directory, vol, soundEffect):
     global game_over
     global level
     global world
@@ -667,7 +667,7 @@ def world_02(selected_option, random, window, w, items, foods):
 
     return resume
 
-def world_03(selected_option, random, window, w, items, foods):
+def world_03(selected_option, random, window, w, items, foods, directory, vol, soundEffect):
     global game_over
     global level
     global world

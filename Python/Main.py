@@ -6,7 +6,7 @@ from tkinter import messagebox
 from random import randint
 
 #Import - Modules ___________________________________________________________________________________________
-from Utils.Defs_Sound import sound, mixer_pm
+from Utils.Defs_Sound import soundtrack, soundEffect, mixer_pm
 from Utils.Defs_Texts import world_01, world_02, world_03, menu
 from Utils.Defs_Images import images, roots, sub_roots, sub_sub_roots, labels, buttons
 
@@ -630,7 +630,7 @@ def show_introduction_and_tutorial_01():
             lbl_int_and_tut.place_forget()
             btn_int_and_tut_next.place_forget()
             btn_int_and_tut_back.place_forget()
-            sound(directory, vol = vol, sound = 1)
+            soundtrack(directory, vol = vol, soundtrack = 1)
             show_game()
             show_button_continue()
         
@@ -964,7 +964,7 @@ def click_nothing():
 
 def click_continue():
     global level
-    sound(directory, vol = vol, sound = 1) #Caso esteja no mundo 1
+    soundtrack(directory, vol = vol, soundtrack = 1) #Caso esteja no mundo 1
     window.title(f"Level 0{level}")
     roots['root_status'].place(x = 0, y = 280, width = width - 23, height = 175)
     roots['root_narrative'].place(x = 0, y = 0, width = width - 23, height = 280)
@@ -1001,32 +1001,6 @@ def click_options():
 
     btn_back.place(x = 10, y = 370, width = 335, height = 65)# x = 355
 
-def vol_pb():
-    global vol
-    var_progressBar = DoubleVar()
-    var_progressBar.set(vol)
-    text_vol = f'{vol*100:.1f}%'
-
-    pb_vol.configure(variable = var_progressBar)
-    pb_vol.place(x = 10 , y = 155, width = 335, height = 40)
-
-    lbl_vol.configure(text = text_vol)
-    lbl_vol.place(x = 10, y = 200, width = 335, height = 30)
-
-def volume(option):
-    global vol
-    
-    if option == "max":
-        vol = round(mixer_pm(vol = 1, p_or_m = "plus"), 2)
-    elif option == "plus":
-        vol = round(mixer_pm(vol, p_or_m = "plus"), 2)
-    elif option == "minus":
-        vol = round(mixer_pm(vol, p_or_m = "minus"), 2)
-    elif option == "mute":
-        vol = round(mixer_pm(vol = 0, p_or_m = "minus"), 2)
-
-    vol_pb()
-
 def click_credits():
     window.title("Créditos")
     clear_all()
@@ -1046,7 +1020,7 @@ def click_quit():
 def click_back_to_main_menu(with_sound = False):
     value_var_language = var_language.get()
     if with_sound == True:
-        sound(directory, vol = vol, sound = 0)
+        soundtrack(directory, vol = vol, soundtrack = 0)
 
     if value_var_language != "BR":
         messagebox.showerror(title = "Idioma Indisponível", icon = messagebox.INFO,
@@ -1078,6 +1052,32 @@ def default():
     hearts = foods = 3
     game_over = False
 
+def vol_pb():
+    global vol
+    var_progressBar = DoubleVar()
+    var_progressBar.set(vol)
+    text_vol = f'{vol*100:.1f}%'
+
+    pb_vol.configure(variable = var_progressBar)
+    pb_vol.place(x = 10 , y = 155, width = 335, height = 40)
+
+    lbl_vol.configure(text = text_vol)
+    lbl_vol.place(x = 10, y = 200, width = 335, height = 30)
+
+def volume(option):
+    global vol
+
+    if option == "max":
+        vol = round(mixer_pm(vol = 1, plus_or_minus = "plus"), 2)
+    elif option == "plus":
+        vol = round(mixer_pm(vol, plus_or_minus = "plus"), 2)
+    elif option == "minus":
+        vol = round(mixer_pm(vol, plus_or_minus = "minus"), 2)
+    elif option == "mute":
+        vol = round(mixer_pm(vol = 0, plus_or_minus = "minus"), 2)
+
+    vol_pb()
+
 def options(selected_option):
     global game_over
     global level
@@ -1092,11 +1092,11 @@ def options(selected_option):
     show_labels_options()
 
     if world == 1:
-        resume = world_01(selected_option, random, window, w, items, foods)
+        resume = world_01(selected_option, random, window, w, items, foods, directory, vol, soundEffect)
     elif world == 2:
-        resume = world_02(selected_option, random, window, w, items, foods)
+        resume = world_02(selected_option, random, window, w, items, foods, directory, vol, soundEffect)
     elif world == 3:
-        resume = world_03(selected_option, random, window, w, items, foods)
+        resume = world_03(selected_option, random, window, w, items, foods, directory, vol, soundEffect)
 
     if resume['game_over'] == True:
         gameover('True')
@@ -1167,7 +1167,7 @@ root.place(x = 10, y = 10, width = width - 20, height = height - 20)
 #Main Menu ___________________________________________________________________________________________________
 lbl_title = Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold")
 lbl_subtitle = Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N)
-lbl_version = Label(root, text = "alpha v 1.2", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
+lbl_version = Label(root, text = "alpha v 1.3", bg=bg, font = "courier 10 bold", anchor = SE) #VERSION
 lbl_volume = Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold")
 lbl_language = Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold")
 
@@ -1178,7 +1178,7 @@ lbl_credits = Label(root, text=txt_credits, bg=bg, font = "courier 20 italic")
 
 default()
 img = images(directory)
-vol = sound(directory, vol = 0.5, sound = 0)
+vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
 roots = roots(root, bg, bg_frames, bg_narrative)
 sub_roots = sub_roots(roots, bg, bg_frames, bg_narrative)
 sub_sub_roots = sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative)
@@ -1192,6 +1192,7 @@ var_progressBar.set(0.5)
 text_vol = f'{vol*100:.1f}%'
 pb_vol = ttk.Progressbar(root, variable = var_progressBar, maximum = 1)
 lbl_vol = Label(root, text = text_vol, bg=bg, font = "courier 16 bold")
+
 rb_lan_UK = Radiobutton(root, text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
                     variable = var_language, value = "UK", relief = "flat", bd=4)
 rb_lan_FR = Radiobutton(root, text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
@@ -1200,7 +1201,7 @@ rb_lan_BR = Radiobutton(root, text = "Português", bg=bg, font = "courier 18 bol
                     variable = var_language, value = "BR", relief = "flat", bd=4)
 rb_lan_SP = Radiobutton(root, text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
                     variable = var_language, value = "SP", relief = "flat", bd=4)
-rb_lan_GE = Radiobutton(root, text = "Deutsche", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+rb_lan_GE = Radiobutton(root, text = "Deutsch", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
                     variable = var_language, value = "GE", relief = "flat", bd=4)
 
 btn_newgame = Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),
