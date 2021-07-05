@@ -155,7 +155,7 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
 
         'lbl_title' : Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold"),
         'lbl_subtitle' : Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N),
-        'lbl_version' : Label(root, text = "alpha v 1.4", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
+        'lbl_version' : Label(root, text = "alpha v 1.5", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
         'lbl_volume' : Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold"),
         'lbl_language' : Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold"),
         'lbl_credits' : Label(root, font = "courier 20 italic", text="Aluno: Arthur Vinícius Bezerra da Silva\n" +\
@@ -202,8 +202,6 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
     labels['lbl_opt_A'].place(x = 360, y = 10, width = 330, height = 80)
     labels['lbl_opt_B'].place(x = 360, y = 100, width = 330, height = 80)
     labels['lbl_opt_C'].place(x = 360, y = 190, width = 330, height = 80)
-
-
 
     return labels
 

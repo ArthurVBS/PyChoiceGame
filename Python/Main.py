@@ -1177,6 +1177,6 @@ sub_sub_roots = sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative)
 labels = labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots, root, vol)
 buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu, images,
 root, click_newgame, click_nothing, click_continue, click_credits, click_options, click_quit, volume)
-
 show_main_menu()
+
 window.mainloop()
