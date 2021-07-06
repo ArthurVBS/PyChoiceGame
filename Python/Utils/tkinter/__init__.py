@@ -49,7 +49,7 @@ def images(directory):
 
     return images
 
-def roots(root, bg, bg_frames, bg_narrative):
+def roots(root, bg, bg_narrative):
     roots = {
         'root_status' : Frame(root, bd = 1, relief = "ridge", bg = bg),
         'root_narrative' : Frame(root, bd = 1, relief = "ridge", bg = bg_narrative)}
@@ -76,7 +76,7 @@ def sub_roots(roots, bg, bg_frames, bg_narrative):
 
     return sub_roots
 
-def sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative):
+def sub_sub_roots(sub_roots, bg):
     sub_sub_roots = {
         'root_item_01' : Frame(sub_roots['root_item_main'], bd = 2, relief = "groove", bg = bg),
         'root_item_02' : Frame(sub_roots['root_item_main'], bd = 2, relief = "groove", bg = bg),
@@ -155,7 +155,7 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
 
         'lbl_title' : Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold"),
         'lbl_subtitle' : Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N),
-        'lbl_version' : Label(root, text = "alpha v 1.5", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
+        'lbl_version' : Label(root, text = "alpha v 1.6", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
         'lbl_volume' : Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold"),
         'lbl_language' : Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold"),
         'lbl_credits' : Label(root, font = "courier 20 italic", text="Aluno: Arthur Vinícius Bezerra da Silva\n" +\
@@ -205,7 +205,7 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
 
     return labels
 
-def buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu, images, root, click_newgame,
+def buttons(roots, bg, bg_frames, fg, options, click_back_to_main_menu, images, root, click_newgame,
             click_nothing, click_continue, click_credits, click_options, click_quit, volume):
     buttons = {
         'btn_newgame' : Button(root, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", command= lambda: click_newgame(),

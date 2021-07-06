@@ -5,10 +5,10 @@ from tkinter import ttk
 from tkinter import messagebox
 from random import randint
 
-#Import - Modules ___________________________________________________________________________________________
-from Utils.Defs_Sound import soundtrack, soundEffect, mixer_pm
-from Utils.Defs_Texts import world_01, world_02, world_03, menu
-from Utils.Defs_Tkinter import images, roots, sub_roots, sub_sub_roots, labels, buttons, radioButtons, progressBar
+#Import - Packages __________________________________________________________________________________________
+from Utils.audio import soundtrack, soundEffect, mixer_pm
+from Utils.texts import world_01, world_02, world_03, menu
+from Utils.tkinter import images, roots, sub_roots, sub_sub_roots, labels, buttons, radioButtons, progressBar
 
 #Functions - Show ___________________________________________________________________________________________
 def show_main_menu():
@@ -1171,12 +1171,12 @@ images = images(directory)
 progressBar = progressBar(root, ttk)
 radioButtons = radioButtons(root, bg)
 vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
-roots = roots(root, bg, bg_frames, bg_narrative)
+roots = roots(root, bg, bg_narrative)
 sub_roots = sub_roots(roots, bg, bg_frames, bg_narrative)
-sub_sub_roots = sub_sub_roots(sub_roots, bg, bg_frames, bg_narrative)
+sub_sub_roots = sub_sub_roots(sub_roots, bg)
 labels = labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_roots, root, vol)
-buttons = buttons(roots, bg, bg_frames, bg_narrative, fg, options, click_back_to_main_menu, images,
-root, click_newgame, click_nothing, click_continue, click_credits, click_options, click_quit, volume)
+buttons = buttons(roots, bg, bg_frames, fg, options, click_back_to_main_menu, images, root,
+click_newgame, click_nothing, click_continue, click_credits, click_options, click_quit, volume)
 show_main_menu()
 
 window.mainloop()
