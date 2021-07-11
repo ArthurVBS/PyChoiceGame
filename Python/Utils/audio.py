@@ -1,4 +1,7 @@
+import urllib.request
+from gtts import gTTS
 from pygame import mixer
+from playsound import playsound
 
 def soundtrack(directory, vol = 1, soundtrack = 0):
     mixer.init()
@@ -44,3 +47,24 @@ def mixer_pm(vol, plus_or_minus):
     mixer.music.set_volume(vol)
     return vol
 
+def connected():
+    try:
+        site = urllib.request.urlopen('http://www.pudim.com.br')
+
+    except urllib.error.URLError:
+        #Without internet
+        return False
+
+    else:
+        #With internet
+        return True
+
+def voice_over(directory, msg = 'Insira o texto'):
+    if connected() == True:
+        tts = gTTS(text = msg, lang = 'pt-br', slow=False)
+        filename = directory + r'\Sound\voice.mp3'
+        tts.save(filename)
+        playsound(filename)
+    else:
+        filename = directory + r'\Sound\voice_default.mp3'
+        playsound(filename)

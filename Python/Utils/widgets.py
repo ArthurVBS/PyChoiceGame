@@ -142,7 +142,7 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
         'lbl_item_crowbar' : Label(sub_sub_roots['root_item_06'], image = images['empty_01_dic'], bg = bg),
         'lbl_item_screwdriver' : Label(sub_sub_roots['root_item_07'], image = images['empty_01_dic'], bg = bg),
         'lbl_item_gear' : Label(sub_sub_roots['root_item_08'], image = images['empty_01_dic'], bg = bg),
-        
+
         'lbl_crossroads' : Label(roots['root_narrative'], text = "", anchor=CENTER, justify=CENTER, font = "courier 14 italic",
                                 bg = bg_narrative, fg = fg),
         'lbl_opt_A' : Label(roots['root_narrative'], text = "", anchor = NW, justify=LEFT, font = "courier 12 italic",
@@ -155,7 +155,7 @@ def labels(roots, bg, bg_frames, bg_narrative, fg, images, sub_roots, sub_sub_ro
 
         'lbl_title' : Label(root, text = " - The Truth - ", bg=bg, font = "courier 40 bold"),
         'lbl_subtitle' : Label(root, text = "a corrupted idea", bg=bg, font = "courier 32 bold", anchor = N),
-        'lbl_version' : Label(root, text = "alpha v 2.0", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
+        'lbl_version' : Label(root, text = "alpha v 2.1", bg=bg, font = "courier 10 bold", anchor = SE), #VERSION
         'lbl_volume' : Label(root, text = "< Volume >", bg=bg, font = "courier 32 bold"),
         'lbl_language' : Label(root, text = "< Idioma >", bg=bg, font = "courier 32 bold"),
         'lbl_credits' : Label(root, font = "courier 20 italic", text="Aluno: Arthur Vinícius Bezerra da Silva\n" +\
@@ -230,6 +230,7 @@ def buttons(roots, bg, bg_frames, fg, options, click_back_to_main_menu, images, 
         'btn_vol_mute' : Button(root, image = images['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",command= lambda: volume("mute"),
                         cursor="hand2", activebackground="#ccc", activeforeground=fg),
 
+
         'btn_back_newgame' : Button(roots['root_status'], image = images['back_dic'], bg=bg, bd = 2, relief = "ridge",
                             command = lambda: click_back_to_main_menu(with_sound = True), cursor="hand2"),
         'btn_opt_A' : Button(roots['root_narrative'], text= "- A -", bg=bg_frames, bd = 2, relief = "ridge", command = lambda: options("A"),
@@ -269,13 +270,9 @@ def radioButtons(root, bg):
 def progressBar(root, ttk):
     var_progressBar = DoubleVar()
     var_progressBar.set(0.5)
-    var_progressBar_loading = DoubleVar()
-    var_progressBar_loading.set(0)
 
     progressBar = {
         'var_progressBar' : var_progressBar,
-        'pb_vol' : ttk.Progressbar(root, variable = var_progressBar, maximum = 1),
-        'var_progressBar_loading' : var_progressBar_loading,
-        'pb_loading' : ttk.Progressbar(root, variable = var_progressBar_loading, maximum = 100)}
+        'pb_vol' : ttk.Progressbar(root, variable = var_progressBar, maximum = 1)}
 
     return progressBar

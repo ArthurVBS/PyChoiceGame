@@ -6,14 +6,13 @@ from tkinter import messagebox
 from random import randint
 
 #Import - Packages __________________________________________________________________________________________
-from Utils.tk import window_tk
-from Utils.voice import voice_over
-from Utils.welcome import welcome
-from Utils.audio import soundtrack, soundEffect, mixer_pm
+from Utils.menus import welcome_menu
 from Utils.texts import world_01, world_02, world_03, menu
-from Utils.images import images, roots, sub_roots, sub_sub_roots, labels, buttons, radioButtons, progressBar
+from Utils.audio import soundtrack, soundEffect, mixer_pm, voice_over
+from Utils.widgets import images, roots, sub_roots, sub_sub_roots, labels, buttons, radioButtons, progressBar
 
 #Functions - Show ___________________________________________________________________________________________
+
 def show_main_menu():
     window.title("Main Menu")
     root.config(bg = bg)
@@ -250,7 +249,7 @@ def show_toplevel(title, lbl_text, losewin_hearts, losewin_foods, w, selected_op
 
     #Tkinter
     win_toplevel = Toplevel()
-    win_toplevel.geometry(f"370x320+{tk['pos_x'] + 200}+{tk['pos_y'] + 100}")
+    win_toplevel.geometry(f"370x320+{pos_x + 200}+{pos_y + 100}")
     win_toplevel.title(title)
     win_toplevel.iconbitmap(directory + "/Images/Icons/icon_02.ico")
     win_toplevel.resizable(False, False)
@@ -1144,20 +1143,33 @@ def gameover(value):
     else:
         pass
 
+
 #Variables __________________________________________________________________________________________________
-title = 'The Truth'
 bg = fg = "#fafafa"
 bg_frames = "#f1f1f1"
 bg_narrative = "#252525"
 directory = os.path.dirname(__file__)
 #Tkinter ____________________________________________________________________________________________________
 
-welcome(directory)
+welcome_menu(directory, voice_over)
 
-tk = window_tk(directory, title, bg)
-root = tk['root']
-width = tk['width']
-window = tk['window']
+window = Tk()
+
+width = 720
+height = 470
+width_screen = window.winfo_screenwidth()
+height_screen = window.winfo_screenheight()
+pos_x = int(width_screen / 2 - width / 2)
+pos_y = int(height_screen / 2 - height / 2)
+
+root = Frame(window, bd = 1, relief = 'sunken', bg = bg)
+root.place(x = 10, y = 10, width = width - 20, height = height - 20)
+
+window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
+window.title('The Truth')
+window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+window.resizable(False,False)
+window.configure(background = '#000')
 
 default()
 images = images(directory)

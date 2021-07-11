@@ -4,16 +4,25 @@ from math import floor
 from time import sleep
 from random import randint
 
-from Utils.tk import window_tk
-from Utils.voice import voice_over
-from Utils.images import progressBar
-
-def welcome(directory, bg = '#fafafa', fg = '#fafafa'):
+def welcome_menu(directory, voice_over, bg = '#fafafa', fg = '#fafafa'):
     global progressBar
-    tk = window_tk(directory, title = 'Usuário', width = 420, height = 170)
-    root = tk['root']
-    width = tk['width']
-    window_welcome = tk['window']
+    window_welcome = Tk()
+
+    width = 420
+    height = 170
+    width_screen = window_welcome.winfo_screenwidth()
+    height_screen = window_welcome.winfo_screenheight()
+    pos_x = int(width_screen / 2 - width / 2)
+    pos_y = int(height_screen / 2 - height / 2)
+
+    root = Frame(window_welcome, bd = 1, relief = 'sunken', bg = bg)
+    root.place(x = 10, y = 10, width = width - 20, height = height - 20)
+
+    window_welcome.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
+    window_welcome.title('Configurações Iniciais')
+    window_welcome.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window_welcome.resizable(False,False)
+    window_welcome.configure(background = '#000')
 
     def loading():
         global user
@@ -22,10 +31,9 @@ def welcome(directory, bg = '#fafafa', fg = '#fafafa'):
         entry_user.place_forget()
 
         user = var_user.get()
-        msg = f'Olá, {user}, Seja bem-vindo ou bem-vinda!'
 
         window_welcome.title('Iniciando o jogo, aguarde!')
-        progressBar['pb_loading'].place(x = 10 , y = 100, width = width - 40, height = 40)
+        pb_loading.place(x = 10 , y = 100, width = width - 40, height = 40)
 
         progress = 0
         while progress < 100:
@@ -33,7 +41,7 @@ def welcome(directory, bg = '#fafafa', fg = '#fafafa'):
             window_welcome.update()
             progress += randint(0, 100)/100
 
-            progressBar['var_progressBar_loading'].set(progress)
+            var_progressBar_loading.set(progress)
             
             lbl_progress.configure(text = f'{floor(progress)}%')
             lbl_progress.place(x = 210, y = 65, width = 180, height = 30)
@@ -44,10 +52,13 @@ def welcome(directory, bg = '#fafafa', fg = '#fafafa'):
                 lbl_welcome.place(x = 10, y = 10, width = width - 40, height = 50)
                 lbl_welcome.configure(text = f'Seja bem-vindo(a)!\n{user}')
                 window_welcome.update()
-                voice_over(directory, msg)
+                voice_over(directory, f'Olá, {user}, Seja bem-vindo ou bem-vinda!')
                 window_welcome.destroy()
 
-    progressBar = progressBar(root, ttk)
+    var_progressBar_loading = DoubleVar()
+    var_progressBar_loading.set(0)
+
+    pb_loading = ttk.Progressbar(root, variable = var_progressBar_loading, maximum = 100)
 
     lbl_progress = Label(root, text = '', font = 'courier 16 bold', bg=bg, anchor = E)
     lbl_welcome = Label(root, text = '', font = 'courier 18 bold', bg=bg)
