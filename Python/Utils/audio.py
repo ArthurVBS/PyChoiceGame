@@ -5,13 +5,13 @@ def soundtrack(directory, vol = 1, soundtrack = 0):
     mixer.music.stop()
     mixer.music.set_volume(vol) #0 -> 1
     if soundtrack == 0:
-        mixer.music.load(directory + '/Sound/soundtrack_00.mp3')
+        mixer.music.load(directory + '\Sound\soundtrack_00.mp3')
     elif soundtrack == 1:
-        mixer.music.load(directory + '/Sound/soundtrack_01.mp3')
+        mixer.music.load(directory + '\Sound\soundtrack_01.mp3')
     elif soundtrack == 2:
-        mixer.music.load(directory + '/Sound/soundtrack_02.mp3')
+        mixer.music.load(directory + '\Sound\soundtrack_02.mp3')
     elif soundtrack == 3:
-        mixer.music.load(directory + '/Sound/soundtrack_03.mp3')
+        mixer.music.load(directory + '\Sound\soundtrack_03.mp3')
 
     mixer.music.play(-1)
     return vol
@@ -24,7 +24,7 @@ def soundEffect(directory, vol = 1, soundEffect = None):
 
     if soundEffect != None:
         if soundEffect == 'Door':
-            se = mixer.Sound(directory + '/Sound/sound_effect_Door.wav')
+            se = mixer.Sound(directory + '\Sound\sound_effect_Door.wav')
         se.play()
         se.set_volume(vol)
     else:
@@ -43,3 +43,4 @@ def mixer_pm(vol, plus_or_minus):
 
     mixer.music.set_volume(vol)
     return vol
+
