@@ -4,8 +4,10 @@ from tkinter import *
 #Import - Packages __________________________________________________________________________________________
 from Utils.widgets import images
 #Variables __________________________________________________________________________________________________
-bg = fg = '#fbfbfb'
-bg_frames = '#e1e1e1'
+bg = fg = '#fefefe'
+bg_light = '#e1e1e1'
+bg_gray = '#545454'
+bg_dark = '#000'
 directory = os.path.dirname(__file__)
 #Tkinter ____________________________________________________________________________________________________
 window = Tk()
@@ -17,8 +19,8 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_main = Frame(window, bd = 1, relief = 'sunken', bg='#fff')
-root_main.place(x = 10, y = 10, width = width - 20, height = height - 20)
+root_main_game = Frame(window, bg=bg)
+root_main_game.place(x = 10, y = 10, width = width - 20, height = height - 20)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.title('In search of the truth')
@@ -30,81 +32,82 @@ images = images(directory)
 
 #Hearts and Foods
 
-root_hearts_foods = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_hearts_foods.place(x = 5, y = 140, width = 260, height = 45)
+root_hearts_foods = Frame(root_main_game, bg=bg_light, bd = 2, relief = 'sunken')
+root_hearts_foods.place(x = 5, y = 145, width = 260, height = 45)
 
-lbl_heart = Label(root_hearts_foods, image = images['heart_11_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_heart.place(x = 5, y = 5, width = 35, height = 32.5)
+lbl_heart = Label(root_hearts_foods, image = images['heart_11_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_heart.place(x = 2.5, y = 2.5, width = 35, height = 32.5)
 
-lbl_value_heart = Label(root_hearts_foods, text = f'100%', bg=bg, font = 'courier 12 bold', bd = 2, relief = 'ridge')
-lbl_value_heart.place(x = 37.5, y = 5, width = 90, height = 32.5)
+lbl_value_heart = Label(root_hearts_foods, text = f'100%', bg=bg, font = 'courier 12 bold', bd = 3, relief = 'ridge')
+lbl_value_heart.place(x = 35, y = 2.5, width = 90, height = 32.5)
 
-lbl_food = Label(root_hearts_foods, image = images['food_11_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_food.place(x = 130, y = 5, width = 35, height = 32.5)
+lbl_food = Label(root_hearts_foods, image = images['food_11_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_food.place(x = 127.5, y = 2.5, width = 35, height = 32.5)
 
-lbl_value_food = Label(root_hearts_foods, text = f'9/10', bg=bg, font = 'courier 12 bold', bd = 2, relief = 'ridge')
-lbl_value_food.place(x = 162.5, y = 5, width = 90, height = 32.5)
+lbl_value_food = Label(root_hearts_foods, text = f'9/10', bg=bg, font = 'courier 12 bold', bd = 3, relief = 'ridge')
+lbl_value_food.place(x = 160, y = 2.5, width = 90, height = 32.5)
 
 #Items - World 1
 
-root_items_world_1 = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_items_world_1.place(x = 5, y = 190, width = 85, height = 85)
+root_items_world_1 = Frame(root_main_game, bg=bg_light, bd = 2, relief = 'sunken')
+root_items_world_1.place(x = 5, y = 195, width = 85, height = 85)
 
-lbl_item_lighter = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_item_wolfhide = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_item_future_friendship = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_key_B = Label(root_items_world_1, image = images['key_E_dic'], bg=bg, bd = 2, relief = 'ridge')
+lbl_item_lighter = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_item_wolfhide = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_item_future_friendship = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_key_B = Label(root_items_world_1, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
 
-lbl_item_lighter.place(x = 5, y = 5, width = 35, height = 35)
-lbl_item_wolfhide.place(x = 42.5, y = 5, width = 35, height = 35)
-lbl_item_future_friendship.place(x = 42.5, y = 42.5, width = 35, height = 35)
-lbl_key_B.place(x = 5, y = 42.5, width = 35, height = 35)
+lbl_item_lighter.place(x = 3, y = 3, width = 35, height = 35)
+lbl_item_wolfhide.place(x = 43, y = 3, width = 35, height = 35)
+lbl_item_future_friendship.place(x = 43, y = 43, width = 35, height = 35)
+lbl_key_B.place(x = 3, y = 43, width = 35, height = 35)
 
 #Items - World 2
 
-root_items_world_2 = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_items_world_2.place(x = 92.5, y = 190, width = 85, height = 85)
+root_items_world_2 = Frame(root_main_game, bg=bg_light, bd = 2, relief = 'sunken')
+root_items_world_2.place(x = 92.5, y = 195, width = 85, height = 85)
 
-lbl_item_shotgun = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_item_nausea = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_item_crowbar = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_key_S = Label(root_items_world_2, image = images['key_E_dic'], bg=bg, bd = 2, relief = 'ridge')
+lbl_item_shotgun = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_item_nausea = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_item_crowbar = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_key_S = Label(root_items_world_2, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
 
-lbl_item_shotgun.place(x = 5, y = 5, width = 35, height = 35)
-lbl_item_nausea.place(x = 42.5, y = 5, width = 35, height = 35)
-lbl_item_crowbar.place(x = 42.5, y = 42.5, width = 35, height = 35)
-lbl_key_S.place(x = 5, y = 42.5, width = 35, height = 35)
+lbl_item_shotgun.place(x = 3, y = 3, width = 35, height = 35)
+lbl_item_nausea.place(x = 43, y = 3, width = 35, height = 35)
+lbl_item_crowbar.place(x = 43, y = 43, width = 35, height = 35)
+lbl_key_S.place(x = 3, y = 43, width = 35, height = 35)
 
 #Items - World 3
 
-root_items_world_3 = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_items_world_3.place(x = 180, y = 190, width = 85, height = 85)
+root_items_world_3 = Frame(root_main_game, bg=bg_light, bd = 2, relief = 'sunken')
+root_items_world_3.place(x = 180, y = 195, width = 85, height = 85)
 
-lbl_item_screwdriver = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_item_gear = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_unknown = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 2, relief = 'ridge')
-lbl_key_G = Label(root_items_world_3, image = images['key_E_dic'], bg=bg, bd = 2, relief = 'ridge')
+lbl_item_screwdriver = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_item_gear = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_unknown = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+lbl_key_G = Label(root_items_world_3, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
 
-lbl_item_screwdriver.place(x = 5, y = 5, width = 35, height = 35)
-lbl_item_gear.place(x = 42.5, y = 5, width = 35, height = 35)
-lbl_unknown.place(x = 42.5, y = 42.5, width = 35, height = 35)
-lbl_key_G.place(x = 5, y = 42.5, width = 35, height = 35)
+lbl_item_screwdriver.place(x = 3, y = 3, width = 35, height = 35)
+lbl_item_gear.place(x = 43, y = 3, width = 35, height = 35)
+lbl_unknown.place(x = 43, y = 43, width = 35, height = 35)
+lbl_key_G.place(x = 3, y = 43, width = 35, height = 35)
 
 #Scenario
 
-root_scenario = Frame(root_main, bd = 0.5, relief = 'groove', bg=bg_frames)
-root_scenario.place(x = 5 , y = 280, width = 260, height = 110)
+root_scenario = Frame(root_main_game, bg=bg_light, bd = 2, relief = 'sunken')
+root_scenario.place(x = 5 , y = 285, width = 260, height = 110)
 
 lbl_scenario = Label(root_scenario, image = images['empty_00_dic'], bg=bg, anchor = CENTER)
-lbl_scenario.place(x = 5, y = 5, width= 250, height = 100)#250x100
+lbl_scenario.place(x = 3, y = 3, width= 250, height = 100)#250x100
 
 #TXT
 
-root_txt = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_txt.place(x = 5, y = 5, width = 690, height = 130)
+root_txt = Frame(root_main_game, bg=bg_dark)
+root_txt.place(x = 0, y = 0, width = 700, height = 140)
 
-lbl_main_text = Label(root_txt, text = 'Texto principal', bg=bg_frames, justify= CENTER, font = 'courier 16 bold')
-lbl_main_text.place(x = 2.5, y = 2.5, width = 680, height = 120)
+lbl_main_text = Label(root_txt, text = 'Texto principal', bg=bg, justify= LEFT,
+                    font = 'courier 16 bold', bd = 4, relief = 'ridge')
+lbl_main_text.place(x = 0, y = 0, width = 700, height = 130)
 
 lbl_main_text['text'] = 'Você está caminhando a um certo tempo, o seu\n' +\
                         'estômago ronca. Você encontra algumas frutinhas\n' +\
@@ -112,58 +115,63 @@ lbl_main_text['text'] = 'Você está caminhando a um certo tempo, o seu\n' +\
 
 #Texts
 
-root_text = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_text.place(x = 270, y = 140, width = 425, height = 250)
+root_text = Frame(root_main_game, bg=bg_light, bd = 2, relief = 'sunken')
+root_text.place(x = 270, y = 145, width = 425, height = 250)
 
 var_option = StringVar()
 var_option.set('E')
 
-rb_option_A = Radiobutton(root_text, bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 2.5, text = '', cursor = 'hand2', 
-                            variable = var_option, value = 'A', activebackground='#aaa', activeforeground=fg)
-rb_option_A.place(x = 5, y = 5, width = 410, height = 75)
+rb_option_A = Radiobutton(root_text, bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 4.5, text = '', cursor = 'hand2', 
+                            variable = var_option, value = 'A', activebackground=bg_gray, activeforeground=fg, justify = LEFT)
+rb_option_A.place(x = 5, y = 5, width = 412.5, height = 76)
 
-rb_option_B = Radiobutton(root_text, bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 2.5, text = '', cursor = 'hand2', 
-                            variable = var_option, value = 'B', activebackground='#aaa', activeforeground=fg)
-rb_option_B.place(x = 5, y = 85, width = 410, height = 75)
+rb_option_B = Radiobutton(root_text, bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 4.5, text = '', cursor = 'hand2', 
+                            variable = var_option, value = 'B', activebackground=bg_gray, activeforeground=fg, justify = LEFT)
+rb_option_B.place(x = 5, y = 86, width = 412.5, height = 76)
 
-rb_option_C = Radiobutton(root_text, bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 2.5, text = '', cursor = 'hand2', 
-                            variable = var_option, value = 'C', activebackground='#aaa', activeforeground=fg)
-rb_option_C.place(x = 5, y = 165, width = 410, height = 75)
+rb_option_C = Radiobutton(root_text, bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 4.5, text = '', cursor = 'hand2',
+                            variable = var_option, value = 'C', activebackground=bg_gray, activeforeground=fg, justify = LEFT)
+rb_option_C.place(x = 5, y = 167, width = 412.5, height = 76)
 
 rb_option_A['text'] = 'Pegar as frutinhas do arbusto e\nsaciar a sua fome;'
 rb_option_B['text'] = 'Ignorar as frutinhas e seguir em\nfrente;'
 rb_option_C['text'] = 'Pegar alguma comida da mochila;'
 
-#Back, Next and Way
+#Back & Next
 
-root_next_back_way = Frame(root_main, bd = 1, relief = 'sunken', bg=bg_frames)
-root_next_back_way.place(x = 5, y = 395, width = 690, height = 50)
+root_back_next = Frame(root_main_game, bg=bg_dark)
+root_back_next.place(x = 0, y = 400, width = 700, height = 55)
 
-btn_back = Button(root_next_back_way, text = 'Ir ao Menu', bg=bg, bd = 2, relief = 'ridge', cursor='hand2',
-                font = 'courier 18 bold', activebackground='#aaa', activeforeground=fg)
-btn_back.place(x = 5, y = 5, width = 205, height = 40)
+btn_back = Button(root_back_next, text = 'Retornar ao Menu', bg=bg, bd = 3, relief = 'ridge', cursor='hand2',
+                font = 'courier 16 bold', activebackground=bg_gray, activeforeground=fg)
+btn_back.place(x = 0, y = 10, width = 270, height = 40)
 
-btn_next = Button(root_next_back_way, text = 'Avançar', bg=bg, bd = 2, relief = 'ridge', cursor='hand2',
-                font = 'courier 18 bold', activebackground='#aaa', activeforeground=fg)
-btn_next.place(x = 475, y = 5, width = 205, height = 40)
+btn_next = Button(root_back_next, text = 'Avançar', bg=bg, bd = 3, relief = 'ridge', cursor='hand2',
+                font = 'courier 16 bold', activebackground=bg_gray, activeforeground=fg)
+btn_next.place(x = 500, y = 10, width = 200, height = 40)
 
-lbl_way_01 = Label(root_next_back_way, image = images['just_way_dic'], bg=bg_frames)
-lbl_way_01.place(x = 225, y = 2.5, width = 40, height = 40)
+#Ways
 
-lbl_way_02 = Label(root_next_back_way, image = images['just_way_dic'], bg=bg_frames)
-lbl_way_02.place(x = 265, y = 2.5, width = 40, height = 40)
+root_ways = Frame(root_main_game, bg=bg_dark)
+root_ways.place(x = 280, y = 410, width = 210, height = 45)
 
-lbl_way_03 = Label(root_next_back_way, image = images['just_way_dic'], bg=bg_frames)
-lbl_way_03.place(x = 305, y = 2.5, width = 40, height = 40)
+lbl_way_01 = Label(root_ways, image = images['just_way_dic'], bg=bg_dark)
+lbl_way_01.place(x = 0, y = 0, width = 35, height = 32)
 
-lbl_way_04 = Label(root_next_back_way, image = images['just_way_dic'], bg=bg_frames)
-lbl_way_04.place(x = 345, y = 2.5, width = 40, height = 40)
+lbl_way_02 = Label(root_ways, image = images['just_way_dic'], bg=bg_dark)
+lbl_way_02.place(x = 35, y = 0, width = 35, height = 32)
 
-lbl_way_05 = Label(root_next_back_way, image = images['just_way_dic'], bg=bg_frames)
-lbl_way_05.place(x = 385, y = 2.5, width = 40, height = 40)
+lbl_way_03 = Label(root_ways, image = images['just_way_dic'], bg=bg_dark)
+lbl_way_03.place(x = 70, y = 0, width = 35, height = 32)
 
-lbl_way_06 = Label(root_next_back_way, image = images['just_way_dic'], bg=bg_frames)
-lbl_way_06.place(x = 425, y = 2.5, width = 40, height = 40)
+lbl_way_04 = Label(root_ways, image = images['just_way_dic'], bg=bg_dark)
+lbl_way_04.place(x = 105, y = 0, width = 35, height = 32)
+
+lbl_way_05 = Label(root_ways, image = images['just_way_dic'], bg=bg_dark)
+lbl_way_05.place(x = 140, y = 0, width = 35, height = 32)
+
+lbl_way_06 = Label(root_ways, image = images['just_way_dic'], bg=bg_dark)
+lbl_way_06.place(x = 175, y = 0, width = 35, height = 32)
 
 #default
 
