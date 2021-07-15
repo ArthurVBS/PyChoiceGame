@@ -11,6 +11,7 @@ bg_dark = '#000'
 version = 'layout v 2.2.1'
 directory = os.path.dirname(__file__)
 #Tkinter ____________________________________________________________________________________________________
+
 window = Tk()
 
 width = 720
@@ -20,9 +21,9 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_play_game = Frame(window, bg=bg)
 root_main_menu = Frame(window, bg=bg)
-root_game_over = Frame(window, bg=bg)
+root_main_menu.place(x = 5, y = 5, width = 710, height = 460)
+images = images(directory)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.title('In search of the truth')
@@ -30,8 +31,75 @@ window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 window.resizable(False,False)
 window.configure(background = '#000')
 
-images = images(directory)
 
+
+window.mainloop()
+
+
+'''
+#Window
+
+window.title('Main Menu')
+window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+
+#Labels
+lbl_title = Label(root_main_menu, text = " - In search - \n of the truth ", bg=bg, font = "courier 40 bold", justify=CENTER)
+lbl_title.place(x = 5, y = 5, width = 700, height = 140)
+
+lbl_version = Label(root_main_menu, text = version, bg=bg, font = "courier 10 bold", anchor = SE)
+lbl_version.place(x = 575, y = 425, width = 125, height = 25)
+
+#Buttons
+btn_newgame = Button(root_main_menu, text= "Novo jogo", bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+btn_newgame.place(x = 230, y = 160, width = 250, height = 50)
+
+
+btn_continue = Button(root_main_menu, text= "Continuar", bg=bg, bd = 2, relief = "flat", 
+                cursor="arrow", font = "courier 25 bold", fg = "#ccc")
+btn_continue.place(x = 230, y = 220, width = 250, height = 50)
+
+
+btn_options = Button(root_main_menu, text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+btn_options.place(x = 230, y = 280, width = 250, height = 50)
+
+
+btn_credits = Button(root_main_menu, text= "Créditos", bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+btn_credits.place(x = 230, y = 340, width = 250, height = 50)
+
+
+btn_quit = Button(root_main_menu, text= "Sair", bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+btn_quit.place(x = 230, y = 400, width = 250, height = 50)
+'''
+
+
+'''
+#Window
+window.title('Créditos')
+window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+
+#Labels
+lbl_credits_title = Label(root_credits, text = ' - In search - \n of the truth ', bg=bg, font = 'courier 40 bold', justify=CENTER)
+lbl_credits_title.place(x = 5, y = 5, width = 700, height = 140)
+
+lbl_credits_version = Label(root_credits, text = version, bg=bg, font = 'courier 10 bold', anchor = SE)
+lbl_credits_version.place(x = 575, y = 425, width = 125, height = 25)
+
+lbl_credits = Label(root_credits, font = 'courier 20 italic', text='Aluno: Arthur Vinícius Bezerra da Silva\n' +\
+                    'Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.--.--\n', bg=bg)
+lbl_credits.place(x = 5, y = 145, width = 700, height = 210)
+
+#Buttons
+btn_back = Button(root_credits, text = 'Voltar', bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_back.place(x = 225, y = 380, width = 260, height = 50)
+'''
+
+
+'''
 def default():
     global items_values
 
@@ -87,13 +155,12 @@ def default():
     lbl_item_screwdriver['image'] = images['empty_01_dic']
     lbl_item_gear['image'] = images['empty_01_dic']
 
-
 def show_items_values():
     global items_values
 
     def heart():
-        if items_values["heart"] >= 100:
-            items_values["heart"] = 100
+        if items_values['heart'] >= 100:
+            items_values['heart'] = 100
 
         if 100 >= items_values['heart'] > 75: #100 - 75
             lbl_heart['image'] = images['heart_11_dic']
@@ -104,11 +171,11 @@ def show_items_values():
         elif 25 >= items_values['heart'] >= 0: #25 - 0
             lbl_heart['image'] = images['heart_00_dic']
 
-        lbl_value_heart['text'] = f'{items_values["heart"]}%'
+        lbl_value_heart['text'] = f'{items_values['heart']}%'
     
     def food():
-        if items_values["food"] >= 10:
-            items_values["food"] = 10
+        if items_values['food'] >= 10:
+            items_values['food'] = 10
 
         if 10 >= items_values['food'] > 7.5: #10 - 7.5
             lbl_food['image'] = images['food_11_dic']
@@ -119,20 +186,20 @@ def show_items_values():
         elif 2.5 >= items_values['food'] >= 0: #2.5 - 0
             lbl_food['image'] = images['food_00_dic']
 
-        lbl_value_food['text'] = f'{items_values["food"]}/10'
+        lbl_value_food['text'] = f'{items_values['food']}/10'
 
     def keys():
         lbl_key_B['image'] = images['key_E_dic']
         lbl_key_S['image'] = images['key_E_dic']
         lbl_key_G['image'] = images['key_E_dic']
 
-        if items_values["key_B"] == True: #Bronze
+        if items_values['key_B'] == True: #Bronze
             lbl_key_B['image'] = images['key_B_dic']
 
-        if items_values["key_S"] == True: #Silver
+        if items_values['key_S'] == True: #Silver
             lbl_key_S['image'] = images['key_S_dic']
 
-        if items_values["key_G"] == True: #Golden
+        if items_values['key_G'] == True: #Golden
             lbl_key_G['image'] = images['key_G_dic']
 
     def items():
@@ -215,35 +282,8 @@ def show_items_values():
     items()
     ways()
     scenario()
-
-
-def show(show_root):
-    if show_root == 'play_game':
-        root_play_game.place(x = 5, y = 5, width = width - 10, height = height - 10)
-
-    elif show_root == 'game_over':
-        root_game_over.place(x = 10, y = 10, width = width - 20, height = height - 20)
-
-    elif show_root == 'main_menu':
-        root_main_menu.place(x = 10, y = 10, width = width - 20, height = height - 20)
-
-
-def clear(clear_root = 'all'):
-    if clear_root == 'play_game':
-        root_play_game.place_forget()
-
-    elif clear_root == 'game_over':
-        root_game_over.place_forget()
-
-    elif clear_root == 'main_menu':
-        root_main_menu.place_forget()
-
-    else:
-        root_play_game.place_forget()
-        root_game_over.place_forget()
-        root_main_menu.place_forget()
-
-
+'''
+'''
 #Hearts and Foods
 
 root_hearts_foods = Frame(root_play_game, bg=bg_light, bd = 2, relief = 'sunken')
@@ -267,13 +307,15 @@ root_items_world_1 = Frame(root_play_game, bg=bg_light, bd = 2, relief = 'sunken
 root_items_world_1.place(x = 5, y = 175, width = 85, height = 85)
 
 lbl_item_lighter = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_item_wolfhide = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_item_future_friendship = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_key_B = Label(root_items_world_1, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
-
 lbl_item_lighter.place(x = 3, y = 3, width = 35, height = 35)
+
+lbl_item_wolfhide = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_item_wolfhide.place(x = 43, y = 3, width = 35, height = 35)
+
+lbl_item_future_friendship = Label(root_items_world_1, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_item_future_friendship.place(x = 43, y = 43, width = 35, height = 35)
+
+lbl_key_B = Label(root_items_world_1, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_key_B.place(x = 3, y = 43, width = 35, height = 35)
 
 #Items - World 2
@@ -282,13 +324,15 @@ root_items_world_2 = Frame(root_play_game, bg=bg_light, bd = 2, relief = 'sunken
 root_items_world_2.place(x = 92.5, y = 175, width = 85, height = 85)
 
 lbl_item_shotgun = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_item_nausea = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_item_crowbar = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_key_S = Label(root_items_world_2, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
-
 lbl_item_shotgun.place(x = 3, y = 3, width = 35, height = 35)
+
+lbl_item_nausea = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_item_nausea.place(x = 43, y = 3, width = 35, height = 35)
+
+lbl_item_crowbar = Label(root_items_world_2, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_item_crowbar.place(x = 43, y = 43, width = 35, height = 35)
+
+lbl_key_S = Label(root_items_world_2, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_key_S.place(x = 3, y = 43, width = 35, height = 35)
 
 #Items - World 3
@@ -297,13 +341,15 @@ root_items_world_3 = Frame(root_play_game, bg=bg_light, bd = 2, relief = 'sunken
 root_items_world_3.place(x = 180, y = 175, width = 85, height = 85)
 
 lbl_item_screwdriver = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_item_gear = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_unknown = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-lbl_key_G = Label(root_items_world_3, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
-
 lbl_item_screwdriver.place(x = 3, y = 3, width = 35, height = 35)
+
+lbl_item_gear = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_item_gear.place(x = 43, y = 3, width = 35, height = 35)
+
+lbl_unknown = Label(root_items_world_3, image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_unknown.place(x = 43, y = 43, width = 35, height = 35)
+
+lbl_key_G = Label(root_items_world_3, image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
 lbl_key_G.place(x = 3, y = 43, width = 35, height = 35)
 
 #Scenario
@@ -356,8 +402,8 @@ rb_option_C['text'] = 'Pegar alguma comida da mochila;'
 root_back_next = Frame(root_play_game, bg=bg_dark)
 root_back_next.place(x = 0, y = 425, width = 710, height = 45)
 
-lbl_version_in_game = Label(root_back_next, bg=bg_dark, font = 'courier 10 bold', text = version, fg=fg)
-lbl_version_in_game.place(x = 275, y = 5, width = 160, height = 30)
+lbl_credits_version_in_game = Label(root_back_next, bg=bg_dark, font = 'courier 10 bold', text = version, fg=fg)
+lbl_credits_version_in_game.place(x = 275, y = 5, width = 160, height = 30)
 
 btn_back = Button(root_back_next, text = 'Retornar ao Menu', bg=bg_dark, bd = 1.5, relief = 'ridge', cursor='hand2',
                 font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light, fg=fg)
@@ -390,13 +436,11 @@ lbl_way_05.place(x = 167.5, y = 0, width = 35, height = 35)
 lbl_way_06 = Label(root_ways, image = images['just_way_dic'], bg=bg_light)
 lbl_way_06.place(x = 207.5, y = 0, width = 35, height = 35)
 
-#default
-
 if var_option.get() == 'E':
     print('Selecione uma das opções para seguir!!!')
 
 default()
 show_items_values()
-show('play_game')
+root_play_game.place(x = 5, y = 5, width = width - 10, height = height - 10)
 
-window.mainloop()
+'''
