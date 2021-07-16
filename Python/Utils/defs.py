@@ -1,7 +1,16 @@
 #Import - Libraries _________________________________________________________________________________________
 
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
+
+#Import - Packages __________________________________________________________________________________________
+
+if __name__ == '__main__':
+    from audio import mixer_pm, soundtrack
+
+else:
+    from Utils.audio import mixer_pm, soundtrack
 
 #Variables __________________________________________________________________________________________________
 
@@ -17,14 +26,15 @@ def main_roots(window):
     root_main_menu = Frame(window, bg=bg)
     root_game_over = Frame(window, bg=bg)
     root_credits = Frame(window, bg=bg)
+    root_options = Frame(window, bg=bg)
 
     main_roots = {
         'root_play_game' : root_play_game, 'root_main_menu' : root_main_menu, 'root_game_over' : root_game_over,
-        'root_credits' : root_credits}
+        'root_credits' : root_credits, 'root_options' : root_options}
 
     return main_roots
 
-#Functions - Internals _______________________________________________________________________________________
+#Functions - Internals ______________________________________________________________________________________
 
 def default(window, images, game_widgets):
     global items_values
@@ -43,9 +53,6 @@ def default(window, images, game_widgets):
 
     #Title
     window.title(f'Level {items_values["world"]}-{items_values["level"]}')
-
-    #Music
-
 
     #Scenario
     game_widgets['lbl_scenario']['image'] = images['scenario_01_dic']
@@ -201,9 +208,37 @@ def show_items_values(images, game_widgets):
     ways()
     scenario()
 
+def volume(option, options_widgets):
+    global vol
+
+    if option == "max":
+        vol = round(mixer_pm(vol = 1, plus_or_minus = "plus"), 2)
+    elif option == "plus":
+        vol = round(mixer_pm(vol, plus_or_minus = "plus"), 2)
+    elif option == "minus":
+        vol = round(mixer_pm(vol, plus_or_minus = "minus"), 2)
+    elif option == "mute":
+        vol = round(mixer_pm(vol = 0, plus_or_minus = "minus"), 2)
+
+    vol_pb(options_widgets)
+
+def vol_pb(options_widgets):
+    global vol
+    var_progressBar = DoubleVar()
+    var_progressBar.set(vol)
+    text_vol = f'{vol*100:.1f}%'
+
+    options_widgets['pb_vol'].configure(variable = var_progressBar)
+    options_widgets['pb_vol'].place(x = 10 , y = 160, width = 335, height = 40)
+
+    options_widgets['lbl_vol'].configure(text = text_vol)
+    options_widgets['lbl_vol'].place(x = 10, y = 205, width = 335, height = 30)
+
 #Game & Credits
-def click_next_level(window, var_option, images, game_widgets):
+def click_next_level(window, directory, var_option, images, game_widgets):
     global items_values
+    global vol
+
     if var_option.get() not in 'ABC':
         messagebox.showerror(title = "Escolha", icon = messagebox.INFO,
         message = "Escolha uma das opções presente\npara poder continuar.")
@@ -216,15 +251,28 @@ def click_next_level(window, var_option, images, game_widgets):
             items_values['level'] = 1
             items_values['world'] += 1
 
-            if items_values['world'] > 3:
+            if items_values['world'] == 1:
+                soundtrack(directory, vol = vol, soundtrack = 1)
+            elif items_values['world'] == 2:
+                soundtrack(directory, vol = vol, soundtrack = 2)
+            elif items_values['world'] == 3:
+                soundtrack(directory, vol = vol, soundtrack = 3)
+
+            elif items_values['world'] > 3:
                 print('END GAME')
 
         show_items_values(images, game_widgets)
         window.title(f'Level {items_values["world"]}-{items_values["level"]}')
 
-def click_back_to_menu(window, main_roots, directory):
+def click_back_to_menu(window, main_roots, directory,  with_sound = False):
+    global vol
+    if with_sound == True:
+        soundtrack(directory, vol = vol, soundtrack = 0)
+
     main_roots['root_play_game'].place_forget()
+    main_roots['root_options'].place_forget()
     main_roots['root_credits'].place_forget()
+
     window.title('Main Menu')
     window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
 
@@ -238,6 +286,8 @@ def click_new_game(window, main_roots, directory, default, images, game_widgets,
         default(window, images, game_widgets)
         show_items_values(images, game_widgets)
 
+        soundtrack(directory, vol = vol, soundtrack = 1)
+
         main_roots['root_main_menu'].place_forget()
         window.title(f'Level {items_values["world"]}-{items_values["level"]}')
         window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
@@ -247,16 +297,32 @@ def click_new_game(window, main_roots, directory, default, images, game_widgets,
         relief = "ridge", fg='#000', command=lambda : click_continue(window, main_roots, directory))
 
 def click_nothing():
-    messagebox.showerror(title = "Continuar - Error", icon = messagebox.INFO,
-    message = "Inicie um Novo Jogo para que você\npossa continuar de onde parou.")
+    messagebox.showerror(title = "Continuar?", icon = messagebox.INFO,
+    message = "Inicie um Novo Jogo para que você possa\ncontinuar de onde parou.\t")
 
 def click_continue(window, main_roots, directory):
     global items_values
+    global vol
+
     main_roots['root_main_menu'].place_forget()
     window.title(f'Level {items_values["world"]}-{items_values["level"]}')
     window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 
+    if items_values['world'] == 1:
+        soundtrack(directory, vol = vol, soundtrack = 1)
+    elif items_values['world'] == 2:
+        soundtrack(directory, vol = vol, soundtrack = 2)
+    elif items_values['world'] == 3:
+        soundtrack(directory, vol = vol, soundtrack = 3)
+
+
     main_roots['root_play_game'].place(x = 5, y = 5, width = 710, height = 460)
+
+def click_options(window, main_roots, directory):
+    window.title('Ajustes')
+    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+
+    main_roots['root_options'].place(x = 5, y = 5, width = 710, height = 460)
 
 def click_credits(window, main_roots, directory):
     window.title('Créditos')
@@ -269,6 +335,23 @@ def click_quit(window):
     detail = "Desde já obrigado por jogar")
     if ok_cancel_quit == True:
         window.destroy()
+
+#Options
+
+def click_back_to_menu_lan(window, main_roots, directory, options_widgets):
+    value_var_language = options_widgets['var_language'].get()
+
+    if value_var_language != "BR":
+        messagebox.showerror(title = "Idioma Indisponível", icon = messagebox.INFO,
+        message = "O idioma selecionado encontra-se\nindisponível no momento.\n\n" +\
+        "Por favor, selecione um idioma\ndisponível para prosseguir.")
+    else:
+        main_roots['root_options'].place_forget()
+
+        window.title('Main Menu')
+        window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+
+        main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
 #Functions - Game ___________________________________________________________________________________________
 
@@ -400,12 +483,12 @@ def game_widgets(window, main_roots, directory, game_roots, images, version):
 
     btn_back = Button(game_roots['root_back_next'], text = 'Retornar ao Menu', bg=bg_dark, bd = 1.5, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
-                    fg=fg, command=lambda : click_back_to_menu(window, main_roots, directory))
+                    fg=fg, command=lambda : click_back_to_menu(window, main_roots, directory, with_sound=True))
     btn_back.place(x = 0, y = 5, width = 270, height = 30)
 
     btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
-                    fg=fg, command=lambda: click_next_level(window, var_option, images, game_widgets))
+                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets))
     btn_next.place(x = 440, y = 5, width = 270, height = 30)
 
     #Ways
@@ -475,7 +558,8 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
     btn_continue.place(x = 230, y = 220, width = 250, height = 50)
 
     btn_options = Button(main_roots['root_main_menu'], text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+                    cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg,
+                    command=lambda : click_options(window, main_roots, directory))
     btn_options.place(x = 230, y = 280, width = 250, height = 50)
 
     btn_credits = Button(main_roots['root_main_menu'], text= "Créditos", bg=bg, bd = 2, relief = "ridge",
@@ -521,3 +605,106 @@ def credits_widgets(window, main_roots, directory, version):
         'lbl_credits' : lbl_credits, 'btn_back' : btn_back}
 
     return credits_widgets
+
+#Functions - Options ________________________________________________________________________________________
+
+def options_widgets(window, main_roots, directory, images):
+    global vol
+    vol = 0.5
+
+    #Labels
+    lbl_options_title =  Label(main_roots['root_options'], text = " - Ajustes - ", bg=bg, font = "courier 40 bold", justify=CENTER)
+    lbl_options_title.place(x = 5, y = 5, width = 700, height = 100)
+
+    lbl_volume = Label(main_roots['root_options'], text = " Volume ", bg=bg, font = "courier 32 bold")
+    lbl_volume.place(x = 5, y = 85, width = 350, height = 65)
+
+    lbl_language = Label(main_roots['root_options'], text = " Idioma ", bg=bg, font = "courier 32 bold")
+    lbl_language.place(x = 355, y = 85, width = 350, height = 65)
+
+    lbl_flag_UK = Label(main_roots['root_options'], image = images['flag_UK_dic'], bg=bg)
+    lbl_flag_UK.place(x = 370, y = 160, width = 50, height = 50)
+
+    lbl_flag_FR = Label(main_roots['root_options'], image = images['flag_FR_dic'], bg=bg)
+    lbl_flag_FR.place(x = 370, y = 220, width = 50, height = 50)
+
+    lbl_flag_BR = Label(main_roots['root_options'], image = images['flag_BR_dic'], bg=bg)
+    lbl_flag_BR.place(x = 370, y = 280, width = 50, height = 50)
+
+    lbl_flag_SP = Label(main_roots['root_options'], image = images['flag_SP_dic'], bg=bg)
+    lbl_flag_SP.place(x = 370, y = 340, width = 50, height = 50)
+
+    lbl_flag_GE = Label(main_roots['root_options'], image = images['flag_GE_dic'], bg=bg)
+    lbl_flag_GE.place(x = 370, y = 400, width = 50, height = 50)
+
+    lbl_vol = Label(main_roots['root_options'], text = f'{vol*100:.1f}%', bg=bg, font = "courier 16 bold")
+    lbl_vol.place(x = 10, y = 205, width = 335, height = 30)
+
+    #Buttons
+    btn_vol_max = Button(main_roots['root_options'], image = images['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("max", options_widgets))
+    btn_vol_max.place(x = 270, y = 320, width = 75, height = 70)
+
+    btn_vol_plus = Button(main_roots['root_options'], image = images['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",
+                    cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("plus", options_widgets))
+    btn_vol_plus.place(x = 185, y = 320, width = 75, height = 70)
+
+    btn_vol_minus = Button(main_roots['root_options'], image = images['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",
+                    cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("minus", options_widgets))
+    btn_vol_minus.place(x = 97.5, y = 320, width = 75, height = 70)
+
+    btn_vol_mute = Button(main_roots['root_options'], image = images['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",
+                    cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("mute", options_widgets))
+    btn_vol_mute.place(x = 10, y = 320, width = 75, height = 70)
+
+    btn_back = Button(main_roots['root_options'], text = 'Voltar', bg=bg, bd = 2, relief = "ridge", cursor="hand2",
+                    font = "courier 25 bold", activebackground="#ccc", activeforeground=fg,
+                    command=lambda : click_back_to_menu_lan(window, main_roots, directory, options_widgets))
+    btn_back.place(x = 10, y = 400, width = 335, height = 50)
+
+    #RadioButtons
+    var_language = StringVar()
+    var_language.set("BR")
+
+    rb_lan_UK = Radiobutton(main_roots['root_options'], text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                variable = var_language, value = "UK", bd=5, cursor="hand2")
+    rb_lan_UK.place(x = 430, y = 160, width = 205, height = 50)
+
+    rb_lan_FR = Radiobutton(main_roots['root_options'], text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                variable = var_language, value = "FR", bd=5, cursor="hand2")
+    rb_lan_FR.place(x = 430, y = 220, width = 205, height = 50)
+
+    rb_lan_BR = Radiobutton(main_roots['root_options'], text = "Português", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#000",
+                variable = var_language, value = "BR", bd=5, cursor="hand2")
+    rb_lan_BR.place(x = 430, y = 280, width = 205, height = 50)
+
+    rb_lan_SP = Radiobutton(main_roots['root_options'], text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                variable = var_language, value = "SP", bd=5, cursor="hand2")
+    rb_lan_SP.place(x = 430, y = 340, width = 205, height = 50)
+
+    rb_lan_GE = Radiobutton(main_roots['root_options'], text = "Deutsch", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+                variable = var_language, value = "GE", bd=5, cursor="hand2")
+    rb_lan_GE.place(x = 430, y = 400, width = 205, height = 50)
+
+    #ProgressBar
+    var_progressBar = DoubleVar()
+    var_progressBar.set(vol)
+
+    pb_vol = ttk.Progressbar(main_roots['root_options'], variable = var_progressBar, maximum = 1)
+    pb_vol.place(x = 10 , y = 160, width = 335, height = 40)
+
+    options_widgets = {
+        'lbl_options_title' : lbl_options_title, 'lbl_volume' : lbl_volume, 'lbl_language' : lbl_language,
+        'lbl_flag_UK' : lbl_flag_UK, 'lbl_flag_FR' : lbl_flag_FR, 'lbl_flag_BR' : lbl_flag_BR,
+        'lbl_flag_SP' : lbl_flag_SP, 'lbl_flag_GE' : lbl_flag_GE, 'lbl_vol' : lbl_vol,
+
+        'btn_vol_max' : btn_vol_max, 'btn_vol_plus' : btn_vol_plus, 'btn_vol_minus' : btn_vol_minus,
+        'btn_vol_mute' : btn_vol_mute, 'btn_back' : btn_back,
+
+        'var_language' : var_language, 'rb_lan_UK' : rb_lan_UK, 'rb_lan_FR' : rb_lan_FR,
+        'rb_lan_BR' : rb_lan_BR, 'rb_lan_SP' : rb_lan_SP, 'rb_lan_GE' : rb_lan_GE,
+
+        'var_progressBar' : var_progressBar, 'pb_vol' : pb_vol}
+
+    return options_widgets
+

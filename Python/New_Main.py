@@ -6,7 +6,9 @@ from tkinter import *
 #Import - Packages __________________________________________________________________________________________
 
 from Utils.widgets import images
-from Utils.defs import main_roots, game_roots, game_widgets, menu_widgets, credits_widgets, default, show_items_values
+from Utils.audio import soundtrack
+from Utils.defs import main_roots, game_roots, game_widgets, menu_widgets, credits_widgets, options_widgets
+from Utils.defs import default, show_items_values
 
 #Variables __________________________________________________________________________________________________
 
@@ -14,7 +16,7 @@ bg = fg = '#fefefe'
 bg_light = '#e1e1e1'
 bg_gray = '#545454'
 bg_dark = '#000'
-version = 'layout v 2.3.1'
+version = 'layout v 2.4.1'
 directory = os.path.dirname(__file__)
 
 global items_values
@@ -42,6 +44,8 @@ pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
 images = images(directory)
+vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
+
 main_roots = main_roots(window)
 game_roots = game_roots(main_roots)
 game_widgets = game_widgets(window, main_roots, directory, game_roots, images, version)
@@ -51,14 +55,13 @@ show_items_values(images, game_widgets)
 
 menu_widgets(window, main_roots, directory, default, version, images, game_widgets)
 credits_widgets(window, main_roots, directory, version)
+options_widgets(window, main_roots, directory, images)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.title('Main Menu')
 window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
 window.resizable(False,False)
 window.configure(background = '#000')
-
-
 
 
 

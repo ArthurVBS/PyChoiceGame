@@ -1,8 +1,10 @@
 #Import - Libraries _________________________________________________________________________________________
 import os
 from tkinter import *
+from tkinter import ttk
 #Import - Packages __________________________________________________________________________________________
 from Utils.widgets import images
+from Utils.audio import mixer_pm
 #Variables __________________________________________________________________________________________________
 bg = fg = '#fefefe'
 bg_light = '#e1e1e1'
@@ -21,8 +23,8 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_main_menu = Frame(window, bg=bg)
-root_main_menu.place(x = 5, y = 5, width = 710, height = 460)
+root_options = Frame(window, bg=bg)
+root_options.place(x = 5, y = 5, width = 710, height = 460)
 images = images(directory)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
@@ -33,8 +35,137 @@ window.configure(background = '#000')
 
 
 
+
 window.mainloop()
 
+'''root_options = Frame(window, bg=bg)
+root_options.place(x = 5, y = 5, width = 710, height = 460)
+
+#Labels
+lbl_options_title =  Label(root_options, text = " - Ajustes - ", bg=bg, font = "courier 40 bold", justify=CENTER)
+lbl_options_title.place(x = 5, y = 5, width = 700, height = 100)
+
+lbl_volume = Label(root_options, text = " -> Volume <- ", bg=bg, font = "courier 32 bold")
+lbl_volume.place(x = 5, y = 85, width = 350, height = 65)
+
+lbl_language = Label(root_options, text = " -> Idioma <- ", bg=bg, font = "courier 32 bold")
+lbl_language.place(x = 355, y = 85, width = 350, height = 65)
+
+lbl_flag_UK = Label(root_options, image = images['flag_UK_dic'], bg=bg)
+lbl_flag_UK.place(x = 370, y = 160, width = 50, height = 50)
+
+lbl_flag_FR = Label(root_options, image = images['flag_FR_dic'], bg=bg)
+lbl_flag_FR.place(x = 370, y = 220, width = 50, height = 50)
+
+lbl_flag_BR = Label(root_options, image = images['flag_BR_dic'], bg=bg)
+lbl_flag_BR.place(x = 370, y = 280, width = 50, height = 50)
+
+lbl_flag_SP = Label(root_options, image = images['flag_SP_dic'], bg=bg)
+lbl_flag_SP.place(x = 370, y = 340, width = 50, height = 50)
+
+lbl_flag_GE = Label(root_options, image = images['flag_GE_dic'], bg=bg)
+lbl_flag_GE.place(x = 370, y = 400, width = 50, height = 50)
+
+
+#RadioButtons
+var_language = StringVar()
+var_language.set("BR")
+
+rb_lan_UK = Radiobutton(root_options, text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+            variable = var_language, value = "UK", bd=5, cursor="hand2")
+rb_lan_UK.place(x = 430, y = 160, width = 205, height = 50)
+
+rb_lan_FR = Radiobutton(root_options, text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+            variable = var_language, value = "FR", bd=5, cursor="hand2")
+rb_lan_FR.place(x = 430, y = 220, width = 205, height = 50)
+
+rb_lan_BR = Radiobutton(root_options, text = "Português", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#000",
+            variable = var_language, value = "BR", bd=5, cursor="hand2")
+rb_lan_BR.place(x = 430, y = 280, width = 205, height = 50)
+
+rb_lan_SP = Radiobutton(root_options, text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+            variable = var_language, value = "SP", bd=5, cursor="hand2")
+rb_lan_SP.place(x = 430, y = 340, width = 205, height = 50)
+
+rb_lan_GE = Radiobutton(root_options, text = "Deutsch", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+            variable = var_language, value = "GE", bd=5, cursor="hand2")
+rb_lan_GE.place(x = 430, y = 400, width = 205, height = 50)
+
+#Buttons
+
+btn_vol_max = Button(root_options, image = images['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("max"))
+btn_vol_max.place(x = 270, y = 320, width = 75, height = 70)
+
+btn_vol_plus = Button(root_options, image = images['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("plus"))
+btn_vol_plus.place(x = 185, y = 320, width = 75, height = 70)
+
+btn_vol_minus = Button(root_options, image = images['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("minus"))
+btn_vol_minus.place(x = 97.5, y = 320, width = 75, height = 70)
+
+btn_vol_mute = Button(root_options, image = images['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("mute"))
+btn_vol_mute.place(x = 10, y = 320, width = 75, height = 70)
+
+btn_back = Button(root_options, text = 'Voltar', bg=bg, bd = 2, relief = "ridge",
+                cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_back.place(x = 10, y = 400, width = 335, height = 50)
+
+#ProgressBar
+
+def volume(option):
+    global vol
+
+    if option == "max":
+        vol = round(mixer_pm(vol = 1, plus_or_minus = "plus"), 2)
+    elif option == "plus":
+        vol = round(mixer_pm(vol, plus_or_minus = "plus"), 2)
+    elif option == "minus":
+        vol = round(mixer_pm(vol, plus_or_minus = "minus"), 2)
+    elif option == "mute":
+        vol = round(mixer_pm(vol = 0, plus_or_minus = "minus"), 2)
+
+    vol_pb()
+
+def vol_pb():
+    global vol
+    var_progressBar = DoubleVar()
+    var_progressBar.set(vol)
+    text_vol = f'{vol*100:.1f}%'
+
+    pb_vol.configure(variable = var_progressBar)
+    pb_vol.place(x = 10 , y = 160, width = 335, height = 40)
+
+    lbl_vol.configure(text = text_vol)
+    lbl_vol.place(x = 10, y = 205, width = 335, height = 30)
+
+var_progressBar = DoubleVar()
+var_progressBar.set(0.5)
+vol = 0.5
+
+pb_vol = ttk.Progressbar(root_options, variable = var_progressBar, maximum = 1)
+pb_vol.place(x = 10 , y = 160, width = 335, height = 40)
+
+lbl_vol = Label(root_options, text = f'{vol*100:.1f}%', bg=bg, font = "courier 16 bold")
+lbl_vol.place(x = 10, y = 205, width = 335, height = 30)'''
+
+
+'''btn_lan_up = Button(root_options, text= "up", bg=bg, bd = 2, relief = "ridge", cursor="hand2",
+                    font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+btn_lan_up.place(x = 500, y = 160, width = 95, height = 45)
+
+btn_lan_down = Button(root_options, text= "down", bg=bg, bd = 2, relief = "ridge", cursor="hand2",
+                    font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
+btn_lan_down.place(x = 500, y = 410, width = 95, height = 45)
+
+
+lbl_lan = Label(root_options, text = 'x', bg=bg, font = 'courier 20 bold')
+lbl_lan.place(x = 430, y = 325, width = 225, height = 50)
+
+lbl_lan_flag = Label(root_options, image = images['flag_BR_dic'], bg=bg, font = 'courier 20 bold')
+lbl_lan_flag.place(x = 500, y = 285, width = 50, height = 50)'''
 
 '''
 #Window
