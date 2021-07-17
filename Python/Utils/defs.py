@@ -8,9 +8,11 @@ from tkinter import messagebox
 
 if __name__ == '__main__':
     from audio import mixer_pm, soundtrack
+    from txt import show_menu_options
 
 else:
     from Utils.audio import mixer_pm, soundtrack
+    from Utils.txt import show_menu_options
 
 #Variables __________________________________________________________________________________________________
 
@@ -56,6 +58,9 @@ def default(window, images, game_widgets):
 
     #Scenario
     game_widgets['lbl_scenario']['image'] = images['scenario_01_dic']
+
+    #Menu_Options
+    show_menu_options(items_values['world'], items_values['level'], game_widgets)
 
     #Heart
     game_widgets['lbl_value_heart']['text'] = '80%'
@@ -271,6 +276,7 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
                 print('END GAME')
 
         show_items_values(images, game_widgets)
+        show_menu_options(items_values['world'], items_values['level'], game_widgets)
 
         if items_values['heart'] <= 0 or items_values['food'] <= 0:
             Game_Over(window, directory, main_roots)
