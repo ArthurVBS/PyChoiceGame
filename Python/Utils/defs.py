@@ -29,10 +29,11 @@ def main_roots(window):
     root_game_over = Frame(window, bg=bg_dark)
     root_credits = Frame(window, bg=bg)
     root_options = Frame(window, bg=bg)
+    root_result = Frame(window, bg=bg_light)
 
     main_roots = {
         'root_play_game' : root_play_game, 'root_main_menu' : root_main_menu, 'root_game_over' : root_game_over,
-        'root_credits' : root_credits, 'root_options' : root_options}
+        'root_credits' : root_credits, 'root_options' : root_options, 'root_result' : root_result}
 
     return main_roots
 
@@ -256,10 +257,10 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
         message = "Escolha uma das opções presente\npara poder continuar.")
 
     else:
+        items_values['heart'] -= 10
+
         var_option.set('E')
         items_values['level'] += 1
-
-        items_values['heart'] -= 10
 
         if items_values['level'] > 6:
             items_values['level'] = 1
@@ -280,7 +281,6 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
 
         if items_values['heart'] <= 0 or items_values['food'] <= 0:
             Game_Over(window, directory, main_roots)
-
         else:
             window.title(f'Level {items_values["world"]}-{items_values["level"]}')
 
@@ -336,7 +336,6 @@ def click_continue(window, main_roots, directory):
     elif items_values['world'] == 3:
         soundtrack(directory, vol = vol, soundtrack = 3)
 
-
     main_roots['root_play_game'].place(x = 5, y = 5, width = 710, height = 460)
 
 def click_options(window, main_roots, directory):
@@ -359,7 +358,7 @@ def click_quit(window):
 
 #Options
 
-def click_back_to_menu_lan(window, main_roots, directory, options_widgets):
+def click_options_to_menu(window, main_roots, directory, options_widgets):
     value_var_language = options_widgets['var_language'].get()
 
     if value_var_language != "BR":
@@ -376,7 +375,7 @@ def click_back_to_menu_lan(window, main_roots, directory, options_widgets):
 
 #Game Over
 
-def click_back_to_menu_go(window, main_roots, directory, menu_widgets):
+def click_gameover_to_menu(window, main_roots, directory, menu_widgets):
     global vol
     main_roots['root_game_over'].place_forget()
 
@@ -695,7 +694,7 @@ def options_widgets(window, main_roots, directory, images):
 
     btn_back = Button(main_roots['root_options'], text = 'Voltar', bg=bg, bd = 2, relief = "ridge", cursor="hand2",
                     font = "courier 25 bold", activebackground="#ccc", activeforeground=fg,
-                    command=lambda : click_back_to_menu_lan(window, main_roots, directory, options_widgets))
+                    command=lambda : click_options_to_menu(window, main_roots, directory, options_widgets))
     btn_back.place(x = 10, y = 400, width = 335, height = 50)
 
     #RadioButtons
@@ -756,7 +755,7 @@ def gameover_widgets(window, main_roots, directory, menu_widgets):
 
     #Buttons
     btn_gameover_back = Button(main_roots['root_game_over'], text = 'Voltar', bg=bg_dark, bd = 2, relief = "ridge", fg=fg,
-                        command=lambda : click_back_to_menu_go(window, main_roots, directory, menu_widgets),
+                        command=lambda : click_gameover_to_menu(window, main_roots, directory, menu_widgets),
                         cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
     btn_gameover_back.place(x = 225, y = 400, width = 260, height = 50)
 
@@ -765,3 +764,67 @@ def gameover_widgets(window, main_roots, directory, menu_widgets):
         'btn_gameover_back' : btn_gameover_back}
 
     return gameover_widgets
+
+#Functions - Result _________________________________________________________________________________________
+
+def result_roots(main_roots):
+    root_result_heart = Frame(main_roots['root_result'], bg=bg_light, bd=1.5, relief='sunken')
+    root_result_heart.place(x = 5, y = 220, width = 115, height = 50)
+
+    root_result_items = Frame(main_roots['root_result'], bg=bg_light, bd=1.5, relief='sunken')
+    root_result_items.place(x = 122.5, y = 220, width = 115, height = 50)
+
+    root_result_food = Frame(main_roots['root_result'], bg=bg_light, bd=1.5, relief='sunken')
+    root_result_food.place(x = 240, y = 220, width = 115, height = 50)
+
+    result_roots = {
+        'root_result_heart' : root_result_heart, 'root_result_items' : root_result_items,
+        'root_result_food' : root_result_food}
+
+    return result_roots
+
+def result_widgets(window, main_roots, directory, result_roots, images):
+    #Variables
+    txt_ = '{positive_negative_heart}{losewin_heart}% '
+    txt_ = '{positive_negative_food}{losewin_food}/10'
+
+    #Title
+    lbl_result_title = Label(main_roots['root_result'], text = "A sua escolha ocasionou:", bg=bg_light, font = "courier 16 bold", justify=CENTER)
+    lbl_result_title.place(x = 5, y = 5, width = 350, height = 40)
+
+    #Text
+    lbl_result_subtitle = Label(main_roots['root_result'], text = '', bg=bg_light, font = "courier 16 bold", justify=CENTER, relief='sunken', bd=1.5)
+    lbl_result_subtitle.place(x = 5, y = 50, width = 350, height = 165)
+
+    #Heart
+    lbl_img_heart = Label(result_roots['root_result_heart'], bg=bg_light, image = images['heart_11_dic'])
+    lbl_img_heart.place(x = 5, y = 5, width = 40, height = 40)
+
+    lbl_value_heart = Label(result_roots['root_result_heart'], bg=bg_light, font = "courier 14 bold", text = '')
+    lbl_value_heart.place(x = 45, y = 5, width = 65, height= 40)
+
+    #Items
+    lbl_value_item = Label(result_roots['root_result_items'], bg=bg_light, text = '+', font = "courier 14 bold")
+    lbl_value_item.place(x = 5, y = 5, width = 25, height= 40)
+
+    lbl_img_item_01 = Label(result_roots['root_result_items'], bg=bg_light, image = images['item_lighter_dic'])
+    lbl_img_item_01.place(x = 30, y = 5, width = 40, height = 40)
+
+    lbl_img_item_02 = Label(result_roots['root_result_items'], bg=bg_light, image = images['key_S_dic'])
+    lbl_img_item_02.place(x = 70, y = 5, width = 40, height= 40)
+
+    #Food
+    lbl_img_food = Label(result_roots['root_result_food'], bg=bg_light, image = images['food_11_dic'])
+    lbl_img_food.place(x = 5, y = 5, width = 40, height = 40)
+
+    lbl_value_food = Label(result_roots['root_result_food'], bg=bg_light, font = "courier 14 bold", text = '')
+    lbl_value_food.place(x = 45, y = 5, width = 65, height= 40)
+
+    #Button
+    lbl_bg_dark = Label(main_roots['root_result'], bg=bg_dark)
+    lbl_bg_dark.place(x = 0, y = 275, width = 360, height = 35)
+
+    btn_result_next = Button(main_roots['root_result'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
+                    cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
+                    fg=fg, command=lambda : click_continue(window, main_roots, directory))
+    btn_result_next.place(x = 95, y = 280, width = 175, height = 30)

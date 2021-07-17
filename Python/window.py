@@ -1,7 +1,7 @@
 #Import - Libraries _________________________________________________________________________________________
 import os
 from tkinter import *
-from tkinter import ttk
+from time import sleep
 #Import - Packages __________________________________________________________________________________________
 from Utils.widgets import images
 #Variables __________________________________________________________________________________________________
@@ -22,11 +22,12 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_game_over = Frame(window, bg=bg_dark)
-root_game_over.place(x = 5, y = 5, width = 710, height = 460)
+root_result = Frame(window, bg=bg_light)
+root_result.place(x = 5, y = 5, width = 360, height = 310)
 images = images(directory)
 
-window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
+
+#window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.title('In search of the truth')
 window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 window.resizable(False,False)
@@ -34,7 +35,95 @@ window.configure(background = '#000')
 
 
 
+window.title('Level {world}-{level} ({option})')
+window.geometry(f'370x320+{pos_x + 200}+{pos_y + 50}')
+window.update()
+
+txt_result = 'hi'
+losewin_heart = '20'
+positive_negative_heart = '-'
+losewin_food = '2'
+positive_negative_food = '+'
+
+sleep(0.5)
+#Text
+lbl_result_title = Label(root_result, text = "A sua escolha ocasionou:", bg=bg_light, font = "courier 16 bold", justify=CENTER)
+lbl_result_title.place(x = 5, y = 5, width = 350, height = 40)
+
+window.update()
+sleep(1)
+window.update()
+
+lbl_result_subtitle = Label(root_result, text = txt_result, bg=bg_light, font = "courier 16 bold", justify=CENTER, relief='sunken', bd=1.5)
+lbl_result_subtitle.place(x = 5, y = 50, width = 350, height = 165)
+
+window.update()
+sleep(2.5)
+window.update()
+
+#Heart
+root_result_heart = Frame(root_result, bg=bg_light, bd=1.5, relief='sunken')
+root_result_heart.place(x = 5, y = 220, width = 115, height = 50)
+
+lbl_img_heart = Label(root_result_heart, bg=bg_light, image = images['heart_11_dic'])
+lbl_img_heart.place(x = 5, y = 5, width = 40, height = 40)
+
+lbl_value_heart = Label(root_result_heart, bg=bg_light, font = "courier 14 bold",
+                        text = f'{positive_negative_heart}{losewin_heart}% ')
+lbl_value_heart.place(x = 45, y = 5, width = 65, height= 40)
+
+window.update()
+sleep(0.5)
+window.update()
+
+#Items
+root_result_items = Frame(root_result, bg=bg_light, bd=1.5, relief='sunken')
+root_result_items.place(x = 122.5, y = 220, width = 115, height = 50)
+
+lbl_value_item = Label(root_result_items, bg=bg_light, text = '+', font = "courier 14 bold")
+lbl_value_item.place(x = 5, y = 5, width = 25, height= 40)
+
+lbl_img_item_01 = Label(root_result_items, bg=bg_light, image = images['item_lighter_dic'])
+lbl_img_item_01.place(x = 30, y = 5, width = 40, height = 40)
+
+lbl_img_item_02 = Label(root_result_items, bg=bg_light, image = images['key_S_dic'])
+lbl_img_item_02.place(x = 70, y = 5, width = 40, height= 40)
+
+
+window.update()
+sleep(0.5)
+window.update()
+
+#Food
+root_result_food = Frame(root_result, bg=bg_light, bd=1.5, relief='sunken')
+
+root_result_food.place(x = 240, y = 220, width = 115, height = 50)
+
+lbl_img_food = Label(root_result_food, bg=bg_light, image = images['food_11_dic'])
+lbl_img_food.place(x = 5, y = 5, width = 40, height = 40)
+
+lbl_value_food = Label(root_result_food, bg=bg_light, font = "courier 14 bold",
+                        text = f'{positive_negative_food}{losewin_food}/10')
+lbl_value_food.place(x = 45, y = 5, width = 65, height= 40)
+
+window.update()
+sleep(0.5)
+window.update()
+
+#Button
+lbl_bg_dark = Label(root_result, bg=bg_dark)
+lbl_bg_dark.place(x = 0, y = 275, width = 360, height = 35)
+
+btn_result_next = Button(root_result, text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
+                cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
+                fg=fg)
+btn_result_next.place(x = 95, y = 280, width = 175, height = 30)
+
+
+
 window.mainloop()
+
+
 
 '''
 window.title('Game Over')
