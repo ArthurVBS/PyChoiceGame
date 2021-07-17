@@ -24,7 +24,7 @@ bg_dark = '#000'
 def main_roots(window):
     root_play_game = Frame(window, bg=bg)
     root_main_menu = Frame(window, bg=bg)
-    root_game_over = Frame(window, bg=bg)
+    root_game_over = Frame(window, bg=bg_dark)
     root_credits = Frame(window, bg=bg)
     root_options = Frame(window, bg=bg)
 
@@ -101,7 +101,7 @@ def show_items_values(images, game_widgets):
         elif 75 >= items_values['heart'] > 25: #75 - 25
             game_widgets['lbl_heart']['image'] = images['heart_01_dic']
 
-        elif 25 >= items_values['heart'] >= 0: #25 - 0
+        elif 25 >= items_values['heart'] > 0: #25 - 0
             game_widgets['lbl_heart']['image'] = images['heart_00_dic']
 
         game_widgets['lbl_value_heart']['text'] = f'{items_values["heart"]}%'
@@ -116,7 +116,7 @@ def show_items_values(images, game_widgets):
         elif 7.5 >= items_values['food'] > 2.5: #7.5 - 2.5
             game_widgets['lbl_food']['image'] = images['food_01_dic']
 
-        elif 2.5 >= items_values['food'] >= 0: #2.5 - 0
+        elif 2.5 >= items_values['food'] > 0: #2.5 - 0
             game_widgets['lbl_food']['image'] = images['food_00_dic']
 
         game_widgets['lbl_value_food']['text'] = f'{items_values["food"]}/10'
@@ -208,6 +208,13 @@ def show_items_values(images, game_widgets):
     ways()
     scenario()
 
+def Game_Over(window, directory, main_roots):
+    global vol
+    main_roots['root_main_menu'].place_forget()
+    main_roots['root_game_over'].place(x = 5, y = 5, width = 710, height = 460)
+    soundtrack(directory, vol = vol, soundtrack = -1)
+    window.title('Game Over')
+
 def volume(option, options_widgets):
     global vol
 
@@ -235,7 +242,7 @@ def vol_pb(options_widgets):
     options_widgets['lbl_vol'].place(x = 10, y = 205, width = 335, height = 30)
 
 #Game & Credits
-def click_next_level(window, directory, var_option, images, game_widgets):
+def click_next_level(window, directory, var_option, images, game_widgets, main_roots, menu_widgets):
     global items_values
     global vol
 
@@ -246,6 +253,8 @@ def click_next_level(window, directory, var_option, images, game_widgets):
     else:
         var_option.set('E')
         items_values['level'] += 1
+
+        items_values['heart'] -= 10
 
         if items_values['level'] > 6:
             items_values['level'] = 1
@@ -262,7 +271,12 @@ def click_next_level(window, directory, var_option, images, game_widgets):
                 print('END GAME')
 
         show_items_values(images, game_widgets)
-        window.title(f'Level {items_values["world"]}-{items_values["level"]}')
+
+        if items_values['heart'] <= 0 or items_values['food'] <= 0:
+            Game_Over(window, directory, main_roots)
+
+        else:
+            window.title(f'Level {items_values["world"]}-{items_values["level"]}')
 
 def click_back_to_menu(window, main_roots, directory,  with_sound = False):
     global vol
@@ -272,6 +286,7 @@ def click_back_to_menu(window, main_roots, directory,  with_sound = False):
     main_roots['root_play_game'].place_forget()
     main_roots['root_options'].place_forget()
     main_roots['root_credits'].place_forget()
+    main_roots['root_game_over'].place_forget()
 
     window.title('Main Menu')
     window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
@@ -353,6 +368,21 @@ def click_back_to_menu_lan(window, main_roots, directory, options_widgets):
 
         main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
+#Game Over
+
+def click_back_to_menu_go(window, main_roots, directory, menu_widgets):
+    global vol
+    main_roots['root_game_over'].place_forget()
+
+    window.title('Main Menu')
+    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    soundtrack(directory, vol = vol, soundtrack = 0)
+        
+    menu_widgets['btn_continue'].config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
+                                        activebackground=None, activeforeground=None) 
+
+    main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 #Functions - Game ___________________________________________________________________________________________
 
 def game_roots(main_roots):
@@ -391,7 +421,7 @@ def game_roots(main_roots):
 
     return game_roots
 
-def game_widgets(window, main_roots, directory, game_roots, images, version):
+def game_widgets(window, main_roots, directory, game_roots, images, version, menu_widgets):
     #Hearts and Foods
 
     lbl_heart = Label(game_roots['root_hearts_foods'], image = images['heart_11_dic'], bg=bg, bd = 3, relief = 'ridge')
@@ -488,7 +518,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version):
 
     btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
-                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets))
+                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets, main_roots, menu_widgets))
     btn_next.place(x = 440, y = 5, width = 270, height = 30)
 
     #Ways
@@ -708,3 +738,24 @@ def options_widgets(window, main_roots, directory, images):
 
     return options_widgets
 
+#Functions - Game over ______________________________________________________________________________________
+
+def gameover_widgets(window, main_roots, directory, menu_widgets):
+    #Labels
+    lbl_gameover_title = Label(main_roots['root_game_over'], text = '- Game Over -', bg=bg_dark, font = 'courier 50 bold', justify=CENTER, fg=fg)
+    lbl_gameover_title.place(x = 5, y = 5, width = 700, height = 100)
+
+    lbl_try_again = Label(main_roots['root_game_over'], text = 'Tente Novamente', bg=bg_dark, font = 'courier 26 bold', justify=CENTER, fg=fg)
+    lbl_try_again.place(x = 5, y = 115, width = 700, height = 100)
+
+    #Buttons
+    btn_gameover_back = Button(main_roots['root_game_over'], text = 'Voltar', bg=bg_dark, bd = 2, relief = "ridge", fg=fg,
+                        command=lambda : click_back_to_menu_go(window, main_roots, directory, menu_widgets),
+                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+    btn_gameover_back.place(x = 225, y = 400, width = 260, height = 50)
+
+    gameover_widgets = {
+        'lbl_gameover_title' : lbl_gameover_title, 'lbl_try_again' : lbl_try_again,
+        'btn_gameover_back' : btn_gameover_back}
+
+    return gameover_widgets

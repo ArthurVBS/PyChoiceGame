@@ -4,7 +4,6 @@ from tkinter import *
 from tkinter import ttk
 #Import - Packages __________________________________________________________________________________________
 from Utils.widgets import images
-from Utils.audio import mixer_pm
 #Variables __________________________________________________________________________________________________
 bg = fg = '#fefefe'
 bg_light = '#e1e1e1'
@@ -23,8 +22,8 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_options = Frame(window, bg=bg)
-root_options.place(x = 5, y = 5, width = 710, height = 460)
+root_game_over = Frame(window, bg=bg_dark)
+root_game_over.place(x = 5, y = 5, width = 710, height = 460)
 images = images(directory)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
@@ -35,8 +34,26 @@ window.configure(background = '#000')
 
 
 
-
 window.mainloop()
+
+'''
+window.title('Game Over')
+
+root_game_over = Frame(window, bg=bg_dark)
+root_game_over.place(x = 5, y = 5, width = 710, height = 460)
+
+#Labels
+lbl_gameover_title = Label(root_game_over, text = '- Game Over -', bg=bg_dark, font = 'courier 50 bold', justify=CENTER, fg=fg)
+lbl_gameover_title.place(x = 5, y = 5, width = 700, height = 100)
+
+lbl_try_again = Label(root_game_over, text = 'Tente Novamente', bg=bg_dark, font = 'courier 26 bold', justify=CENTER, fg=fg)
+lbl_try_again.place(x = 5, y = 115, width = 700, height = 100)
+
+#Buttons
+btn_gameover_back = Button(root_game_over, text = 'Voltar', bg=bg_dark, bd = 2, relief = "ridge", fg=fg,
+                    cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+btn_gameover_back.place(x = 225, y = 400, width = 260, height = 50)
+'''
 
 '''root_options = Frame(window, bg=bg)
 root_options.place(x = 5, y = 5, width = 710, height = 460)
@@ -213,8 +230,8 @@ window.title('Créditos')
 window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 
 #Labels
-lbl_credits_title = Label(root_credits, text = ' - In search - \n of the truth ', bg=bg, font = 'courier 40 bold', justify=CENTER)
-lbl_credits_title.place(x = 5, y = 5, width = 700, height = 140)
+lbl_game_over_title = Label(root_credits, text = ' - In search - \n of the truth ', bg=bg, font = 'courier 40 bold', justify=CENTER)
+lbl_game_over_title.place(x = 5, y = 5, width = 700, height = 140)
 
 lbl_credits_version = Label(root_credits, text = version, bg=bg, font = 'courier 10 bold', anchor = SE)
 lbl_credits_version.place(x = 575, y = 425, width = 125, height = 25)
