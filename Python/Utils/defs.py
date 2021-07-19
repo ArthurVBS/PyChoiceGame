@@ -3,16 +3,18 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from time import sleep
+from random import randint
 
 #Import - Packages __________________________________________________________________________________________
 
 if __name__ == '__main__':
     from audio import mixer_pm, soundtrack
-    from txt import show_menu_options
+    from txt import show_menu_options, show_top_level
 
 else:
     from Utils.audio import mixer_pm, soundtrack
-    from Utils.txt import show_menu_options
+    from Utils.txt import show_menu_options, show_top_level
 
 #Variables __________________________________________________________________________________________________
 
@@ -37,7 +39,7 @@ def main_roots(window):
 
     return main_roots
 
-#Functions - Internals ______________________________________________________________________________________
+#Functions - Others _________________________________________________________________________________________
 
 def default(window, images, game_widgets):
     global items_values
@@ -247,19 +249,17 @@ def vol_pb(options_widgets):
     options_widgets['lbl_vol'].configure(text = text_vol)
     options_widgets['lbl_vol'].place(x = 10, y = 205, width = 335, height = 30)
 
+def random_number():
+    return randint(1,4)
+
 #Game & Credits
 def click_next_level(window, directory, var_option, images, game_widgets, main_roots, menu_widgets):
     global items_values
     global vol
 
-    if var_option.get() not in 'ABC':
-        messagebox.showerror(title = "Escolha", icon = messagebox.INFO,
-        message = "Escolha uma das opções presente\npara poder continuar.")
+    if var_option.get() in 'ABC':
+        resume = show_top_level(items_values["world"], items_values["level"], var_option.get(), random_number(), items_values)
 
-    else:
-        items_values['heart'] -= 10
-
-        var_option.set('E')
         items_values['level'] += 1
 
         if items_values['level'] > 6:
@@ -268,31 +268,40 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
 
             if items_values['world'] == 1:
                 soundtrack(directory, vol = vol, soundtrack = 1)
+                print('World 1')
             elif items_values['world'] == 2:
                 soundtrack(directory, vol = vol, soundtrack = 2)
+                print('World 2')
             elif items_values['world'] == 3:
                 soundtrack(directory, vol = vol, soundtrack = 3)
+                print('World 3')
 
             elif items_values['world'] > 3:
                 print('END GAME')
 
         show_items_values(images, game_widgets)
+        window.title(f'Level {items_values["world"]}-{items_values["level"]}')
         show_menu_options(items_values['world'], items_values['level'], game_widgets)
 
         if items_values['heart'] <= 0 or items_values['food'] <= 0:
             Game_Over(window, directory, main_roots)
-        else:
-            window.title(f'Level {items_values["world"]}-{items_values["level"]}')
 
-def click_back_to_menu(window, main_roots, directory,  with_sound = False):
+        var_option.set('E')
+        toplevel_result(directory, images, title = resume['title'], txt_result = resume['txt_result'],
+                        losewin_heart = resume['losewin_heart'], losewin_food = resume['losewin_food'])
+
+    else:
+        messagebox.showerror(title = "Escolha", icon = messagebox.INFO,
+        message = "Escolha uma das opções presente\npara poder continuar.")
+
+def click_game_to_menu(window, main_roots, directory, var_option, with_sound = False):
     global vol
+    var_option.set('E')
+
     if with_sound == True:
         soundtrack(directory, vol = vol, soundtrack = 0)
 
     main_roots['root_play_game'].place_forget()
-    main_roots['root_options'].place_forget()
-    main_roots['root_credits'].place_forget()
-    main_roots['root_game_over'].place_forget()
 
     window.title('Main Menu')
     window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
@@ -355,6 +364,15 @@ def click_quit(window):
     detail = "Desde já obrigado por jogar")
     if ok_cancel_quit == True:
         window.destroy()
+
+#Credits
+
+def click_credits_to_menu(window, main_roots, directory):
+    window.title('Main Menu')
+    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+
+    main_roots['root_credits'].place_forget()
+    main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
 #Options
 
@@ -518,7 +536,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
 
     btn_back = Button(game_roots['root_back_next'], text = 'Retornar ao Menu', bg=bg_dark, bd = 1.5, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
-                    fg=fg, command=lambda : click_back_to_menu(window, main_roots, directory, with_sound=True))
+                    fg=fg, command=lambda : click_game_to_menu(window, main_roots, directory, var_option, with_sound=True))
     btn_back.place(x = 0, y = 5, width = 270, height = 30)
 
     btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
@@ -631,7 +649,7 @@ def credits_widgets(window, main_roots, directory, version):
 
     #Buttons
     btn_back = Button(main_roots['root_credits'], text = 'Voltar', bg=bg, bd = 2, relief = "ridge",
-                    command=lambda : click_back_to_menu(window, main_roots, directory),
+                    command=lambda : click_credits_to_menu(window, main_roots, directory),
                     cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
     btn_back.place(x = 230, y = 400, width = 250, height = 50)
 
@@ -828,3 +846,136 @@ def result_widgets(window, main_roots, directory, result_roots, images):
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
                     fg=fg, command=lambda : click_continue(window, main_roots, directory))
     btn_result_next.place(x = 95, y = 280, width = 175, height = 30)
+
+
+
+
+
+
+
+
+
+
+
+def toplevel_result(directory, images, title = 'title', txt_result = 'text', losewin_heart = 0, losewin_food = 0):
+    win_toplevel = Toplevel()
+
+    width = 720
+    height = 470
+    width_screen = win_toplevel.winfo_screenwidth()
+    height_screen = win_toplevel.winfo_screenheight()
+    pos_x = int(width_screen / 2 - width / 2)
+    pos_y = int(height_screen / 2 - height / 2)
+
+    root_result = Frame(win_toplevel, bg=bg_light)
+    root_result.place(x = 5, y = 5, width = 360, height = 310)
+
+    win_toplevel.geometry(f"370x320+{pos_x + 175}+{pos_y + 50}")
+    win_toplevel.title(title)
+    win_toplevel.resizable(False, False)
+    win_toplevel.iconbitmap(directory + "/Images/Icons/icon_02.ico")
+    win_toplevel.configure(background = '#000')
+    win_toplevel.update()
+    sleep(0.3)
+
+    #Text
+    lbl_result_title = Label(root_result, text = "A sua escolha ocasionou:", bg=bg_light, font = "courier 16 bold", justify=CENTER)
+    lbl_result_title.place(x = 5, y = 5, width = 350, height = 40)
+
+    win_toplevel.update()
+    sleep(0.5)
+
+    lbl_result_subtitle = Label(root_result, text = txt_result, bg=bg_light, font = "courier 16 bold", justify=CENTER, relief='sunken', bd=1.5)
+    lbl_result_subtitle.place(x = 5, y = 50, width = 350, height = 165)
+
+    win_toplevel.update()
+    sleep(1.2)
+
+    #Roots
+    root_result_heart = Frame(root_result, bg=bg_light, bd=1.5, relief='sunken')
+    root_result_heart.place(x = 5, y = 220, width = 115, height = 50)
+
+    win_toplevel.update()
+    sleep(0.2)
+
+    root_result_items = Frame(root_result, bg=bg_light, bd=1.5, relief='sunken')
+    root_result_items.place(x = 122.5, y = 220, width = 115, height = 50)
+
+    win_toplevel.update()
+    sleep(0.2)
+
+    root_result_food = Frame(root_result, bg=bg_light, bd=1.5, relief='sunken')
+    root_result_food.place(x = 240, y = 220, width = 115, height = 50)
+
+    win_toplevel.update()
+    sleep(0.3)
+
+    #Heart
+    if losewin_heart <= 0:
+        pos_neg_heart = ''
+    elif losewin_heart > 0:
+        pos_neg_heart = '+'
+
+    lbl_img_heart = Label(root_result_heart, bg=bg_light, image = images['heart_11_dic'])
+    lbl_img_heart.place(x = 5, y = 5, width = 40, height = 40)
+
+    win_toplevel.update()
+    sleep(0.3)
+
+    lbl_value_heart = Label(root_result_heart, bg=bg_light, font = "courier 14 bold",
+                            text = f'{pos_neg_heart}{losewin_heart}% ')
+    lbl_value_heart.place(x = 45, y = 5, width = 65, height= 40)
+
+    win_toplevel.update()
+    sleep(0.3)
+
+    #Items
+    lbl_value_item = Label(root_result_items, bg=bg_light, text = '+', font = "courier 14 bold")
+    lbl_value_item.place(x = 5, y = 5, width = 25, height= 40)
+
+    win_toplevel.update()
+    sleep(0.3)
+
+    lbl_img_item_01 = Label(root_result_items, bg=bg_light, image = images['item_lighter_dic'])
+    lbl_img_item_01.place(x = 30, y = 5, width = 40, height = 40)
+
+    win_toplevel.update()
+    sleep(0.3)
+
+    lbl_img_item_02 = Label(root_result_items, bg=bg_light, image = images['key_S_dic'])
+    lbl_img_item_02.place(x = 70, y = 5, width = 40, height= 40)
+
+    win_toplevel.update()
+    sleep(0.3)
+
+    #Food
+    if losewin_food <= 0:
+        pos_neg_food = ''
+    elif losewin_food> 0:
+        pos_neg_food = '+'
+
+    lbl_img_food = Label(root_result_food, bg=bg_light, image = images['food_11_dic'])
+    lbl_img_food.place(x = 5, y = 5, width = 40, height = 40)
+    win_toplevel.update()
+
+    sleep(0.3)
+
+    lbl_value_food = Label(root_result_food, bg=bg_light, font = "courier 14 bold",
+                            text = f'{pos_neg_food}{losewin_food}/10')
+    lbl_value_food.place(x = 45, y = 5, width = 65, height= 40)
+
+    win_toplevel.update()
+    sleep(0.2)
+
+    #Button
+    lbl_bg_dark = Label(root_result, bg=bg_dark)
+    lbl_bg_dark.place(x = 0, y = 275, width = 360, height = 35)
+
+    btn_result_next = Button(root_result, text = 'OK', bg=bg_dark, bd = 1, relief = 'ridge',
+                    cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
+                    fg=fg, command=lambda : win_toplevel.destroy())
+    btn_result_next.place(x = 122.5, y = 280, width = 115, height = 30)
+    
+
+    win_toplevel.mainloop()
+

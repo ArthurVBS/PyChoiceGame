@@ -23,3 +23,30 @@ def show_menu_options(world, level, game_widgets):
 
         elif level == 3:
             print('hi')
+
+def show_top_level(world, level, option, rand, items_values):
+    txt_result = 'Nothing'
+    losewin_heart = 0
+    losewin_food = 0
+
+    if world == 1:
+        if level == 1:
+            if option == 'A':
+                if rand == 1 or rand == 2:
+                    txt_result = 'HI'
+                    losewin_heart = -10
+                    losewin_food = -2
+                elif rand == 3 or rand == 4:
+                    txt_result = 'God be with you'
+                    losewin_heart = -20
+                    losewin_food = 1
+
+
+    items_values['heart'] += losewin_heart
+    items_values['food'] += losewin_food
+
+    resume = {
+        'title' : f'Level {world}-{level} {option}', 'txt_result' : txt_result,
+        'losewin_heart' : losewin_heart, 'losewin_food' : losewin_food}
+        
+    return resume

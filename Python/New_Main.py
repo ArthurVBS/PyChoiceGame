@@ -12,7 +12,7 @@ from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widg
 
 #Variables __________________________________________________________________________________________________
 
-version = 'layout v 2.6.2'
+version = 'layout v 2.7.1'
 directory = os.path.dirname(__file__)
 
 global items_values
