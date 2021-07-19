@@ -7,12 +7,12 @@ from tkinter import *
 
 from Utils.widgets import images
 from Utils.audio import soundtrack
-from Utils.defs import main_roots, game_roots, result_roots, default, show_items_values
-from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widgets, gameover_widgets, result_widgets
+from Utils.defs import main_roots, game_roots, default, show_items_values
+from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widgets, gameover_widgets
 
 #Variables __________________________________________________________________________________________________
 
-version = 'layout v 2.7.1'
+version = 'layout v 2.7.2'
 directory = os.path.dirname(__file__)
 
 global items_values
@@ -53,9 +53,6 @@ menu_widgets = menu_widgets(window, main_roots, directory, default, version, ima
 credits_widgets = credits_widgets(window, main_roots, directory, version)
 options_widgets = options_widgets(window, main_roots, directory, images)
 gameover_widgets = gameover_widgets(window, main_roots, directory, menu_widgets)
-
-result_roots = result_roots(main_roots)
-result_widgets = result_widgets(window, main_roots, directory, result_roots, images)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.title('Main Menu')
