@@ -8,13 +8,8 @@ from time import sleep
 
 #Import - Packages __________________________________________________________________________________________
 
-if __name__ == '__main__':
-    from audio import mixer_pm, soundtrack
-    from txt import show_menu_options, show_top_level
-
-else:
-    from Utils.audio import mixer_pm, soundtrack
-    from Utils.txt import show_menu_options, show_top_level
+from Utils.audio import mixer_pm, soundtrack
+from Utils.txt import show_menu_options, show_top_level
 
 #Variables __________________________________________________________________________________________________
 
@@ -227,7 +222,8 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
     global vol
 
     if var_option.get() in 'ABC':
-        resume = show_top_level(items_values["world"], items_values["level"], var_option.get(), random_number(), items_values)
+        resume = show_top_level(directory, items_values["world"], items_values["level"],
+                                var_option.get(), random_number(), items_values, vol)
 
         items_values['level'] += 1
 
@@ -279,41 +275,53 @@ def click_game_to_menu(window, main_roots, directory, var_option, with_sound = F
 
 #Functions - Main Menu ______________________________________________________________________________________
 
-def menu_widgets(window, main_roots, directory, default, version, images, game_widgets):
+def menu_widgets(window, main_roots, directory, default, version, images, game_widgets, title):
     #Labels
-    lbl_title = Label(main_roots['root_main_menu'], text = " - In search - \n of the truth ", bg=bg, font = "courier 40 bold", justify=CENTER)
-    lbl_title.place(x = 5, y = 5, width = 700, height = 140)
+    lbl_title = Label(main_roots['root_main_menu'], text = title, bg=bg, font = "courier 42 bold", justify=CENTER)
+    lbl_title.place(x = 5, y = 5, width = 700, height = 150)
 
-    lbl_version = Label(main_roots['root_main_menu'], text = version, bg=bg, font = "courier 10 bold", anchor = SE)
-    lbl_version.place(x = 575, y = 425, width = 125, height = 25)
+    lbl_version = Label(main_roots['root_main_menu'], text = version, bg=bg, font = "courier 10 bold")
+    lbl_version.place(x = 290, y = 420, width = 130, height = 32.5)
+
+    lbl_line_01 = Label(main_roots['root_main_menu'], bg=bg_dark)
+    lbl_line_01.place(x = 0, y = 410, width = 710, height = 3)
+
+    lbl_line_02 = Label(main_roots['root_main_menu'], bg=bg_dark)
+    lbl_line_02.place(x = 0, y = 160, width = 710, height = 3)
 
     #Buttons
     btn_newgame = Button(main_roots['root_main_menu'], text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", cursor="hand2",
-                    font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg, command=lambda :
+                    font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg, command=lambda :
                     click_new_game(window, main_roots, directory, default, images, game_widgets, menu_widgets))
-    btn_newgame.place(x = 230, y = 160, width = 250, height = 50)
+    btn_newgame.place(x = 55, y = 205, width = 275, height = 50)
 
     btn_continue = Button(main_roots['root_main_menu'], text= "Continuar", bg=bg, bd = 2, relief = "flat", 
-                    cursor="arrow", font = "courier 25 bold", fg = "#ccc", command=lambda : click_nothing())
-    btn_continue.place(x = 230, y = 220, width = 250, height = 50)
-
-    btn_options = Button(main_roots['root_main_menu'], text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg,
-                    command=lambda : click_options(window, main_roots, directory))
-    btn_options.place(x = 230, y = 280, width = 250, height = 50)
+                    cursor="arrow", font = "courier 26 bold", fg = "#ccc", command=lambda : click_nothing())
+    btn_continue.place(x = 55, y = 265, width = 275, height = 50)
 
     btn_credits = Button(main_roots['root_main_menu'], text= "Créditos", bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg,
+                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
                     command=lambda : click_credits(window, main_roots, directory))
-    btn_credits.place(x = 230, y = 340, width = 250, height = 50)
+    btn_credits.place(x = 55, y = 325, width = 275, height = 50)
+
+    btn_tutorial = Button(main_roots['root_main_menu'], text= "Tutorial", bg=bg, bd = 2, relief = "ridge",
+                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
+                    command=lambda : click_nothing())
+    btn_tutorial.place(x = 380, y = 205, width = 275, height = 50)
+
+    btn_options = Button(main_roots['root_main_menu'], text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
+                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
+                    command=lambda : click_options(window, main_roots, directory))
+    btn_options.place(x = 380, y = 265, width = 275, height = 50)
 
     btn_quit = Button(main_roots['root_main_menu'], text= "Sair", bg=bg, bd = 2, relief = "ridge", cursor="hand2", 
-                    font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg,
+                    font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
                     command=lambda : click_quit(window))
-    btn_quit.place(x = 230, y = 400, width = 250, height = 50)
+    btn_quit.place(x = 380, y = 325, width = 275, height = 50)
 
     menu_widgets = {
         'lbl_title' : lbl_title, 'lbl_version' : lbl_version,
+        'lbl_line_01' : lbl_line_01, 'lbl_line_02' : lbl_line_02,
         'btn_newgame' : btn_newgame, 'btn_continue' : btn_continue,
         'btn_options' : btn_options, 'btn_credits' : btn_credits,
         'btn_quit' : btn_quit}
@@ -378,23 +386,23 @@ def click_quit(window):
 
 #Functions - Credits ________________________________________________________________________________________
 
-def credits_widgets(window, main_roots, directory, version):
+def credits_widgets(window, main_roots, directory, version, title):
     #Labels
-    lbl_credits_title = Label(main_roots['root_credits'], text = ' - In search - \n of the truth ', bg=bg, font = 'courier 40 bold', justify=CENTER)
-    lbl_credits_title.place(x = 5, y = 5, width = 700, height = 140)
+    lbl_credits_title = Label(main_roots['root_credits'], text = title, bg=bg, font = 'courier 42 bold', justify=CENTER)
+    lbl_credits_title.place(x = 5, y = 5, width = 700, height = 150)
 
     lbl_credits_version = Label(main_roots['root_credits'], text = version, bg=bg, font = 'courier 10 bold', anchor = SE)
     lbl_credits_version.place(x = 575, y = 425, width = 125, height = 25)
 
     lbl_credits = Label(main_roots['root_credits'], font = 'courier 20 italic', text='Aluno: Arthur Vinícius Bezerra da Silva\n' +\
                         'Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.--.--\n', bg=bg)
-    lbl_credits.place(x = 5, y = 145, width = 700, height = 210)
+    lbl_credits.place(x = 5, y = 160, width = 700, height = 240)
 
     #Buttons
     btn_back = Button(main_roots['root_credits'], text = 'Voltar', bg=bg, bd = 2, relief = "ridge",
                     command=lambda : click_credits_to_menu(window, main_roots, directory),
-                    cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
-    btn_back.place(x = 230, y = 400, width = 250, height = 50)
+                    cursor="hand2", font = "courier 26 bold", activebackground="#ccc", activeforeground=fg)
+    btn_back.place(x = 217.5, y = 405, width = 275, height = 45)
 
     credits_widgets = {
         'lbl_credits_title' : lbl_credits_title, 'lbl_credits_version' : lbl_credits_version,

@@ -1,3 +1,13 @@
+#Import - Packages __________________________________________________________________________________________
+
+if __name__ == '__main__':
+    from audio import soundEffect
+
+else:
+    from Utils.audio import soundEffect
+
+#Functions - Texts __________________________________________________________________________________________
+
 def show_menu_options(world, level, game_widgets):
     title = game_widgets['lbl_main_text']
     option_A = game_widgets['rb_option_A']
@@ -24,7 +34,8 @@ def show_menu_options(world, level, game_widgets):
         elif level == 3:
             print('hi')
 
-def show_top_level(world, level, option, rand, items_values):
+
+def show_top_level(directory, world, level, option, rand, items_values, vol):
     txt_result = 'Nothing'
     losewin_heart = 0
     losewin_food = 0
@@ -32,6 +43,7 @@ def show_top_level(world, level, option, rand, items_values):
     if world == 1:
         if level == 1:
             if option == 'A':
+                soundEffect(directory, vol, soundEffect = "Door")
                 if rand == 1 or rand == 2:
                     txt_result = 'HI'
                     losewin_heart = -10
@@ -50,3 +62,8 @@ def show_top_level(world, level, option, rand, items_values):
         'losewin_heart' : losewin_heart, 'losewin_food' : losewin_food}
         
     return resume
+
+
+def show_introduction():
+    print('hi')
+
