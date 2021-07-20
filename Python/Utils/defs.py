@@ -8,8 +8,12 @@ from time import sleep
 
 #Import - Packages __________________________________________________________________________________________
 
-from Utils.audio import mixer_pm, soundtrack
-from Utils.txt import show_menu_options, show_top_level
+try:
+    from audio import  mixer_pm, soundtrack
+    from txt import show_menu_options, show_top_level
+except:
+    from Utils.audio import mixer_pm, soundtrack
+    from Utils.txt import show_menu_options, show_top_level
 
 #Variables __________________________________________________________________________________________________
 
@@ -32,6 +36,19 @@ def main_roots(window):
         'root_credits' : root_credits, 'root_options' : root_options}
 
     return main_roots
+
+def start_the_game(window, main_roots, directory):
+    global vol
+
+    #Menu
+    main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
+    #Sound
+    vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
+
+    #Window
+    window.title('Main Menu')
+    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
 
 #Functions - Game ___________________________________________________________________________________________
 
@@ -168,7 +185,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
 
     btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
-                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets, main_roots, menu_widgets))
+                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets, main_roots))
     btn_next.place(x = 440, y = 5, width = 270, height = 30)
 
     #Ways
@@ -217,7 +234,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
 
     return game_widgets
 
-def click_next_level(window, directory, var_option, images, game_widgets, main_roots, menu_widgets):
+def click_next_level(window, directory, var_option, images, game_widgets, main_roots):
     global items_values
     global vol
 
@@ -641,20 +658,20 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
     lbl_value_heart.place(x = 45, y = 5, width = 65, height= 40)
 
     win_toplevel.update()
-    sleep(0.3)
+    sleep(0.1)
 
     #Items
     lbl_value_item = Label(root_result_items, bg=bg_light, text = '', font = "courier 14 bold")
     lbl_value_item.place(x = 5, y = 5, width = 25, height= 40)
 
     win_toplevel.update()
-    sleep(0.3)
+    sleep(0.1)
 
     lbl_img_item_01 = Label(root_result_items, bg=bg_light, image = images['empty_00_dic'])
     lbl_img_item_01.place(x = 30, y = 5, width = 40, height = 40)
 
     win_toplevel.update()
-    sleep(0.3)
+    sleep(0.1)
 
     lbl_img_item_02 = Label(root_result_items, bg=bg_light, image = images['empty_00_dic'])
     lbl_img_item_02.place(x = 70, y = 5, width = 40, height= 40)
@@ -693,7 +710,7 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
 
     win_toplevel.mainloop()
 
-#Functions - Others _________________________________________________________________________________________
+#Others Functions ___________________________________________________________________________________________
 
 def default(window, images, game_widgets):
     global items_values

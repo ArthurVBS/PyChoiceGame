@@ -1,9 +1,8 @@
 #Import - Packages __________________________________________________________________________________________
 
-if __name__ == '__main__':
+try:
     from audio import soundEffect
-
-else:
+except:
     from Utils.audio import soundEffect
 
 #Functions - Texts __________________________________________________________________________________________
