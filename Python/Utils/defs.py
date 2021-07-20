@@ -322,8 +322,7 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
     btn_credits.place(x = 55, y = 325, width = 275, height = 50)
 
     btn_tutorial = Button(main_roots['root_main_menu'], text= "Tutorial", bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
-                    command=lambda : click_nothing())
+                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg)
     btn_tutorial.place(x = 380, y = 205, width = 275, height = 50)
 
     btn_options = Button(main_roots['root_main_menu'], text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
