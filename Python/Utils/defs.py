@@ -91,7 +91,6 @@ def game_roots(main_roots):
 
 def game_widgets(window, main_roots, directory, game_roots, images, version, menu_widgets):
     #Hearts and Foods
-
     lbl_heart = Label(game_roots['root_hearts_foods'], image = images['heart_11_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_heart.place(x = 2.5, y = 2.5, width = 35, height = 32.5)
 
@@ -105,7 +104,6 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
     lbl_value_food.place(x = 160, y = 2.5, width = 90, height = 32.5)
 
     #Items - World 1
-
     lbl_item_lighter = Label(game_roots['root_items_world_1'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_item_lighter.place(x = 3, y = 3, width = 35, height = 35)
 
@@ -119,7 +117,6 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
     lbl_key_B.place(x = 3, y = 43, width = 35, height = 35)
 
     #Items - World 2
-
     lbl_item_shotgun = Label(game_roots['root_items_world_2'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_item_shotgun.place(x = 3, y = 3, width = 35, height = 35)
 
@@ -133,7 +130,6 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
     lbl_key_S.place(x = 3, y = 43, width = 35, height = 35)
 
     #Items - World 3
-
     lbl_item_screwdriver = Label(game_roots['root_items_world_3'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_item_screwdriver.place(x = 3, y = 3, width = 35, height = 35)
 
@@ -147,18 +143,15 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
     lbl_key_G.place(x = 3, y = 43, width = 35, height = 35)
 
     #Scenario
-
     lbl_scenario = Label(game_roots['root_scenario'], image = images['empty_00_dic'], bg=bg, anchor = CENTER)
     lbl_scenario.place(x = 3, y = 3, width= 250, height = 100)#250x100
 
     #TXT
-
     lbl_main_text = Label(game_roots['root_txt'], text = 'Texto principal', bg=bg, justify= LEFT,
                     font = 'courier 16 bold', bd = 4, relief = 'ridge')
     lbl_main_text.place(x = 0, y = 0, width = 710, height = 115)
 
     #Texts
-
     var_option = StringVar()
     var_option.set('E')
 
@@ -175,7 +168,6 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
     rb_option_C.place(x = 5, y = 195, width = 420, height = 90)
 
     #Back & Next
-
     lbl_version_in_game = Label(game_roots['root_back_next'], bg=bg_dark, font = 'courier 10 bold', text = version, fg=fg)
     lbl_version_in_game.place(x = 275, y = 5, width = 160, height = 30)
 
@@ -190,7 +182,6 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
     btn_next.place(x = 440, y = 5, width = 270, height = 30)
 
     #Ways
-
     lbl_way_01 = Label(game_roots['root_ways'], image = images['just_way_dic'], bg=bg_light)
     lbl_way_01.place(x = 7.5, y = 0, width = 35, height = 35)
 
@@ -299,10 +290,10 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
     lbl_title.place(x = 5, y = 5, width = 700, height = 150)
 
     lbl_version = Label(main_roots['root_main_menu'], text = version, bg=bg, font = "courier 10 bold")
-    lbl_version.place(x = 290, y = 420, width = 130, height = 32.5)
+    lbl_version.place(x = 275, y = 430, width = 160, height = 30)
 
     lbl_line_01 = Label(main_roots['root_main_menu'], bg=bg_dark)
-    lbl_line_01.place(x = 0, y = 410, width = 710, height = 3)
+    lbl_line_01.place(x = 0, y = 425, width = 710, height = 3)
 
     lbl_line_02 = Label(main_roots['root_main_menu'], bg=bg_dark)
     lbl_line_02.place(x = 0, y = 160, width = 710, height = 3)
@@ -311,31 +302,31 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
     btn_newgame = Button(main_roots['root_main_menu'], text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", cursor="hand2",
                     font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg, command=lambda :
                     click_new_game(window, main_roots, directory, default, images, game_widgets, menu_widgets))
-    btn_newgame.place(x = 55, y = 205, width = 275, height = 50)
+    btn_newgame.place(x = 55, y = 212.5, width = 275, height = 50)
 
     btn_continue = Button(main_roots['root_main_menu'], text= "Continuar", bg=bg, bd = 2, relief = "flat", 
                     cursor="arrow", font = "courier 26 bold", fg = "#ccc", command=lambda : click_nothing())
-    btn_continue.place(x = 55, y = 265, width = 275, height = 50)
+    btn_continue.place(x = 55, y = 272.5, width = 275, height = 50)
 
     btn_credits = Button(main_roots['root_main_menu'], text= "Créditos", bg=bg, bd = 2, relief = "ridge",
                     cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
                     command=lambda : click_credits(window, main_roots, directory))
-    btn_credits.place(x = 55, y = 325, width = 275, height = 50)
+    btn_credits.place(x = 55, y = 332.5, width = 275, height = 50)
 
     btn_tutorial = Button(main_roots['root_main_menu'], text= "Tutorial", bg=bg, bd = 2, relief = "ridge",
                     cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
                     command=lambda : click_tutorial(window, main_roots, directory, tutorial_widgets))
-    btn_tutorial.place(x = 380, y = 205, width = 275, height = 50)
+    btn_tutorial.place(x = 380, y = 212.5, width = 275, height = 50)
 
     btn_options = Button(main_roots['root_main_menu'], text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
                     cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
                     command=lambda : click_options(window, main_roots, directory))
-    btn_options.place(x = 380, y = 265, width = 275, height = 50)
+    btn_options.place(x = 380, y = 272.5, width = 275, height = 50)
 
     btn_quit = Button(main_roots['root_main_menu'], text= "Sair", bg=bg, bd = 2, relief = "ridge", cursor="hand2", 
                     font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
                     command=lambda : click_quit(window))
-    btn_quit.place(x = 380, y = 325, width = 275, height = 50)
+    btn_quit.place(x = 380, y = 332.5, width = 275, height = 50)
 
     menu_widgets = {
         'lbl_title' : lbl_title, 'lbl_version' : lbl_version,
@@ -389,6 +380,7 @@ def click_tutorial(window, main_roots, directory, tutorial_widgets):
     window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 
     show_introduction(tutorial_widgets, page=0)
+    tutorial_widgets['btn_next_tut'].place(x = 440, y = 5, width = 270, height = 30)
     main_roots['root_tutorial'].place(x = 5, y = 5, width = 710, height = 460)
 
 def click_options(window, main_roots, directory):
@@ -749,7 +741,7 @@ def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, vers
     lbl_heart_tut = Label(tutorial_roots['root_hearts_foods_tut'], image = images['heart_11_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_value_heart_tut = Label(tutorial_roots['root_hearts_foods_tut'], text = f'100%', bg=bg, font = 'courier 13 bold', bd = 3, relief = 'ridge')
     lbl_food_tut = Label(tutorial_roots['root_hearts_foods_tut'], image = images['food_11_dic'], bg=bg, bd = 3, relief = 'ridge')
-    lbl_value_food_tut = Label(tutorial_roots['root_hearts_foods_tut'], text = f'9/10', bg=bg, font = 'courier 13 bold', bd = 3, relief = 'ridge')
+    lbl_value_food_tut = Label(tutorial_roots['root_hearts_foods_tut'], text = f'8/10', bg=bg, font = 'courier 13 bold', bd = 3, relief = 'ridge')
 
     #Items - World 1
     lbl_item_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['item_lighter_dic'], bg=bg, bd = 3, relief = 'ridge')
@@ -901,6 +893,7 @@ def pages_tutorial(window, tutorial_roots, tutorial_widgets , page):
     page_number_tut += 1
 
     show_introduction(tutorial_widgets , page)
+    tutorial_widgets['btn_next_tut']['text'] = '...'
     if page == 1:
         #Root
         tutorial_roots['root_hearts_foods_tut'].place(x = 5, y = 125, width = 260, height = 45)
@@ -1011,7 +1004,10 @@ def pages_tutorial(window, tutorial_roots, tutorial_widgets , page):
 
     elif page == 6:
         page_number_tut = 6
+        tutorial_widgets['btn_next_tut'].place_forget()
+
     print(page)
+    tutorial_widgets['btn_next_tut']['text'] = 'Avançar'
 
 def default(window, images, game_widgets):
     global items_values
@@ -1227,4 +1223,3 @@ def random_number():
 def wait(window, time = 0.5):
     window.update()
     sleep(time)
-
