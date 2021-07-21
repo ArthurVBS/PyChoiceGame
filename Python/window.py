@@ -22,16 +22,20 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_tutorial = Frame(window, bg=bg_light)
-root_tutorial.place(x = 5, y = 5, width = 710, height = 460)
+root_introduction = Frame(window, bg=bg_light)
+root_introduction.place(x = 5, y = 5, width = 710, height = 460)
 images = images(directory)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
-window.title('In search of the truth')
-window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 window.resizable(False,False)
 window.configure(background = '#000')
 
+
+
+
+
+
+'''
 page_number = 1
 
 def wait(window, time = 0.5):
@@ -238,5 +242,5 @@ btn_next_tut = Button(root_back_next_tut, text = 'Avançar', bg=bg_dark, bd = 1,
                 cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
                 fg=fg, command=lambda : pages_tutorial(page_number))
 btn_next_tut.place(x = 440, y = 5, width = 270, height = 30)
-
+'''
 window.mainloop()

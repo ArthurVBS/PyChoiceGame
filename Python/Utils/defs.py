@@ -30,7 +30,7 @@ def main_roots(window):
     root_game_over = Frame(window, bg=bg_dark)
     root_credits = Frame(window, bg=bg)
     root_options = Frame(window, bg=bg)
-    root_tutorial = Frame(window, bg=bg_light)
+    root_tutorial = Frame(window, bg=bg)
 
     main_roots = {
         'root_play_game' : root_play_game, 'root_main_menu' : root_main_menu, 'root_game_over' : root_game_over,
@@ -176,7 +176,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version, men
                     fg=fg, command=lambda : click_game_to_menu(window, main_roots, directory, var_option, with_sound=True))
     btn_back.place(x = 0, y = 5, width = 270, height = 30)
 
-    btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
+    btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1.5, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
                     fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets, main_roots))
     btn_next.place(x = 440, y = 5, width = 270, height = 30)
@@ -293,10 +293,10 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
     lbl_version.place(x = 275, y = 430, width = 160, height = 30)
 
     lbl_line_01 = Label(main_roots['root_main_menu'], bg=bg_dark)
-    lbl_line_01.place(x = 0, y = 425, width = 710, height = 3)
+    lbl_line_01.place(x = 0, y = 425, width = 710, height = 5)
 
     lbl_line_02 = Label(main_roots['root_main_menu'], bg=bg_dark)
-    lbl_line_02.place(x = 0, y = 160, width = 710, height = 3)
+    lbl_line_02.place(x = 0, y = 160, width = 710, height = 5)
 
     #Buttons
     btn_newgame = Button(main_roots['root_main_menu'], text= "Novo jogo", bg=bg, bd = 2, relief = "ridge", cursor="hand2",
@@ -408,22 +408,29 @@ def credits_widgets(window, main_roots, directory, version, title):
     lbl_credits_title = Label(main_roots['root_credits'], text = title, bg=bg, font = 'courier 42 bold', justify=CENTER)
     lbl_credits_title.place(x = 5, y = 5, width = 700, height = 150)
 
-    lbl_credits_version = Label(main_roots['root_credits'], text = version, bg=bg, font = 'courier 10 bold', anchor = SE)
-    lbl_credits_version.place(x = 575, y = 425, width = 125, height = 25)
+    lbl_credits_version = Label(main_roots['root_credits'], text = version, bg=bg, font = 'courier 10 bold')
+    lbl_credits_version.place(x = 275, y = 430, width = 160, height = 30)
 
     lbl_credits = Label(main_roots['root_credits'], font = 'courier 20 italic', text='Aluno: Arthur Vinícius Bezerra da Silva\n' +\
-                        'Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.--.--\n', bg=bg)
-    lbl_credits.place(x = 5, y = 160, width = 700, height = 240)
+                        'Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.--.--', bg=bg)
+    lbl_credits.place(x = 5, y = 170, width = 700, height = 250)
+
+    lbl_credits_line_01 = Label(main_roots['root_credits'], bg=bg_dark)
+    lbl_credits_line_01.place(x = 0, y = 425, width = 710, height = 5)
+
+    lbl_credits_line_02 = Label(main_roots['root_credits'], bg=bg_dark)
+    lbl_credits_line_02.place(x = 0, y = 160, width = 710, height = 5)
 
     #Buttons
-    btn_back = Button(main_roots['root_credits'], text = 'Voltar', bg=bg, bd = 2, relief = "ridge",
+    btn_credits_back = Button(main_roots['root_credits'], text = 'Retornar ao menu', bg=bg, bd = 2.5, relief = "ridge",
                     command=lambda : click_credits_to_menu(window, main_roots, directory),
-                    cursor="hand2", font = "courier 26 bold", activebackground="#ccc", activeforeground=fg)
-    btn_back.place(x = 217.5, y = 405, width = 275, height = 45)
+                    cursor="hand2", font = "courier 14 bold", activebackground="#ccc", activeforeground=fg)
+    btn_credits_back.place(x = 0, y = 430, width = 270, height = 30)
 
     credits_widgets = {
         'lbl_credits_title' : lbl_credits_title, 'lbl_credits_version' : lbl_credits_version,
-        'lbl_credits' : lbl_credits, 'btn_back' : btn_back}
+        'lbl_credits_line_01' : lbl_credits_line_01, 'lbl_credits_line_02' : lbl_credits_line_02,
+        'lbl_credits' : lbl_credits, 'btn_credits_back' : btn_credits_back}
 
     return credits_widgets
 
@@ -436,13 +443,21 @@ def click_credits_to_menu(window, main_roots, directory):
 
 #Functions - Options ________________________________________________________________________________________
 
-def options_widgets(window, main_roots, directory, images):
+def options_widgets(window, main_roots, directory, version, images):
     global vol
     vol = 0.5
-
     #Labels
-    lbl_options_title =  Label(main_roots['root_options'], text = " - Ajustes - ", bg=bg, font = "courier 40 bold", justify=CENTER)
-    lbl_options_title.place(x = 5, y = 5, width = 700, height = 100)
+    lbl_options_title = Label(main_roots['root_options'], text = '- Ajustes -\n', bg=bg, font = 'courier 42 bold', justify=CENTER)
+    lbl_options_title.place(x = 5, y = 5, width = 700, height = 150)
+
+    lbl_options_line_01 = Label(main_roots['root_options'], bg=bg_dark)
+    lbl_options_line_01.place(x = 0, y = 425, width = 710, height = 5)
+
+    lbl_options_line_02 = Label(main_roots['root_options'], bg=bg_dark)
+    lbl_options_line_02.place(x = 0, y = 160, width = 710, height = 5)
+
+    lbl_options_version = Label(main_roots['root_options'], text = version, bg=bg, font = 'courier 10 bold')
+    lbl_options_version.place(x = 275, y = 430, width = 160, height = 30)
 
     lbl_volume = Label(main_roots['root_options'], text = " Volume ", bg=bg, font = "courier 32 bold")
     lbl_volume.place(x = 5, y = 85, width = 350, height = 65)
@@ -450,84 +465,69 @@ def options_widgets(window, main_roots, directory, images):
     lbl_language = Label(main_roots['root_options'], text = " Idioma ", bg=bg, font = "courier 32 bold")
     lbl_language.place(x = 355, y = 85, width = 350, height = 65)
 
-    lbl_flag_UK = Label(main_roots['root_options'], image = images['flag_UK_dic'], bg=bg)
-    lbl_flag_UK.place(x = 370, y = 160, width = 50, height = 50)
-
-    lbl_flag_FR = Label(main_roots['root_options'], image = images['flag_FR_dic'], bg=bg)
-    lbl_flag_FR.place(x = 370, y = 220, width = 50, height = 50)
-
-    lbl_flag_BR = Label(main_roots['root_options'], image = images['flag_BR_dic'], bg=bg)
-    lbl_flag_BR.place(x = 370, y = 280, width = 50, height = 50)
-
-    lbl_flag_SP = Label(main_roots['root_options'], image = images['flag_SP_dic'], bg=bg)
-    lbl_flag_SP.place(x = 370, y = 340, width = 50, height = 50)
-
-    lbl_flag_GE = Label(main_roots['root_options'], image = images['flag_GE_dic'], bg=bg)
-    lbl_flag_GE.place(x = 370, y = 400, width = 50, height = 50)
-
-    lbl_vol = Label(main_roots['root_options'], text = f'{vol*100:.1f}%', bg=bg, font = "courier 16 bold")
-    lbl_vol.place(x = 10, y = 205, width = 335, height = 30)
+    lbl_vol = Label(main_roots['root_options'], text = f'{vol*100:.1f}%', bg=bg, font = "courier 20 bold")
+    lbl_vol.place(x = 15, y = 220, width = 350, height = 40)
 
     #Buttons
     btn_vol_max = Button(main_roots['root_options'], image = images['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",
                 cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("max", options_widgets))
-    btn_vol_max.place(x = 270, y = 320, width = 75, height = 70)
+    btn_vol_max.place(x = 285, y = 340, width = 75, height = 70)
 
     btn_vol_plus = Button(main_roots['root_options'], image = images['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",
                     cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("plus", options_widgets))
-    btn_vol_plus.place(x = 185, y = 320, width = 75, height = 70)
+    btn_vol_plus.place(x = 195, y = 340, width = 75, height = 70)
 
     btn_vol_minus = Button(main_roots['root_options'], image = images['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",
                     cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("minus", options_widgets))
-    btn_vol_minus.place(x = 97.5, y = 320, width = 75, height = 70)
+    btn_vol_minus.place(x = 105, y = 340, width = 75, height = 70)
 
     btn_vol_mute = Button(main_roots['root_options'], image = images['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",
                     cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("mute", options_widgets))
-    btn_vol_mute.place(x = 10, y = 320, width = 75, height = 70)
+    btn_vol_mute.place(x = 15, y = 340, width = 75, height = 70)
 
-    btn_back = Button(main_roots['root_options'], text = 'Voltar', bg=bg, bd = 2, relief = "ridge", cursor="hand2",
-                    font = "courier 25 bold", activebackground="#ccc", activeforeground=fg,
-                    command=lambda : click_options_to_menu(window, main_roots, directory, options_widgets))
-    btn_back.place(x = 10, y = 400, width = 335, height = 50)
+    btn_options_back = Button(main_roots['root_options'], text = 'Retornar ao menu', bg=bg, bd = 2.5, relief = "ridge",
+                    command=lambda : click_options_to_menu(window, main_roots, directory, options_widgets),
+                    cursor="hand2", font = "courier 14 bold", activebackground="#ccc", activeforeground=fg)
+    btn_options_back.place(x = 0, y = 430, width = 270, height = 30)
 
     #RadioButtons
     var_language = StringVar()
     var_language.set("BR")
 
-    rb_lan_UK = Radiobutton(main_roots['root_options'], text = "English", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+    rb_lan_UK = Radiobutton(main_roots['root_options'], text = "English", bg=bg, font = "courier 16 bold", indicatoron=0, fg = "#888",
                 variable = var_language, value = "UK", bd=5, cursor="hand2")
-    rb_lan_UK.place(x = 430, y = 160, width = 205, height = 50)
+    rb_lan_UK.place(x = 430, y = 180, width = 210, height = 40)
 
-    rb_lan_FR = Radiobutton(main_roots['root_options'], text = "Français", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+    rb_lan_FR = Radiobutton(main_roots['root_options'], text = "Français", bg=bg, font = "courier 16 bold", indicatoron=0, fg = "#888",
                 variable = var_language, value = "FR", bd=5, cursor="hand2")
-    rb_lan_FR.place(x = 430, y = 220, width = 205, height = 50)
+    rb_lan_FR.place(x = 430, y = 227.5, width = 210, height = 40)
 
-    rb_lan_BR = Radiobutton(main_roots['root_options'], text = "Português", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#000",
+    rb_lan_BR = Radiobutton(main_roots['root_options'], text = "Português", bg=bg, font = "courier 16 bold", indicatoron=0, fg = "#000",
                 variable = var_language, value = "BR", bd=5, cursor="hand2")
-    rb_lan_BR.place(x = 430, y = 280, width = 205, height = 50)
+    rb_lan_BR.place(x = 430, y = 275, width = 210, height = 40)
 
-    rb_lan_SP = Radiobutton(main_roots['root_options'], text = "Español", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+    rb_lan_SP = Radiobutton(main_roots['root_options'], text = "Español", bg=bg, font = "courier 16 bold", indicatoron=0, fg = "#888",
                 variable = var_language, value = "SP", bd=5, cursor="hand2")
-    rb_lan_SP.place(x = 430, y = 340, width = 205, height = 50)
+    rb_lan_SP.place(x = 430, y = 322.5, width = 210, height = 40)
 
-    rb_lan_GE = Radiobutton(main_roots['root_options'], text = "Deutsch", bg=bg, font = "courier 18 bold", indicatoron=0, fg = "#888",
+    rb_lan_GE = Radiobutton(main_roots['root_options'], text = "Deutsch", bg=bg, font = "courier 16 bold", indicatoron=0, fg = "#888",
                 variable = var_language, value = "GE", bd=5, cursor="hand2")
-    rb_lan_GE.place(x = 430, y = 400, width = 205, height = 50)
+    rb_lan_GE.place(x = 430, y = 370, width = 210, height = 40)
 
     #ProgressBar
     var_progressBar = DoubleVar()
     var_progressBar.set(vol)
 
     pb_vol = ttk.Progressbar(main_roots['root_options'], variable = var_progressBar, maximum = 1)
-    pb_vol.place(x = 10 , y = 160, width = 335, height = 40)
+    pb_vol.place(x = 15 , y = 180, width = 350, height = 35)
 
     options_widgets = {
         'lbl_options_title' : lbl_options_title, 'lbl_volume' : lbl_volume, 'lbl_language' : lbl_language,
-        'lbl_flag_UK' : lbl_flag_UK, 'lbl_flag_FR' : lbl_flag_FR, 'lbl_flag_BR' : lbl_flag_BR,
-        'lbl_flag_SP' : lbl_flag_SP, 'lbl_flag_GE' : lbl_flag_GE, 'lbl_vol' : lbl_vol,
+        'lbl_options_line_01' : lbl_options_line_01, 'lbl_options_line_02' : lbl_options_line_02,
+        'lbl_options_version' : lbl_options_version, 'lbl_vol' : lbl_vol,
 
         'btn_vol_max' : btn_vol_max, 'btn_vol_plus' : btn_vol_plus, 'btn_vol_minus' : btn_vol_minus,
-        'btn_vol_mute' : btn_vol_mute, 'btn_back' : btn_back,
+        'btn_vol_mute' : btn_vol_mute, 'btn_options_back' : btn_options_back, 
 
         'var_language' : var_language, 'rb_lan_UK' : rb_lan_UK, 'rb_lan_FR' : rb_lan_FR,
         'rb_lan_BR' : rb_lan_BR, 'rb_lan_SP' : rb_lan_SP, 'rb_lan_GE' : rb_lan_GE,
@@ -797,7 +797,7 @@ def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, vers
                     fg=fg, command=lambda : click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutorial_widgets))
     btn_back_tut.place(x = 0, y = 5, width = 270, height = 30)
 
-    btn_next_tut = Button(tutorial_roots['root_back_next_tut'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
+    btn_next_tut = Button(tutorial_roots['root_back_next_tut'], text = 'Avançar', bg=bg_dark, bd = 1.5, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
                     fg=fg, command=lambda : pages_tutorial(window, tutorial_roots, tutorial_widgets, page_number_tut))
     btn_next_tut.place(x = 440, y = 5, width = 270, height = 30)
@@ -1212,10 +1212,10 @@ def vol_pb(options_widgets):
     text_vol = f'{vol*100:.1f}%'
 
     options_widgets['pb_vol'].configure(variable = var_progressBar)
-    options_widgets['pb_vol'].place(x = 10 , y = 160, width = 335, height = 40)
+    options_widgets['pb_vol'].place(x = 15 , y = 180, width = 350, height = 35)
 
     options_widgets['lbl_vol'].configure(text = text_vol)
-    options_widgets['lbl_vol'].place(x = 10, y = 205, width = 335, height = 30)
+    options_widgets['lbl_vol'].place(x = 15, y = 220, width = 350, height = 40)
 
 def random_number():
     return randint(1,4)

@@ -12,7 +12,7 @@ from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widg
 #Variables __________________________________________________________________________________________________
 
 title = '- Looking for -\n a way out '
-version = 'layout v 2.9.3'
+version = 'layout v 2.9.4'
 directory = os.path.dirname(__file__)
 
 global items_values
@@ -57,7 +57,7 @@ show_items_values(images, game_widgets)
 tutorial_widgets = tutorial_widgets(window, main_roots, directory, tutorial_roots, images, version)
 menu_widgets = menu_widgets(window, main_roots, directory, default, version, images, game_widgets, title, tutorial_widgets)
 credits_widgets = credits_widgets(window, main_roots, directory, version, title)
-options_widgets = options_widgets(window, main_roots, directory, images)
+options_widgets = options_widgets(window, main_roots, directory, version, images)
 gameover_widgets = gameover_widgets(window, main_roots, directory, menu_widgets)
 
 start_the_game(window, main_roots, directory)
