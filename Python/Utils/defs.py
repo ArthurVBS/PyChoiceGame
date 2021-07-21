@@ -10,10 +10,10 @@ from time import sleep
 
 try:
     from audio import  mixer_pm, soundtrack
-    from txt import show_menu_options, show_top_level
+    from txt import show_menu_options, show_top_level, show_introduction
 except:
     from Utils.audio import mixer_pm, soundtrack
-    from Utils.txt import show_menu_options, show_top_level
+    from Utils.txt import show_menu_options, show_top_level, show_introduction
 
 #Variables __________________________________________________________________________________________________
 
@@ -30,10 +30,11 @@ def main_roots(window):
     root_game_over = Frame(window, bg=bg_dark)
     root_credits = Frame(window, bg=bg)
     root_options = Frame(window, bg=bg)
+    root_tutorial = Frame(window, bg=bg_light)
 
     main_roots = {
         'root_play_game' : root_play_game, 'root_main_menu' : root_main_menu, 'root_game_over' : root_game_over,
-        'root_credits' : root_credits, 'root_options' : root_options}
+        'root_credits' : root_credits, 'root_options' : root_options, 'root_tutorial' : root_tutorial}
 
     return main_roots
 
@@ -292,7 +293,7 @@ def click_game_to_menu(window, main_roots, directory, var_option, with_sound = F
 
 #Functions - Main Menu ______________________________________________________________________________________
 
-def menu_widgets(window, main_roots, directory, default, version, images, game_widgets, title):
+def menu_widgets(window, main_roots, directory, default, version, images, game_widgets, title, tutorial_widgets):
     #Labels
     lbl_title = Label(main_roots['root_main_menu'], text = title, bg=bg, font = "courier 42 bold", justify=CENTER)
     lbl_title.place(x = 5, y = 5, width = 700, height = 150)
@@ -322,7 +323,8 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
     btn_credits.place(x = 55, y = 325, width = 275, height = 50)
 
     btn_tutorial = Button(main_roots['root_main_menu'], text= "Tutorial", bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg)
+                    cursor="hand2", font = "courier 26 bold", activebackground=bg_gray, activeforeground=fg,
+                    command=lambda : click_tutorial(window, main_roots, directory, tutorial_widgets))
     btn_tutorial.place(x = 380, y = 205, width = 275, height = 50)
 
     btn_options = Button(main_roots['root_main_menu'], text = 'Ajustes',  bg=bg, bd = 2, relief = "ridge",
@@ -381,6 +383,13 @@ def click_continue(window, main_roots, directory):
         soundtrack(directory, vol = vol, soundtrack = 3)
 
     main_roots['root_play_game'].place(x = 5, y = 5, width = 710, height = 460)
+
+def click_tutorial(window, main_roots, directory, tutorial_widgets):
+    window.title('Tutorial')
+    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+
+    show_introduction(tutorial_widgets, page=0)
+    main_roots['root_tutorial'].place(x = 5, y = 5, width = 710, height = 460)
 
 def click_options(window, main_roots, directory):
     window.title('Ajustes')
@@ -709,7 +718,297 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
 
     win_toplevel.mainloop()
 
+#Functions - Tutotrial ______________________________________________________________________________________
+
+def tutorial_roots(main_roots):
+    root_hearts_foods_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+    root_items_world_1_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+    root_items_world_2_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+    root_items_world_3_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+    root_scenario_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+    root_txt_tut = Frame(main_roots['root_tutorial'], bg=bg_dark)
+    root_text_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+    root_back_next_tut = Frame(main_roots['root_tutorial'], bg=bg_dark)
+    root_ways_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
+
+    root_txt_tut.place(x = 0, y = 0, width = 710, height = 120)
+    root_back_next_tut.place(x = 0, y = 425, width = 710, height = 45)
+
+    tutorial_roots = {
+        'root_hearts_foods_tut' : root_hearts_foods_tut, 'root_items_world_1_tut' : root_items_world_1_tut,
+        'root_items_world_2_tut' : root_items_world_2_tut, 'root_items_world_3_tut' : root_items_world_3_tut,
+        'root_scenario_tut' : root_scenario_tut, 'root_txt_tut' : root_txt_tut, 'root_text_tut' : root_text_tut,
+        'root_back_next_tut' : root_back_next_tut, 'root_ways_tut' : root_ways_tut}
+
+    return tutorial_roots
+
+def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, version):
+    global page_number_tut
+    page_number_tut = 1
+    #Hearts and Foods
+    lbl_heart_tut = Label(tutorial_roots['root_hearts_foods_tut'], image = images['heart_11_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_value_heart_tut = Label(tutorial_roots['root_hearts_foods_tut'], text = f'100%', bg=bg, font = 'courier 13 bold', bd = 3, relief = 'ridge')
+    lbl_food_tut = Label(tutorial_roots['root_hearts_foods_tut'], image = images['food_11_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_value_food_tut = Label(tutorial_roots['root_hearts_foods_tut'], text = f'9/10', bg=bg, font = 'courier 13 bold', bd = 3, relief = 'ridge')
+
+    #Items - World 1
+    lbl_item_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_02_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_03_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_key_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
+
+    #Items - World 2
+    lbl_item_04_tut = Label(tutorial_roots['root_items_world_2_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_05_tut = Label(tutorial_roots['root_items_world_2_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_06_tut = Label(tutorial_roots['root_items_world_2_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_key_02_tut = Label(tutorial_roots['root_items_world_2_tut'], image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
+
+    #Items - World 3
+    lbl_item_07_tut = Label(tutorial_roots['root_items_world_3_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_08_tut = Label(tutorial_roots['root_items_world_3_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_09_tut = Label(tutorial_roots['root_items_world_3_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_key_03_tut = Label(tutorial_roots['root_items_world_3_tut'], image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
+
+    #Ways
+    lbl_way_01_tut = Label(tutorial_roots['root_ways_tut'], image = images['way_dic'], bg=bg_light)
+    lbl_way_02_tut = Label(tutorial_roots['root_ways_tut'], image = images['just_way_dic'], bg=bg_light)
+    lbl_way_03_tut = Label(tutorial_roots['root_ways_tut'], image = images['just_way_dic'], bg=bg_light)
+    lbl_way_04_tut = Label(tutorial_roots['root_ways_tut'], image = images['just_way_dic'], bg=bg_light)
+    lbl_way_05_tut = Label(tutorial_roots['root_ways_tut'], image = images['just_way_dic'], bg=bg_light)
+    lbl_way_06_tut = Label(tutorial_roots['root_ways_tut'], image = images['just_way_dic'], bg=bg_light)
+
+    #Scenario
+    lbl_scenario_tut = Label(tutorial_roots['root_scenario_tut'], image = images['scenario_01_dic'], bg=bg, anchor = CENTER)
+
+    #TXT
+    lbl_main_text_tut = Label(tutorial_roots['root_txt_tut'], bg=bg, justify= LEFT, bd = 4, relief = 'ridge', font = 'courier 16 bold')
+    lbl_main_text_tut.place(x = 0, y = 0, width = 710, height = 115)
+
+    #Texts
+
+    var_option = StringVar()
+    var_option.set('E')
+
+    rb_option_A_tut = Radiobutton(tutorial_roots['root_text_tut'], bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 4.5, text = '', cursor = 'hand2', 
+                                variable = var_option, value = 'A', activebackground=bg_gray, activeforeground=fg, justify = LEFT)
+    rb_option_B_tut = Radiobutton(tutorial_roots['root_text_tut'], bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 4.5, text = '', cursor = 'hand2', 
+                                variable = var_option, value = 'B', activebackground=bg_gray, activeforeground=fg, justify = LEFT)
+    rb_option_C_tut = Radiobutton(tutorial_roots['root_text_tut'], bg=bg, font = 'courier 12 bold', indicatoron=0, bd = 4.5, text = '', cursor = 'hand2',
+                                variable = var_option, value = 'C', activebackground=bg_gray, activeforeground=fg, justify = LEFT)
+
+    #Back & Next
+    lbl_version_in_tut = Label(tutorial_roots['root_back_next_tut'], bg=bg_dark, font = 'courier 10 bold', text = version, fg=fg)
+    lbl_version_in_tut.place(x = 275, y = 5, width = 160, height = 30)
+
+    btn_back_tut = Button(tutorial_roots['root_back_next_tut'], text = 'Retornar ao Menu', bg=bg_dark, bd = 1.5, relief = 'ridge',
+                    cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
+                    fg=fg, command=lambda : click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutorial_widgets))
+    btn_back_tut.place(x = 0, y = 5, width = 270, height = 30)
+
+    btn_next_tut = Button(tutorial_roots['root_back_next_tut'], text = 'Avançar', bg=bg_dark, bd = 1, relief = 'ridge',
+                    cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
+                    fg=fg, command=lambda : pages_tutorial(window, tutorial_roots, tutorial_widgets, page_number_tut))
+    btn_next_tut.place(x = 440, y = 5, width = 270, height = 30)
+
+
+    tutorial_widgets = {
+        'lbl_heart_tut' : lbl_heart_tut, 'lbl_value_heart_tut' : lbl_value_heart_tut,
+        'lbl_food_tut' : lbl_food_tut, 'lbl_value_food_tut' : lbl_value_food_tut,
+
+        'lbl_item_01_tut' : lbl_item_01_tut, 'lbl_item_02_tut' : lbl_item_02_tut,
+        'lbl_item_03_tut' : lbl_item_03_tut, 'lbl_key_01_tut' : lbl_key_01_tut,
+
+        'lbl_item_04_tut' : lbl_item_04_tut, 'lbl_item_05_tut' : lbl_item_05_tut,
+        'lbl_item_06_tut' : lbl_item_06_tut, 'lbl_key_02_tut' : lbl_key_02_tut,
+
+        'lbl_item_07_tut' : lbl_item_07_tut, 'lbl_item_08_tut' : lbl_item_08_tut,
+        'lbl_item_09_tut' : lbl_item_09_tut, 'lbl_key_03_tut' : lbl_key_03_tut,
+
+        'lbl_way_01_tut' : lbl_way_01_tut, 'lbl_way_02_tut' : lbl_way_02_tut,
+        'lbl_way_03_tut' : lbl_way_03_tut, 'lbl_way_04_tut' : lbl_way_04_tut,
+        'lbl_way_05_tut' : lbl_way_05_tut, 'lbl_way_06_tut' : lbl_way_06_tut,
+
+        'lbl_scenario_tut' : lbl_scenario_tut, 'lbl_main_text_tut' : lbl_main_text_tut,
+
+        'rb_option_A_tut' : rb_option_A_tut, 'rb_option_B_tut' : rb_option_B_tut,
+        'rb_option_C_tut' : rb_option_C_tut, 'lbl_version_in_tut' : lbl_version_in_tut,
+        'btn_back_tut' : btn_back_tut, 'btn_next_tut' : btn_next_tut}
+
+    return tutorial_widgets
+
+def click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutorial_widgets):
+    global page_number_tut
+    page_number_tut = 1
+    show_introduction(tutorial_widgets, page=0)
+
+    #Window
+    window.title('Main Menu')
+    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+
+    #Tutorial Roots
+    tutorial_roots['root_hearts_foods_tut'].place_forget()
+    tutorial_roots['root_items_world_1_tut'].place_forget()
+    tutorial_roots['root_items_world_2_tut'].place_forget()
+    tutorial_roots['root_items_world_3_tut'].place_forget()
+    tutorial_roots['root_ways_tut'].place_forget()
+    tutorial_roots['root_scenario_tut'].place_forget()
+    tutorial_roots['root_text_tut'].place_forget()
+
+    #Tutorial Widgets
+    tutorial_widgets['lbl_heart_tut'].place_forget()
+    tutorial_widgets['lbl_value_heart_tut'].place_forget()
+    tutorial_widgets['lbl_food_tut'].place_forget()
+    tutorial_widgets['lbl_value_food_tut'].place_forget()
+
+    tutorial_widgets['lbl_item_01_tut'].place_forget()
+    tutorial_widgets['lbl_item_02_tut'].place_forget()
+    tutorial_widgets['lbl_item_03_tut'].place_forget()
+    tutorial_widgets['lbl_key_01_tut'].place_forget()
+
+    tutorial_widgets['lbl_item_04_tut'].place_forget()
+    tutorial_widgets['lbl_item_05_tut'].place_forget()
+    tutorial_widgets['lbl_item_06_tut'].place_forget()
+    tutorial_widgets['lbl_key_02_tut'].place_forget()
+
+    tutorial_widgets['lbl_item_07_tut'].place_forget()
+    tutorial_widgets['lbl_item_08_tut'].place_forget()
+    tutorial_widgets['lbl_item_09_tut'].place_forget()
+    tutorial_widgets['lbl_key_03_tut'].place_forget()
+
+    tutorial_widgets['lbl_way_01_tut'].place_forget()
+    tutorial_widgets['lbl_way_02_tut'].place_forget()
+    tutorial_widgets['lbl_way_03_tut'].place_forget()
+    tutorial_widgets['lbl_way_04_tut'].place_forget()
+    tutorial_widgets['lbl_way_05_tut'].place_forget()
+    tutorial_widgets['lbl_way_06_tut'].place_forget()
+
+    tutorial_widgets['lbl_scenario_tut'].place_forget()
+    tutorial_widgets['rb_option_A_tut'].place_forget()
+    tutorial_widgets['rb_option_B_tut'].place_forget()
+    tutorial_widgets['rb_option_C_tut'].place_forget()
+    
+    #Main
+    main_roots['root_tutorial'].place_forget()
+    main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 #Others Functions ___________________________________________________________________________________________
+
+def pages_tutorial(window, tutorial_roots, tutorial_widgets , page):
+    global page_number_tut
+    page_number_tut += 1
+
+    show_introduction(tutorial_widgets , page)
+    if page == 1:
+        #Root
+        tutorial_roots['root_hearts_foods_tut'].place(x = 5, y = 125, width = 260, height = 45)
+        wait(window)
+
+        #Labels
+        tutorial_widgets['lbl_heart_tut'].place(x = 2.5, y = 2.5, width = 35, height = 32.5)
+        wait(window)
+
+        tutorial_widgets['lbl_value_heart_tut'].place(x = 35, y = 2.5, width = 90, height = 32.5)
+        wait(window)
+
+        tutorial_widgets['lbl_food_tut'].place(x = 127.5, y = 2.5, width = 35, height = 32.5)
+        wait(window)
+
+        tutorial_widgets['lbl_value_food_tut'].place(x = 160, y = 2.5, width = 90, height = 32.5)
+
+    elif page == 2:
+        #Roots
+        tutorial_roots['root_items_world_1_tut'].place(x = 5, y = 175, width = 85, height = 85)
+        wait(window)
+
+        tutorial_roots['root_items_world_2_tut'].place(x = 92.5, y = 175, width = 85, height = 85)
+        wait(window)
+
+        tutorial_roots['root_items_world_3_tut'].place(x = 180, y = 175, width = 85, height = 85)
+        wait(window)
+
+        #Labels
+        tutorial_widgets['lbl_item_01_tut'].place(x = 3, y = 3, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_02_tut'].place(x = 43, y = 3, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_03_tut'].place(x = 43, y = 43, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_key_01_tut'].place(x = 3, y = 43, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_04_tut'].place(x = 3, y = 3, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_05_tut'].place(x = 43, y = 3, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_06_tut'].place(x = 43, y = 43, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_key_02_tut'].place(x = 3, y = 43, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_07_tut'].place(x = 3, y = 3, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_08_tut'].place(x = 43, y = 3, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_item_09_tut'].place(x = 43, y = 43, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_key_03_tut'].place(x = 3, y = 43, width = 35, height = 35)
+        
+    elif page == 3:
+        #Root
+        tutorial_roots['root_ways_tut'].place(x = 5, y = 265, width = 260, height = 40)
+        wait(window)
+
+        #Labels
+        tutorial_widgets['lbl_way_01_tut'].place(x = 7.5, y = 0, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_way_02_tut'].place(x = 47.5, y = 0, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_way_03_tut'].place(x = 87.5, y = 0, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_way_04_tut'].place(x = 127.5, y = 0, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_way_05_tut'].place(x = 167.5, y = 0, width = 35, height = 35)
+        wait(window)
+
+        tutorial_widgets['lbl_way_06_tut'].place(x = 207.5, y = 0, width = 35, height = 35)
+
+    elif page == 4:
+        #Root
+        tutorial_roots['root_scenario_tut'].place(x = 5 , y = 310, width = 260, height = 110)
+        wait(window)
+        #Label
+        tutorial_widgets['lbl_scenario_tut'].place(x = 3, y = 3, width= 250, height = 100)
+
+    elif page == 5:
+        #Root
+        tutorial_roots['root_text_tut'].place(x = 270, y = 125, width = 435, height = 295)
+        wait(window)
+
+        #RadioButtons
+        tutorial_widgets['rb_option_A_tut'].place(x = 5, y = 5, width = 420, height = 90)
+        wait(window)
+
+        tutorial_widgets['rb_option_B_tut'].place(x = 5, y = 100, width = 420, height = 90)
+        wait(window)
+
+        tutorial_widgets['rb_option_C_tut'].place(x = 5, y = 195, width = 420, height = 90)
+
+    elif page == 6:
+        page_number_tut = 6
+    print(page)
 
 def default(window, images, game_widgets):
     global items_values
@@ -921,3 +1220,8 @@ def vol_pb(options_widgets):
 
 def random_number():
     return randint(1,4)
+
+def wait(window, time = 0.5):
+    window.update()
+    sleep(time)
+

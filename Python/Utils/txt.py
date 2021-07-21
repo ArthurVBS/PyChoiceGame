@@ -66,3 +66,29 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
 def show_introduction():
     print('hi')
 
+
+def show_introduction(tutorial_widgets, page):
+    if page == 0:
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Hello'
+
+    elif page == 1:
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'ih'
+
+    elif page == 2:
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'TV'
+
+    elif page == 3:
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Tel'
+
+    elif page == 4:
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Everyone'
+
+    elif page == 5:
+        tutorial_widgets['lbl_main_text_tut']['text'] = f'13215465 {page}'
+
+        tutorial_widgets['rb_option_A_tut']['text'] = 'Essa é a 1º opção'
+        tutorial_widgets['rb_option_B_tut']['text'] = 'Essa é a 2º opção'
+        tutorial_widgets['rb_option_C_tut']['text'] = 'Essa é a 3º opção'
+
+    elif page == 6:
+        tutorial_widgets['lbl_main_text_tut']['text'] = f'859215 {page}'

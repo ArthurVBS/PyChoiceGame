@@ -6,13 +6,13 @@ from tkinter import *
 #Import - Packages __________________________________________________________________________________________
 
 from Utils.images import images
-from Utils.defs import main_roots, game_roots, default, show_items_values, start_the_game
-from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widgets, gameover_widgets
+from Utils.defs import main_roots, game_roots, tutorial_roots, default, show_items_values, start_the_game
+from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widgets, gameover_widgets, tutorial_widgets
 
 #Variables __________________________________________________________________________________________________
 
 title = '- Looking for -\n a way out '
-version = 'layout v 2.8.3'
+version = 'layout v 2.9.1'
 directory = os.path.dirname(__file__)
 
 global items_values
@@ -46,15 +46,16 @@ window['background'] = '#000'
 #_____________________________________________________________________________________________________________
 
 images = images(directory)
-
 main_roots = main_roots(window)
 game_roots = game_roots(main_roots)
-game_widgets = game_widgets(window, main_roots, directory, game_roots, images, version, menu_widgets)
+tutorial_roots = tutorial_roots(main_roots)
 
+game_widgets = game_widgets(window, main_roots, directory, game_roots, images, version, menu_widgets)
 default(window, images, game_widgets)
 show_items_values(images, game_widgets)
 
-menu_widgets = menu_widgets(window, main_roots, directory, default, version, images, game_widgets, title)
+tutorial_widgets = tutorial_widgets(window, main_roots, directory, tutorial_roots, images, version)
+menu_widgets = menu_widgets(window, main_roots, directory, default, version, images, game_widgets, title, tutorial_widgets)
 credits_widgets = credits_widgets(window, main_roots, directory, version, title)
 options_widgets = options_widgets(window, main_roots, directory, images)
 gameover_widgets = gameover_widgets(window, main_roots, directory, menu_widgets)
