@@ -752,10 +752,10 @@ def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, vers
     lbl_value_food_tut = Label(tutorial_roots['root_hearts_foods_tut'], text = f'9/10', bg=bg, font = 'courier 13 bold', bd = 3, relief = 'ridge')
 
     #Items - World 1
-    lbl_item_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_item_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['item_lighter_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_item_02_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_item_03_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
-    lbl_key_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['key_E_dic'], bg=bg, bd = 3, relief = 'ridge')
+    lbl_key_01_tut = Label(tutorial_roots['root_items_world_1_tut'], image = images['key_B_dic'], bg=bg, bd = 3, relief = 'ridge')
 
     #Items - World 2
     lbl_item_04_tut = Label(tutorial_roots['root_items_world_2_tut'], image = images['empty_01_dic'], bg=bg, bd = 3, relief = 'ridge')
@@ -832,13 +832,16 @@ def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, vers
 
         'rb_option_A_tut' : rb_option_A_tut, 'rb_option_B_tut' : rb_option_B_tut,
         'rb_option_C_tut' : rb_option_C_tut, 'lbl_version_in_tut' : lbl_version_in_tut,
-        'btn_back_tut' : btn_back_tut, 'btn_next_tut' : btn_next_tut}
+        'btn_back_tut' : btn_back_tut, 'btn_next_tut' : btn_next_tut,
+        
+        'var_option' : var_option}
 
     return tutorial_widgets
 
 def click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutorial_widgets):
     global page_number_tut
     page_number_tut = 1
+    tutorial_widgets['var_option'].set('E')
     show_introduction(tutorial_widgets, page=0)
 
     #Window
