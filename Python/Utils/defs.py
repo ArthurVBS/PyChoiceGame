@@ -453,7 +453,7 @@ def credits_widgets(window, main_roots, directory, version, title):
     #Buttons
     btn_credits_back = Button(main_roots['root_credits'], text = 'Retornar ao menu', bg=bg, bd = 2.5, relief = "ridge",
                     command=lambda : click_credits_to_menu(window, main_roots, directory),
-                    cursor="hand2", font = "courier 14 bold", activebackground="#ccc", activeforeground=fg)
+                    cursor="hand2", font = "courier 14 bold", activebackground=bg_gray, activeforeground=fg)
     btn_credits_back.place(x = 0, y = 430, width = 270, height = 30)
 
     credits_widgets = {
@@ -501,24 +501,24 @@ def options_widgets(window, main_roots, directory, version, images):
 
     #Buttons
     btn_vol_max = Button(main_roots['root_options'], image = images['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",
-                cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("max", options_widgets))
+                cursor="hand2", activebackground=bg_gray, activeforeground=fg, command= lambda: volume("max", options_widgets))
     btn_vol_max.place(x = 285, y = 340, width = 75, height = 70)
 
     btn_vol_plus = Button(main_roots['root_options'], image = images['vol_plus_dic'], bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("plus", options_widgets))
+                    cursor="hand2", activebackground=bg_gray, activeforeground=fg, command= lambda: volume("plus", options_widgets))
     btn_vol_plus.place(x = 195, y = 340, width = 75, height = 70)
 
     btn_vol_minus = Button(main_roots['root_options'], image = images['vol_minus_dic'], bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("minus", options_widgets))
+                    cursor="hand2", activebackground=bg_gray, activeforeground=fg, command= lambda: volume("minus", options_widgets))
     btn_vol_minus.place(x = 105, y = 340, width = 75, height = 70)
 
     btn_vol_mute = Button(main_roots['root_options'], image = images['vol_mute_dic'], bg=bg, bd = 2, relief = "ridge",
-                    cursor="hand2", activebackground="#ccc", activeforeground=fg, command= lambda: volume("mute", options_widgets))
+                    cursor="hand2", activebackground=bg_gray, activeforeground=fg, command= lambda: volume("mute", options_widgets))
     btn_vol_mute.place(x = 15, y = 340, width = 75, height = 70)
 
     btn_options_back = Button(main_roots['root_options'], text = 'Retornar ao menu', bg=bg, bd = 2.5, relief = "ridge",
                     command=lambda : click_options_to_menu(window, main_roots, directory, options_widgets),
-                    cursor="hand2", font = "courier 14 bold", activebackground="#ccc", activeforeground=fg)
+                    cursor="hand2", font = "courier 14 bold", activebackground=bg_gray, activeforeground=fg)
     btn_options_back.place(x = 0, y = 430, width = 270, height = 30)
 
     #RadioButtons
@@ -597,7 +597,7 @@ def gameover_widgets(window, main_roots, directory, menu_widgets):
     #Buttons
     btn_gameover_back = Button(main_roots['root_game_over'], text = 'Voltar', bg=bg_dark, bd = 2, relief = "ridge", fg=fg,
                         command=lambda : click_gameover_to_menu(window, main_roots, directory, menu_widgets),
-                        cursor="hand2", font = "courier 25 bold", activebackground="#ccc", activeforeground=fg)
+                        cursor="hand2", font = "courier 25 bold", activebackground=bg_gray, activeforeground=fg)
     btn_gameover_back.place(x = 225, y = 400, width = 260, height = 50)
 
     gameover_widgets = {
@@ -771,7 +771,7 @@ def end_of_the_game_widgets(window, main_roots, directory):
 
     #Button
     btn_end_of_the_game = Button(main_roots['root_end_of_the_game'], text = '★', bg=bg_dark, bd = 2, relief = "ridge", fg=fg, 
-                                cursor="hand2", activebackground="#ccc", activeforeground=fg, font = "courier 18 bold",
+                                cursor="hand2", activebackground=bg_gray, activeforeground=fg, font = "courier 18 bold",
                                 command=lambda : end_of_the_game(window, var_user.get(), directory))
     btn_end_of_the_game.place(x = 620, y = 410, width = 80, height = 40)
 
@@ -979,12 +979,12 @@ def history_widgets(window, main_roots, directory, version):
 
     #Buttons
     btn_his_next = Button(main_roots['root_history'], text= 'Voltar', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
-                    font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
+                    font = 'courier 14 bold', activebackground=bg_gray, activeforeground=fg,
                     command=lambda : pages_history(window, main_roots, directory, page_number_his, 'back', history_widgets))
     #btn_his_next.place(x = 0, y = 430, width = 270, height = 30)
 
     btn_his_back = Button(main_roots['root_history'], text= 'Próximo', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
-                    font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
+                    font = 'courier 14 bold', activebackground=bg_gray, activeforeground=fg,
                     command=lambda : pages_history(window, main_roots, directory, page_number_his, 'next', history_widgets))
     btn_his_back.place(x = 440, y = 430, width = 270, height = 30)
 
