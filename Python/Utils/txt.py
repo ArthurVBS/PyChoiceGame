@@ -63,11 +63,19 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
     return resume
 
 
-def show_introduction():
-    print('hi')
+def show_history(history_widgets, page, world):
+    if world == 1:
+        if page == 0:
+            history_widgets['lbl_his_text']['text'] = 'Hello'
+        elif page == 1:
+            history_widgets['lbl_his_text']['text'] = f'h59 - {page}'
+        elif page == 2:
+            history_widgets['lbl_his_text']['text'] = f'h59 - {page}'
+        else:
+            history_widgets['lbl_his_text']['text'] = f'h8 - {page}'
+    
 
-
-def show_introduction(tutorial_widgets, page):
+def show_tutorial(tutorial_widgets, page):
     if page == 0:
         tutorial_widgets['lbl_main_text_tut']['text'] = 'Hello'
 

@@ -22,18 +22,60 @@ height_screen = window.winfo_screenheight()
 pos_x = int(width_screen / 2 - width / 2)
 pos_y = int(height_screen / 2 - height / 2)
 
-root_introduction = Frame(window, bg=bg_light)
-root_introduction.place(x = 5, y = 5, width = 710, height = 460)
+root_history = Frame(window, bg=bg)
+root_history.place(x = 5, y = 5, width = 710, height = 460)
 images = images(directory)
 
 window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.resizable(False,False)
 window.configure(background = '#000')
 
+page_number_his = 0
+
+def pages_history(page, action):
+    global page_number_his
+    if action == 'next':
+        page_number_his += 1
+        page = page_number_his
+    elif action == 'back':
+        page_number_his -= 1
+        page = page_number_his
+
+    if page == 0:
+        print('exit')
+    if page == 1:
+        lbl_his_text['text'] = f'h59 - {page}'
+    elif page == 2:
+        lbl_his_text['text'] = f'h59 - {page}'
+    else:
+        lbl_his_text['text'] = f'h8 - {page}'
+
+    print(page_number_his)
+
+#Labels
+lbl_his_main = Label(root_history, text = '- Introdução -', bg=bg, font = 'courier 40 bold')
+lbl_his_main.place(x = 5, y = 5, width = 700, height = 115)
+
+lbl_his_text = Label(root_history, text = '', bg=bg, bd = 5, relief = 'solid', font = 'courier 18 italic')
+lbl_his_text.place(x = -5, y = 125, width = 720, height = 305)
+
+lbl_his_version = Label(root_history, text = version, bg=bg, font = 'courier 10 bold')
+lbl_his_version.place(x = 275, y = 430, width = 160, height = 30)
+
+#Buttons
+btn_his_next = Button(root_history, text= 'Voltar', bg=bg, bd = 2, relief = 'ridge', cursor='hand2',
+                font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
+                command=lambda : pages_history(page_number_his, 'back'))
+btn_his_next.place(x = 0, y = 430, width = 270, height = 30)
+
+btn_his_back = Button(root_history, text= 'Próximo', bg=bg, bd = 2, relief = 'ridge', cursor='hand2',
+                font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
+                command=lambda : pages_history(page_number_his, 'next'))
+btn_his_back.place(x = 440, y = 430, width = 270, height = 30)
 
 
 
-
+window.mainloop()
 
 '''
 page_number = 1
@@ -243,4 +285,3 @@ btn_next_tut = Button(root_back_next_tut, text = 'Avançar', bg=bg_dark, bd = 1,
                 fg=fg, command=lambda : pages_tutorial(page_number))
 btn_next_tut.place(x = 440, y = 5, width = 270, height = 30)
 '''
-window.mainloop()
