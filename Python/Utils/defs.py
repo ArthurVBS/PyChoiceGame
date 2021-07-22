@@ -94,7 +94,7 @@ def game_roots(main_roots):
     return game_roots
 
 
-def game_widgets(window, main_roots, directory, game_roots, images, version):
+def game_widgets(window, main_roots, directory, game_roots, images, version, history_widgets):
     #Hearts and Foods
     lbl_heart = Label(game_roots['root_hearts_foods'], image = images['heart_11_dic'], bg=bg, bd = 3, relief = 'ridge')
     lbl_heart.place(x = 2.5, y = 2.5, width = 35, height = 32.5)
@@ -183,7 +183,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version):
 
     btn_next = Button(game_roots['root_back_next'], text = 'Avançar', bg=bg_dark, bd = 1.5, relief = 'ridge',
                     cursor='hand2', font = 'courier 14 bold', activebackground=bg_gray, activeforeground=bg_light,
-                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets, main_roots))
+                    fg=fg, command=lambda: click_next_level(window, directory, var_option, images, game_widgets, main_roots, history_widgets))
     btn_next.place(x = 440, y = 5, width = 270, height = 30)
 
     #Ways
@@ -232,11 +232,12 @@ def game_widgets(window, main_roots, directory, game_roots, images, version):
     return game_widgets
 
 
-def click_next_level(window, directory, var_option, images, game_widgets, main_roots):
+def click_next_level(window, directory, var_option, images, game_widgets, main_roots, history_widgets):
     global items_values
     global vol
 
     if var_option.get() in 'ABC':
+        history = False
         resume = show_top_level(directory, items_values["world"], items_values["level"],
                                 var_option.get(), random_number(), items_values, vol)
 
@@ -246,21 +247,19 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
             items_values['level'] = 1
             items_values['world'] += 1
 
-            if items_values['world'] == 1:
-                soundtrack(directory, vol = vol, soundtrack = 1)
-                print('World 1')
-            elif items_values['world'] == 2:
-                soundtrack(directory, vol = vol, soundtrack = 2)
-                print('World 2')
-            elif items_values['world'] == 3:
-                soundtrack(directory, vol = vol, soundtrack = 3)
-                print('World 3')
-
-            elif items_values['world'] > 3:
+            if items_values['world'] > 3:
                 print('END GAME')
+            else:
+                click_history(window, main_roots, directory, history_widgets)
+                history = True
 
         show_items_values(images, game_widgets)
-        window.title(f'Level {items_values["world"]}-{items_values["level"]}')
+
+        if history:
+            window.title('História')
+        else:
+            window.title(f'Level {items_values["world"]}-{items_values["level"]}')
+
         show_menu_options(items_values['world'], items_values['level'], game_widgets)
 
         if items_values['heart'] <= 0 or items_values['food'] <= 0:
@@ -934,10 +933,10 @@ def history_widgets(window, main_roots, directory, version):
     lbl_his_version.place(x = 275, y = 430, width = 160, height = 30)
 
     #Buttons
-    btn_his_next = Button(main_roots['root_history'], text= 'Retornar ao menu', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
+    btn_his_next = Button(main_roots['root_history'], text= 'Voltar', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
                     font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
-                    command=lambda : click_his_to_menu(window, main_roots, directory))
-    btn_his_next.place(x = 0, y = 430, width = 270, height = 30)
+                    command=lambda : pages_history(window, main_roots, directory, page_number_his, 'back', history_widgets))
+    #btn_his_next.place(x = 0, y = 430, width = 270, height = 30)
 
     btn_his_back = Button(main_roots['root_history'], text= 'Próximo', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
                     font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
@@ -1097,13 +1096,11 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
         page = page_number_his
 
     if page <= 0:
-        history_widgets['btn_his_next']['text'] = 'Retornar ao menu'
-        history_widgets['btn_his_next']['command'] = lambda: click_his_to_menu(window, main_roots, directory)
+        history_widgets['btn_his_next'].place_forget()
     elif page == 1:
-        history_widgets['btn_his_next']['text'] = 'Voltar'
-        history_widgets['btn_his_next']['command'] = lambda: pages_history(window, main_roots, directory,
-                                                        page_number_his, 'back', history_widgets)
-    elif page == 5: #To the game
+        history_widgets['btn_his_next'].place(x = 0, y = 430, width = 270, height = 30)
+
+    if items_values['world'] == 1 and page == 5:
         page_number_his = 0
         #Sound
         soundtrack(directory, vol = vol, soundtrack = 1)
@@ -1112,8 +1109,35 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
         window.title(f'Level {items_values["world"]}-{items_values["level"]}')
 
         #History
-        history_widgets['btn_his_next']['text'] = 'Retornar ao menu'
-        history_widgets['btn_his_next']['command'] = lambda: click_his_to_menu(window, main_roots, directory)
+        history_widgets['btn_his_next'].place_forget()
+
+        #Main_roots
+        main_roots['root_history'].place_forget()
+
+    elif items_values['world'] == 2 and page == 4:
+        page_number_his = 0
+        #Sound
+        soundtrack(directory, vol = vol, soundtrack = 2)
+
+        #Window
+        window.title(f'Level {items_values["world"]}-{items_values["level"]}')
+
+        #History
+        history_widgets['btn_his_next'].place_forget()
+
+        #Main_roots
+        main_roots['root_history'].place_forget()
+
+    elif items_values['world'] == 3 and page == 6:
+        page_number_his = 0
+        #Sound
+        soundtrack(directory, vol = vol, soundtrack = 3)
+
+        #Window
+        window.title(f'Level {items_values["world"]}-{items_values["level"]}')
+
+        #History
+        history_widgets['btn_his_next'].place_forget()
 
         #Main_roots
         main_roots['root_history'].place_forget()

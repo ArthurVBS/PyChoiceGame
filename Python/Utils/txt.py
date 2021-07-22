@@ -68,11 +68,15 @@ def show_history(history_widgets, page, world):
         if page == 0:
             history_widgets['lbl_his_text']['text'] = 'Hello'
         elif page == 1:
-            history_widgets['lbl_his_text']['text'] = f'h59 - {page}'
+            history_widgets['lbl_his_text']['text'] = f'h51 - {page}'
         elif page == 2:
-            history_widgets['lbl_his_text']['text'] = f'h59 - {page}'
-        else:
-            history_widgets['lbl_his_text']['text'] = f'h8 - {page}'
+            history_widgets['lbl_his_text']['text'] = f'h57 - {page}'
+        elif page == 3:
+            history_widgets['lbl_his_text']['text'] = f'h54 - {page}'
+        elif page == 4:
+            history_widgets['lbl_his_text']['text'] = f'h56 - {page}'
+    else:
+        history_widgets['lbl_his_text']['text'] = f'Nothing - página {page}'
     
 
 def show_tutorial(tutorial_widgets, page):
