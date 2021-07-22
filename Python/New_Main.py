@@ -12,7 +12,7 @@ from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widg
 #Variables __________________________________________________________________________________________________
 
 title = '- Looking for -\n a way out '
-version = 'layout v 2.10.1'
+version = 'layout v 2.10.2'
 directory = os.path.dirname(__file__)
 
 global items_values

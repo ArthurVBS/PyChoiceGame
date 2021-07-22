@@ -40,6 +40,7 @@ def main_roots(window):
 
     return main_roots
 
+
 def start_the_game(window, main_roots, directory):
     global vol
 
@@ -52,6 +53,7 @@ def start_the_game(window, main_roots, directory):
     #Window
     window.title('Main Menu')
     window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+
 
 #Functions - Game ___________________________________________________________________________________________
 
@@ -90,6 +92,7 @@ def game_roots(main_roots):
         'root_back_next' : root_back_next, 'root_ways' : root_ways}
 
     return game_roots
+
 
 def game_widgets(window, main_roots, directory, game_roots, images, version):
     #Hearts and Foods
@@ -228,6 +231,7 @@ def game_widgets(window, main_roots, directory, game_roots, images, version):
 
     return game_widgets
 
+
 def click_next_level(window, directory, var_option, images, game_widgets, main_roots):
     global items_values
     global vol
@@ -270,6 +274,7 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
         messagebox.showerror(title = "Escolha", icon = messagebox.INFO,
         message = "Escolha uma das opções presente\npara poder continuar.")
 
+
 def click_game_to_menu(window, main_roots, directory, var_option, with_sound = False):
     global vol
     var_option.set('E')
@@ -283,6 +288,7 @@ def click_game_to_menu(window, main_roots, directory, var_option, with_sound = F
     window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
 
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 #Functions - Main Menu ______________________________________________________________________________________
 
@@ -339,6 +345,7 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
 
     return menu_widgets
 
+
 def click_new_game(window, main_roots, directory, default, images, game_widgets, menu_widgets, history_widgets):
     ok_cancel_newgame = messagebox.askokcancel(title = "Novo Jogo", message = "Desejas Iniciar um novo Jogo?",
     detail = "Caso possua um Save anterior ele será sobrescito")
@@ -353,9 +360,11 @@ def click_new_game(window, main_roots, directory, default, images, game_widgets,
         menu_widgets['btn_continue'].config(cursor="hand2", activebackground=bg_gray, activeforeground=fg,
         relief = "ridge", fg='#000', command=lambda : click_continue(window, main_roots, directory))
 
+
 def click_nothing():
     messagebox.showerror(title = "Continuar?", icon = messagebox.INFO,
     message = "Inicie um Novo Jogo para que você possa\ncontinuar de onde parou.\t")
+
 
 def click_continue(window, main_roots, directory):
     global items_values
@@ -374,6 +383,7 @@ def click_continue(window, main_roots, directory):
 
     main_roots['root_play_game'].place(x = 5, y = 5, width = 710, height = 460)
 
+
 def click_tutorial(window, main_roots, directory, tutorial_widgets):
     window.title('Tutorial')
     window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
@@ -381,6 +391,7 @@ def click_tutorial(window, main_roots, directory, tutorial_widgets):
     show_tutorial(tutorial_widgets, page=0)
     tutorial_widgets['btn_next_tut'].place(x = 440, y = 5, width = 270, height = 30)
     main_roots['root_tutorial'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 def click_history(window, main_roots, directory, history_widgets):
     global items_values
@@ -390,11 +401,13 @@ def click_history(window, main_roots, directory, history_widgets):
 
     main_roots['root_history'].place(x = 5, y = 5, width = 710, height = 460)
 
+
 def click_options(window, main_roots, directory):
     window.title('Ajustes')
     window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
 
     main_roots['root_options'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 def click_credits(window, main_roots, directory):
     window.title('Créditos')
@@ -402,11 +415,13 @@ def click_credits(window, main_roots, directory):
 
     main_roots['root_credits'].place(x = 5, y = 5, width = 710, height = 460)
 
+
 def click_quit(window):
     ok_cancel_quit = messagebox.askokcancel(title = "Sair?", message = "Você realmente deseja sair?\t\t",
     detail = "Desde já obrigado por jogar")
     if ok_cancel_quit == True:
         window.destroy()
+
 
 #Functions - Credits ________________________________________________________________________________________
 
@@ -441,12 +456,14 @@ def credits_widgets(window, main_roots, directory, version, title):
 
     return credits_widgets
 
+
 def click_credits_to_menu(window, main_roots, directory):
     window.title('Main Menu')
     window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
 
     main_roots['root_credits'].place_forget()
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 #Functions - Options ________________________________________________________________________________________
 
@@ -473,7 +490,7 @@ def options_widgets(window, main_roots, directory, version, images):
     lbl_language.place(x = 355, y = 85, width = 350, height = 65)
 
     lbl_vol = Label(main_roots['root_options'], text = f'{vol*100:.1f}%', bg=bg, font = "courier 20 bold")
-    lbl_vol.place(x = 15, y = 220, width = 350, height = 40)
+    lbl_vol.place(x = 15, y = 220, width = 347.5, height = 40)
 
     #Buttons
     btn_vol_max = Button(main_roots['root_options'], image = images['vol_max_dic'], bg=bg, bd = 2, relief = "ridge",
@@ -526,7 +543,7 @@ def options_widgets(window, main_roots, directory, version, images):
     var_progressBar.set(vol)
 
     pb_vol = ttk.Progressbar(main_roots['root_options'], variable = var_progressBar, maximum = 1)
-    pb_vol.place(x = 15 , y = 180, width = 350, height = 35)
+    pb_vol.place(x = 15 , y = 180, width = 347.5, height = 35)
 
     options_widgets = {
         'lbl_options_title' : lbl_options_title, 'lbl_volume' : lbl_volume, 'lbl_language' : lbl_language,
@@ -543,6 +560,7 @@ def options_widgets(window, main_roots, directory, version, images):
 
     return options_widgets
 
+
 def click_options_to_menu(window, main_roots, directory, options_widgets):
     value_var_language = options_widgets['var_language'].get()
 
@@ -557,6 +575,7 @@ def click_options_to_menu(window, main_roots, directory, options_widgets):
         window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
 
         main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 #Functions - Game over ______________________________________________________________________________________
 
@@ -580,6 +599,7 @@ def gameover_widgets(window, main_roots, directory, menu_widgets):
 
     return gameover_widgets
 
+
 def click_gameover_to_menu(window, main_roots, directory, menu_widgets):
     global vol
     main_roots['root_game_over'].place_forget()
@@ -592,6 +612,7 @@ def click_gameover_to_menu(window, main_roots, directory, menu_widgets):
                                         activebackground=None, activeforeground=None) 
 
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 #Functions - Result _________________________________________________________________________________________
 
@@ -717,7 +738,8 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
 
     win_toplevel.mainloop()
 
-#Functions - Tutotrial ______________________________________________________________________________________
+
+#Functions - Tutorial _______________________________________________________________________________________
 
 def tutorial_roots(main_roots):
     root_hearts_foods_tut = Frame(main_roots['root_tutorial'], bg=bg_light, bd = 2, relief = 'sunken')
@@ -740,6 +762,7 @@ def tutorial_roots(main_roots):
         'root_back_next_tut' : root_back_next_tut, 'root_ways_tut' : root_ways_tut}
 
     return tutorial_roots
+
 
 def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, version):
     global page_number_tut
@@ -837,6 +860,7 @@ def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, vers
 
     return tutorial_widgets
 
+
 def click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutorial_widgets):
     global page_number_tut
     page_number_tut = 1
@@ -893,6 +917,7 @@ def click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutori
     main_roots['root_tutorial'].place_forget()
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
+
 #Functions - History  _______________________________________________________________________________________
 
 def history_widgets(window, main_roots, directory, version):
@@ -909,12 +934,12 @@ def history_widgets(window, main_roots, directory, version):
     lbl_his_version.place(x = 275, y = 430, width = 160, height = 30)
 
     #Buttons
-    btn_his_next = Button(main_roots['root_history'], text= 'Retornar ao menu', bg=bg, bd = 2, relief = 'ridge', cursor='hand2',
+    btn_his_next = Button(main_roots['root_history'], text= 'Retornar ao menu', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
                     font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
                     command=lambda : click_his_to_menu(window, main_roots, directory))
     btn_his_next.place(x = 0, y = 430, width = 270, height = 30)
 
-    btn_his_back = Button(main_roots['root_history'], text= 'Próximo', bg=bg, bd = 2, relief = 'ridge', cursor='hand2',
+    btn_his_back = Button(main_roots['root_history'], text= 'Próximo', bg=bg, bd = 2.5, relief = 'ridge', cursor='hand2',
                     font = 'courier 14 bold', activebackground='#ccc', activeforeground=fg,
                     command=lambda : pages_history(window, main_roots, directory, page_number_his, 'next', history_widgets))
     btn_his_back.place(x = 440, y = 430, width = 270, height = 30)
@@ -925,6 +950,7 @@ def history_widgets(window, main_roots, directory, version):
 
     return history_widgets
 
+
 def click_his_to_menu(window, main_roots, directory):
     global page_number_his
     page_number_his = 0
@@ -934,6 +960,7 @@ def click_his_to_menu(window, main_roots, directory):
 
     main_roots['root_history'].place_forget()
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+
 
 #Others Functions ___________________________________________________________________________________________
 
@@ -1058,6 +1085,7 @@ def pages_tutorial(window, tutorial_roots, tutorial_widgets , page):
     print(page)
     tutorial_widgets['btn_next_tut']['text'] = 'Avançar'
 
+
 def pages_history(window, main_roots, directory, page, action, history_widgets):
     global page_number_his
     global items_values
@@ -1092,6 +1120,7 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
 
     show_history(history_widgets, page, items_values['world'])
     print(page_number_his)
+
 
 def default(window, images, game_widgets):
     global items_values
@@ -1147,6 +1176,7 @@ def default(window, images, game_widgets):
     game_widgets['lbl_item_crowbar']['image'] = images['empty_01_dic']
     game_widgets['lbl_item_screwdriver']['image'] = images['empty_01_dic']
     game_widgets['lbl_item_gear']['image'] = images['empty_01_dic']
+
 
 def show_items_values(images, game_widgets):
     global items_values
@@ -1268,12 +1298,14 @@ def show_items_values(images, game_widgets):
     ways()
     scenario()
 
+
 def Game_Over(window, directory, main_roots):
     global vol
     main_roots['root_main_menu'].place_forget()
     main_roots['root_game_over'].place(x = 5, y = 5, width = 710, height = 460)
     soundtrack(directory, vol = vol, soundtrack = -1)
     window.title('Game Over')
+
 
 def volume(option, options_widgets):
     global vol
@@ -1289,6 +1321,7 @@ def volume(option, options_widgets):
 
     vol_pb(options_widgets)
 
+
 def vol_pb(options_widgets):
     global vol
     var_progressBar = DoubleVar()
@@ -1296,14 +1329,14 @@ def vol_pb(options_widgets):
     text_vol = f'{vol*100:.1f}%'
 
     options_widgets['pb_vol'].configure(variable = var_progressBar)
-    options_widgets['pb_vol'].place(x = 15 , y = 180, width = 350, height = 35)
-
     options_widgets['lbl_vol'].configure(text = text_vol)
-    options_widgets['lbl_vol'].place(x = 15, y = 220, width = 350, height = 40)
+
 
 def random_number():
     return randint(1,4)
 
+
 def wait(window, time = 0.5):
     window.update()
     sleep(time)
+
