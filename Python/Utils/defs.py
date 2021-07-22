@@ -46,8 +46,7 @@ def start_the_game(window, main_roots, directory):
     global vol
 
     #Menu
-    #main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
-    main_roots['root_end_of_the_game'].place(x = 5, y = 5, width = 710, height = 460)
+    main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
     #Sound
     vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
@@ -250,7 +249,7 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
             items_values['world'] += 1
 
             if items_values['world'] > 3:
-                print('END GAME')
+                click_end_of_the_game(window, main_roots, directory)
             else:
                 click_history(window, main_roots, directory, history_widgets)
                 history = True
@@ -1412,6 +1411,8 @@ def wait(window, time = 0.5):
 
 
 def end_of_the_game(window, user, directory):
-    voice_over(directory, msg = f'{user}, Muito obrigado por jogar!')
-    window.quit()
+    global vol
+    if vol != 0:
+        voice_over(directory, msg = f'{user}, Muito obrigado por jogar!')
+    window.destroy()
 
