@@ -6,13 +6,14 @@ from tkinter import *
 #Import - Packages __________________________________________________________________________________________
 
 from Utils.images import images
-from Utils.defs import main_roots, game_roots, tutorial_roots, default, show_items_values, start_the_game, history_widgets
-from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widgets, gameover_widgets, tutorial_widgets
+from Utils.defs import main_roots, game_roots, tutorial_roots, default, show_items_values, start_the_game
+from Utils.defs import game_widgets, menu_widgets, credits_widgets, options_widgets, gameover_widgets
+from Utils.defs import history_widgets, tutorial_widgets, end_of_the_game_widgets
 
 #Variables __________________________________________________________________________________________________
 
 title = '- Looking for -\n a way out '
-version = 'layout v 2.11.1'
+version = 'layout v 2.12.1'
 directory = os.path.dirname(__file__)
 
 global items_values
@@ -63,6 +64,7 @@ menu_widgets = menu_widgets(window, main_roots, directory, default, version, ima
 credits_widgets = credits_widgets(window, main_roots, directory, version, title)
 options_widgets = options_widgets(window, main_roots, directory, version, images)
 gameover_widgets = gameover_widgets(window, main_roots, directory, menu_widgets)
+end_of_the_game_widgets(window, main_roots, directory)
 
 start_the_game(window, main_roots, directory)
 

@@ -9,10 +9,10 @@ from time import sleep
 #Import - Packages __________________________________________________________________________________________
 
 try:
-    from audio import  mixer_pm, soundtrack
+    from sound import  mixer_pm, soundtrack, voice_over
     from txt import show_menu_options, show_top_level, show_tutorial, show_history
 except:
-    from Utils.audio import mixer_pm, soundtrack
+    from Utils.sound import mixer_pm, soundtrack, voice_over
     from Utils.txt import show_menu_options, show_top_level, show_tutorial, show_history
 
 #Variables __________________________________________________________________________________________________
@@ -28,15 +28,16 @@ def main_roots(window):
     root_play_game = Frame(window, bg=bg)
     root_main_menu = Frame(window, bg=bg)
     root_game_over = Frame(window, bg=bg_dark)
+    root_end_of_the_game = Frame(window, bg=bg_dark)
     root_credits = Frame(window, bg=bg)
     root_options = Frame(window, bg=bg)
     root_tutorial = Frame(window, bg=bg)
     root_history = Frame(window, bg=bg)
 
     main_roots = {
-        'root_play_game' : root_play_game, 'root_main_menu' : root_main_menu,
+        'root_play_game' : root_play_game, 'root_main_menu' : root_main_menu, 'root_tutorial' : root_tutorial,
         'root_game_over' : root_game_over, 'root_credits' : root_credits, 'root_options' : root_options,
-        'root_tutorial' : root_tutorial, 'root_history' : root_history}
+        'root_history' : root_history, 'root_end_of_the_game' : root_end_of_the_game}
 
     return main_roots
 
@@ -45,7 +46,8 @@ def start_the_game(window, main_roots, directory):
     global vol
 
     #Menu
-    main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+    #main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
+    main_roots['root_end_of_the_game'].place(x = 5, y = 5, width = 710, height = 460)
 
     #Sound
     vol = soundtrack(directory, vol = 0.5, soundtrack = 0)
@@ -401,6 +403,13 @@ def click_history(window, main_roots, directory, history_widgets):
     main_roots['root_history'].place(x = 5, y = 5, width = 710, height = 460)
 
 
+def click_end_of_the_game(window, main_roots, directory):
+    window.title('Fim de Jogo')
+    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+
+    main_roots['root_end_of_the_game'].place(x = 5, y = 5, width = 710, height = 460)
+
+
 def click_options(window, main_roots, directory):
     window.title('Ajustes')
     window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
@@ -736,6 +745,43 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
     
 
     win_toplevel.mainloop()
+
+
+#Functions - End of the Game ________________________________________________________________________________
+
+def end_of_the_game_widgets(window, main_roots, directory):
+    #Labels
+    lbl_end_of_the_game = Label(main_roots['root_end_of_the_game'], text = '- End Game -', bg=bg_dark,
+                                font = 'courier 50 bold', justify=CENTER, fg=fg)
+    lbl_end_of_the_game.place(x = 5, y = 5, width = 700, height = 100)
+
+    lbl_thanks_for_playing = Label(main_roots['root_end_of_the_game'], bg=bg_dark, font = 'courier 26 bold',
+                                    text = 'Obrigado por jogar e zerar\no meu jogo!', 
+                                    justify=CENTER, fg=fg)
+    lbl_thanks_for_playing.place(x = 5, y = 115, width = 700, height = 100)
+
+    lbl_user = Label(main_roots['root_end_of_the_game'], bg=bg_dark, font = 'courier 18 bold',
+                    text = 'Insira seu nome:', anchor=W, fg=fg)
+    lbl_user.place(x = 10, y = 370, width = 595, height = 40)
+
+    #Entry
+    var_user = StringVar()
+    entry_user = Entry(main_roots['root_end_of_the_game'], bg=bg, bd = 2, relief = "ridge", font = "courier 18 bold",
+                        textvariable = var_user)
+    entry_user.place(x = 10, y = 410, width = 595, height = 40)
+
+    #Button
+    btn_end_of_the_game = Button(main_roots['root_end_of_the_game'], text = '★', bg=bg_dark, bd = 2, relief = "ridge", fg=fg, 
+                                cursor="hand2", activebackground="#ccc", activeforeground=fg, font = "courier 18 bold",
+                                command=lambda : end_of_the_game(window, var_user.get(), directory))
+    btn_end_of_the_game.place(x = 620, y = 410, width = 80, height = 40)
+
+    end_of_the_game_widgets = {
+        'lbl_end_of_the_game' : lbl_end_of_the_game, 'lbl_thanks_for_playing' : lbl_thanks_for_playing,
+        'lbl_user' : lbl_user, 'entry_user'  :entry_user, 'var_user' : var_user,
+        'btn_end_of_the_game' : btn_end_of_the_game}
+
+    return end_of_the_game_widgets
 
 
 #Functions - Tutorial _______________________________________________________________________________________
@@ -1363,4 +1409,9 @@ def random_number():
 def wait(window, time = 0.5):
     window.update()
     sleep(time)
+
+
+def end_of_the_game(window, user, directory):
+    voice_over(directory, msg = f'{user}, Muito obrigado por jogar!')
+    window.quit()
 
