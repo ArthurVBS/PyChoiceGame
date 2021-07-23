@@ -64,19 +64,58 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
 
 
 def show_history(history_widgets, page, world):
+    title = history_widgets['lbl_his_main']
+    history = history_widgets['lbl_his_text']
+
     if world == 1:
+        title['text'] = '- A chegada -'
+
         if page == 0:
-            history_widgets['lbl_his_text']['text'] = 'Hello'
+            history['text']='Após uma longa viagem de intercambio,\n' +\
+                            'Sam e Annie chegam a uma bela cidade.\n\n' +\
+                            'Estabelendo-se no hotel e depois de\n' +\
+                            'fazer o check-in, elas elaboram o\n' +\
+                            'que vão fazer no dia seguinte.\n'
+
         elif page == 1:
-            history_widgets['lbl_his_text']['text'] = f'h51 - {page}'
+            history['text']='Elas decidiram fazer uma trilha\n' +\
+                            'por uma famosa floresta, afim de\n' +\
+                            'conhecer a fauna e a flora local.\n\n'+\
+                            'Elas entraram em contato com um\n' +\
+                            'guia para as conduzir pela trilha.\n'
+
         elif page == 2:
-            history_widgets['lbl_his_text']['text'] = f'h57 - {page}'
+            history['text']='No dia seguinte, iniciou-se a trilha.\n\n' +\
+                            'Tudo ia nos conformes até que em uma\n' +\
+                            'parte densa da floresta as meninas\n' +\
+                            'após tanto conversar, se distrairam\n' +\
+                            'e não encontraram mais o guia.\n'
+
         elif page == 3:
-            history_widgets['lbl_his_text']['text'] = f'h54 - {page}'
+            history['text']='Elas gritaram pelo john, o guia, porém\n' +\
+                            'sem respostas, elas se cansam e decidem\n' +\
+                            'voltar por onde vieram.\n\n' +\
+                            'Após uma hora de caminhada elas se\n' +\
+                            'dão conta que estão perdidas.\n'
+
         elif page == 4:
-            history_widgets['lbl_his_text']['text'] = f'h56 - {page}'
-    else:
-        history_widgets['lbl_his_text']['text'] = f'Nothing - página {page}'
+            history['text']='Desnorteadas naquela grande e densa\n' +\
+                            'floresta, elas optam por seguir num\n' +\
+                            'caminho que aparenta ser o correto.\n\n' +\
+                            'Elas possuem somente uma chave, um\n' +\
+                            'isqueiro e algumas comidas na mochila.\n'
+    
+    elif world == 2:
+        title['text'] = '- Aterrorizada -'
+        history['text']=''
+
+    elif world == 3:
+        title['text'] = '- Um caminho -'
+        history['text']=''
+
+    elif world == 4:
+        title['text'] = '- Uma saída -'
+        history['text']=''
     
 
 def show_tutorial(tutorial_widgets, page):
@@ -117,4 +156,4 @@ def show_tutorial(tutorial_widgets, page):
     elif page == 6:
         tutorial_widgets['lbl_main_text_tut']['text'] = 'Pronto! Agora você já compreende tudo sobre a sua\n' +\
                                                         'jornada. Inicie essa grande aventura indo ao menu\n' +\
-                                                        'principal do jogo \'Retornar ao menu\' para voltar.'
+                                                        'principal do jogo \'Retornar ao Menu\' para voltar.'

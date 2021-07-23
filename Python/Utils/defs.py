@@ -249,7 +249,9 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
             items_values['world'] += 1
 
             if items_values['world'] > 3:
+                click_history(window, main_roots, directory, history_widgets)
                 click_end_of_the_game(window, main_roots, directory)
+                history = True
             else:
                 click_history(window, main_roots, directory, history_widgets)
                 history = True
@@ -971,7 +973,7 @@ def history_widgets(window, main_roots, directory, version):
     lbl_his_main = Label(main_roots['root_history'], text = '- Introdução -', bg=bg, font = 'courier 40 bold')
     lbl_his_main.place(x = 5, y = 5, width = 700, height = 115)
 
-    lbl_his_text = Label(main_roots['root_history'], text = '', bg=bg, bd = 5, relief = 'solid', font = 'courier 18 italic')
+    lbl_his_text = Label(main_roots['root_history'], text = '', bg=bg, bd = 5, relief = 'solid', font = 'courier 22 italic')
     lbl_his_text.place(x = -5, y = 125, width = 720, height = 305)
 
     lbl_his_version = Label(main_roots['root_history'], text = version, bg=bg, font = 'courier 10 bold')
@@ -1174,6 +1176,20 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
         main_roots['root_history'].place_forget()
 
     elif items_values['world'] == 3 and page == 6:
+        page_number_his = 0
+        #Sound
+        soundtrack(directory, vol = vol, soundtrack = 3)
+
+        #Window
+        window.title(f'Level {items_values["world"]}-{items_values["level"]}')
+
+        #History
+        history_widgets['btn_his_next'].place_forget()
+
+        #Main_roots
+        main_roots['root_history'].place_forget()
+
+    elif items_values['world'] == 4 and page == 2:
         page_number_his = 0
         #Sound
         soundtrack(directory, vol = vol, soundtrack = 3)
