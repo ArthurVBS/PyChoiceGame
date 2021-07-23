@@ -81,26 +81,40 @@ def show_history(history_widgets, page, world):
 
 def show_tutorial(tutorial_widgets, page):
     if page == 0:
-        tutorial_widgets['lbl_main_text_tut']['text'] = 'Hello'
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'O jogo consiste em escolhas, você deve decidir com\n'+\
+                                                        'sabedoria, pois suas escolhas influenciarão a sua \n' +\
+                                                        'grande jornada! Aperte \'Avançar\' para prosseguir.'
 
     elif page == 1:
-        tutorial_widgets['lbl_main_text_tut']['text'] = 'ih'
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Ali está a sua saúde e a comida em sua mochila.\n'+\
+                                                        'Suas escolhas alterarão os valores, portanto saiba\n' +\
+                                                        'fazer ótimas escolhas! \'Avançar\' para prosseguir.'
 
     elif page == 2:
-        tutorial_widgets['lbl_main_text_tut']['text'] = 'TV'
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Em sua jornada você encontrará itens especiais e\n' +\
+                                                        'também algumas chaves, por meio deles sua jornada\n' +\
+                                                        'irá se tornar única! \'Avançar\' para prosseguir.'
 
     elif page == 3:
-        tutorial_widgets['lbl_main_text_tut']['text'] = 'Tel'
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Toda aventura é composta por caminhos, mesmo que\n' +\
+                                                        'eles sejam retilíneos, o importante é sempre ir\n' +\
+                                                        'adiante! \'Avançar\' para prosseguir.'
 
     elif page == 4:
-        tutorial_widgets['lbl_main_text_tut']['text'] = 'Everyone'
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Sua jornada se passará em cenários distintos, como\n' +\
+                                                        'uma densa floresta, o alto de uma montanha ou até\n' +\
+                                                        'uma mina abandonada. \'Avançar\' para prosseguir.'
 
     elif page == 5:
-        tutorial_widgets['lbl_main_text_tut']['text'] = f'13215465 {page}'
+        tutorial_widgets['lbl_main_text_tut']['text'] = '\'Escolhas\', o tema principal dessa grande aventura,\n' +\
+                                                        'por meio delas você abrirá oportunidades e sentirá\n' +\
+                                                        'o \'efeito borboleta\'! \'Avançar\' para prosseguir.'
 
         tutorial_widgets['rb_option_A_tut']['text'] = 'Essa é a 1º opção'
         tutorial_widgets['rb_option_B_tut']['text'] = 'Essa é a 2º opção'
         tutorial_widgets['rb_option_C_tut']['text'] = 'Essa é a 3º opção'
 
     elif page == 6:
-        tutorial_widgets['lbl_main_text_tut']['text'] = f'859215 {page}'
+        tutorial_widgets['lbl_main_text_tut']['text'] = 'Pronto! Agora você já compreende tudo sobre a sua\n' +\
+                                                        'jornada. Inicie essa grande aventura indo ao menu\n' +\
+                                                        'principal do jogo \'Retornar ao menu\' para voltar.'

@@ -847,7 +847,7 @@ def tutorial_widgets(window, main_roots, directory, tutorial_roots, images, vers
     lbl_scenario_tut = Label(tutorial_roots['root_scenario_tut'], image = images['scenario_01_dic'], bg=bg, anchor = CENTER)
 
     #TXT
-    lbl_main_text_tut = Label(tutorial_roots['root_txt_tut'], bg=bg, justify= LEFT, bd = 4, relief = 'ridge', font = 'courier 16 bold')
+    lbl_main_text_tut = Label(tutorial_roots['root_txt_tut'], bg=bg, bd = 4, relief = 'ridge', font = 'courier 16 bold')
     lbl_main_text_tut.place(x = 0, y = 0, width = 710, height = 115)
 
     #Texts
