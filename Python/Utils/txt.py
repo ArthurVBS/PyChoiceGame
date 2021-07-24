@@ -15,23 +15,63 @@ def show_menu_options(world, level, game_widgets):
 
     if world == 1:
         if level == 1:
-            title['text'] = 'Você está caminhando a um certo tempo, o seu\n' +\
-                            'estômago ronca. Você encontra algumas frutinhas\n' +\
-                            'azuis em um arbusto que podem ser comestíveis.'
+            title['text'] = 'Vocês estão caminhando a um certo tempo, tanto que\n' +\
+                            'já está entardecendo, além do mais vocês estão com\n' +\
+                            'bastante fome. Vocês encontram algumas frutinhas\n' +\
+                            'azuis em um arbusto que aparentam ser comestíveis.'
 
-            option_A['text'] = 'Pegar as frutinhas do arbusto e\nsaciar a sua fome;'
+            option_A['text'] = 'Pegar as frutinhas do arbusto e\nsaciar a fome;'
             option_B['text'] = 'Ignorar as frutinhas e seguir em\nfrente;'
             option_C['text'] = 'Pegar alguma comida da mochila;'
 
         elif level == 2:
-            title['text'] = 'HI, everyone'
+            title['text'] = 'Até aqui o sol as acompanhava, porém a noite vem\n' +\
+                            'a espreita, é necessário parar e dormir, vocês\n' +\
+                            'observam uma caverna, uma antiga casa inacabada\n' +\
+                            'e um local no chão da floresta para poder dormir.'
 
-            option_A['text'] = 'Hi'
-            option_B['text'] = 'Hi'
-            option_C['text'] = 'Hi'
+            option_A['text'] = 'Dormir na caverna;'
+            option_B['text'] = 'Dormir na casa inacabada;'
+            option_C['text'] = 'Dormir no chão da floresta;'
 
         elif level == 3:
-            print('hi')
+            title['text'] = 'Após acordar e começar a caminhar em busca de uma\n'  +\
+                            'saída, você ouve um uivo, paralisada, você observa\n' +\
+                            'que esse uivo vem de um lobo filhote preso a uma\n' +\
+                            'armadilha de urso.'
+
+            option_A['text'] = 'Salvar o lobinho daquele sofrimento;'
+            option_B['text'] = 'Seguir em frente, como se nada\ntivesse ocorrido;' 
+            option_C['text'] = 'Matar o lobinho e pegar sua carne\ne couro;'
+
+        elif level == 4:
+            title['text'] = 'Seguindo a caminhada, um toró toma a floresta.\n' +\
+                            'Ao procurar um lugar para se resguardar você\n' +\
+                            'encontra um abrigo abandonado, aparentemente\n' +\
+                            'seguro, apesar de estar bem sujo.'
+
+            option_A['text'] = 'Entrar no abrigo, explorar e\nesperar a chuva passar;'
+            option_B['text'] = 'Seguir adiante, apesar da chuva\npesada;' 
+            option_C['text'] = 'Esperar a chuva passar na\nsacada do abrigo;'
+
+        elif level == 5:
+            title['text'] = 'Após a longa chuva você se depara com um grande\n' +\
+                            'e fundo riacho, há uma velha ponte suspensa,\n' +\
+                            'uma margem bem ao longe e uma parte que é\n' +\
+                            'aparentemente rasa.'
+
+            option_A['text'] = 'Atravessar pela velha ponte\nsuspensa;'
+            option_B['text'] = 'Atravessar pela margem distante;' 
+            option_C['text'] = 'Atravessar pela parte que\naparenta ser mais rasa;'
+
+        elif level == 6:
+            title['text'] = 'Ao caminhar você sente um fio esticar em sua\n' +\
+                            'perna, seu corpo para e reflete rapidamente\n' +\
+                            'no que deve fazer, caso seja uma armadilha...'
+
+            option_A['text'] = 'Avançar, ignorando o fio;'
+            option_B['text'] = 'Voltar e passar por cima do fio;' 
+            option_C['text'] = 'Caminhar até a fonte do fio e\ndesarma-lo;'
 
 
 def show_top_level(directory, world, level, option, rand, items_values, vol):
@@ -42,16 +82,20 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
     if world == 1:
         if level == 1:
             if option == 'A':
-                soundEffect(directory, vol, soundEffect = "Door")
-                if rand == 1 or rand == 2:
-                    txt_result = 'HI'
-                    losewin_heart = -10
-                    losewin_food = -2
-                elif rand == 3 or rand == 4:
-                    txt_result = 'God be with you'
-                    losewin_heart = -20
-                    losewin_food = 1
+                soundEffect(directory, vol, soundEffect = 'Door')
 
+                if rand == 1 or rand == 2:
+                    txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                    losewin_heart = -10
+                    losewin_food = 0
+                elif rand == 3:
+                    txt_result = 'As frutinhas até que eram\ncomestíveis.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'As frutinhas são simplesmente\ndeliciosas, levarei um pouco\npara mais tarde.'
+                    losewin_heart = 0
+                    losewin_food = 1
 
     items_values['heart'] += losewin_heart
     items_values['food'] += losewin_food

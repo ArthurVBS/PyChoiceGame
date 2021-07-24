@@ -653,7 +653,7 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
     win_toplevel.update()
     sleep(0.5)
 
-    lbl_result_subtitle = Label(root_result, text = txt_result, bg=bg_light, font = "courier 16 bold", justify=CENTER, relief='sunken', bd=1.5)
+    lbl_result_subtitle = Label(root_result, text = txt_result, bg=bg_light, font = "courier 14 bold", justify=CENTER, relief='sunken', bd=1.5)
     lbl_result_subtitle.place(x = 5, y = 50, width = 350, height = 165)
 
     win_toplevel.update()
