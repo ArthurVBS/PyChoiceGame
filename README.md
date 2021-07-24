@@ -2,4 +2,4 @@
 
 ## Python: 
 
-> The Truth, a corrupted idea.
+> Looking for a way out.
