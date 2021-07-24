@@ -1,9 +1,9 @@
 #Import - Packages __________________________________________________________________________________________
 
 try:
-    from audio import soundEffect
+    from sound import soundEffect
 except:
-    from Utils.audio import soundEffect
+    from Utils.sound import soundEffect
 
 #Functions - Texts __________________________________________________________________________________________
 

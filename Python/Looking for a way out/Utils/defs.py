@@ -53,7 +53,7 @@ def start_the_game(window, main_roots, directory):
 
     #Window
     window.title('Main Menu')
-    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
 
 
 #Functions - Game ___________________________________________________________________________________________
@@ -288,7 +288,7 @@ def click_game_to_menu(window, main_roots, directory, var_option, with_sound = F
     main_roots['root_play_game'].place_forget()
 
     window.title('Main Menu')
-    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
 
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
@@ -375,7 +375,7 @@ def click_continue(window, main_roots, directory):
 
     main_roots['root_main_menu'].place_forget()
     window.title(f'Level {items_values["world"]}-{items_values["level"]}')
-    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
 
     if items_values['world'] == 1:
         soundtrack(directory, vol = vol, soundtrack = 1)
@@ -389,7 +389,7 @@ def click_continue(window, main_roots, directory):
 
 def click_tutorial(window, main_roots, directory, tutorial_widgets):
     window.title('Tutorial')
-    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
 
     show_tutorial(tutorial_widgets, page=0)
     tutorial_widgets['btn_next_tut'].place(x = 440, y = 5, width = 270, height = 30)
@@ -399,7 +399,7 @@ def click_tutorial(window, main_roots, directory, tutorial_widgets):
 def click_history(window, main_roots, directory, history_widgets):
     global items_values
     window.title('História')
-    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
     show_history(history_widgets , page = 0, world = items_values['world'])
 
     main_roots['root_history'].place(x = 5, y = 5, width = 710, height = 460)
@@ -407,21 +407,21 @@ def click_history(window, main_roots, directory, history_widgets):
 
 def click_end_of_the_game(window, main_roots, directory):
     window.title('Fim de Jogo')
-    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
 
     main_roots['root_end_of_the_game'].place(x = 5, y = 5, width = 710, height = 460)
 
 
 def click_options(window, main_roots, directory):
     window.title('Ajustes')
-    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
 
     main_roots['root_options'].place(x = 5, y = 5, width = 710, height = 460)
 
 
 def click_credits(window, main_roots, directory):
     window.title('Créditos')
-    window.iconbitmap(directory + '/Images/Icons/icon_02.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
 
     main_roots['root_credits'].place(x = 5, y = 5, width = 710, height = 460)
 
@@ -469,7 +469,7 @@ def credits_widgets(window, main_roots, directory, version, title):
 
 def click_credits_to_menu(window, main_roots, directory):
     window.title('Main Menu')
-    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
 
     main_roots['root_credits'].place_forget()
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
@@ -582,7 +582,7 @@ def click_options_to_menu(window, main_roots, directory, options_widgets):
         main_roots['root_options'].place_forget()
 
         window.title('Main Menu')
-        window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+        window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
 
         main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
 
@@ -615,7 +615,7 @@ def click_gameover_to_menu(window, main_roots, directory, menu_widgets):
     main_roots['root_game_over'].place_forget()
 
     window.title('Main Menu')
-    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
     soundtrack(directory, vol = vol, soundtrack = 0)
         
     menu_widgets['btn_continue'].config(command = lambda: click_nothing(), fg = "#ccc", relief = "flat", cursor = "arrow",
@@ -643,7 +643,7 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
     win_toplevel.geometry(f"370x320+{pos_x + 175}+{pos_y + 50}")
     win_toplevel.title(title)
     win_toplevel.resizable(False, False)
-    win_toplevel.iconbitmap(directory + "/Images/Icons/icon_01.ico")
+    win_toplevel.iconbitmap(directory + "/Assets/Icons/icon_01.ico")
     win_toplevel.configure(background = '#000')
     win_toplevel.update()
     sleep(0.3)
@@ -922,7 +922,7 @@ def click_tutorial_to_menu(window, main_roots, directory, tutorial_roots, tutori
 
     #Window
     window.title('Main Menu')
-    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
 
     #Tutorial Roots
     tutorial_roots['root_hearts_foods_tut'].place_forget()
@@ -1009,7 +1009,7 @@ def click_his_to_menu(window, main_roots, directory):
     page_number_his = 0
 
     window.title('Main Menu')
-    window.iconbitmap(directory + '/Images/Icons/icon_01.ico')
+    window.iconbitmap(directory + '/Assets/Icons/icon_01.ico')
 
     main_roots['root_history'].place_forget()
     main_roots['root_main_menu'].place(x = 5, y = 5, width = 710, height = 460)
@@ -1135,7 +1135,6 @@ def pages_tutorial(window, tutorial_roots, tutorial_widgets , page):
         page_number_tut = 6
         tutorial_widgets['btn_next_tut'].place_forget()
 
-    print(page)
     tutorial_widgets['btn_next_tut']['text'] = 'Avançar'
 
 
@@ -1211,7 +1210,6 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
         main_roots['root_history'].place_forget()
 
     show_history(history_widgets, page, items_values['world'])
-    print(page_number_his)
 
 
 def default(window, images, game_widgets):
