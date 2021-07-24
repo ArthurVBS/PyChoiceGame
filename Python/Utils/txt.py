@@ -35,8 +35,8 @@ def show_menu_options(world, level, game_widgets):
             option_C['text'] = 'Dormir no chão da floresta;'
 
         elif level == 3:
-            title['text'] = 'Após acordar e começar a caminhar em busca de uma\n'  +\
-                            'saída, você ouve um uivo, paralisada, você observa\n' +\
+            title['text'] = 'Após acordar e começar a caminhar em busca de sua\n'  +\
+                            'amiga, você ouve um uivo. Paralisada, você observa\n' +\
                             'que esse uivo vem de um lobo filhote preso a uma\n' +\
                             'armadilha de urso.'
 
@@ -75,15 +75,14 @@ def show_menu_options(world, level, game_widgets):
 
 
 def show_top_level(directory, world, level, option, rand, items_values, vol):
+    losewin_heart = losewin_food = 0
+    new_item = new_key =  None
     txt_result = 'Nothing'
-    losewin_heart = 0
-    losewin_food = 0
+    game_over = False
 
     if world == 1:
         if level == 1:
             if option == 'A':
-                soundEffect(directory, vol, soundEffect = 'Door')
-
                 if rand == 1 or rand == 2:
                     txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
                     losewin_heart = -10
@@ -93,15 +92,206 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
                     losewin_heart = 0
                     losewin_food = 0
                 elif rand == 4:
-                    txt_result = 'As frutinhas são simplesmente\ndeliciosas, levarei um pouco\npara mais tarde.'
+                    txt_result = 'As frutinhas são simplesmente\ndeliciosas, levaremos um pouco\npara mais tarde.'
                     losewin_heart = 0
                     losewin_food = 1
+
+            elif option == 'B':
+                txt_result = 'A caminhada é longa e a\nfome é sua inimiga, ignora-lá\né custoso.'
+                losewin_heart = -10
+                losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Uma simples fruta, isso\nsacia a fome.'
+                    losewin_heart = 0
+                    losewin_food = -1
+                elif rand == 4:
+                    txt_result = 'Guloseimas são tão gostosas,\npegaremos só mais uma, ~Ops~\nacabamos exagerando...'
+                    losewin_heart = 0
+                    losewin_food = -2
+
+        elif level == 2:
+            if option == 'A':
+                if items_values['food'] >= 6:
+                    txt_result = 'Um urso é atraído pela\nsua comida e tem um\nbelo banquete.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                else:
+                    txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de sua amiga.\n' +\
+                                'Você observa o óculos dela\nquebrado em uma direção...'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+            elif option == 'B':
+                txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de sua amiga.\n' +\
+                            'Você observa o óculos dela\nquebrado em uma direção...'
+                losewin_heart = 0
+                losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de sua amiga.\n' +\
+                                'Você observa o óculos dela\nquebrado em uma direção...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'O chão é o lar de\nmuitos animais, inclusive\nda cobra que as deu\num beijinho de boa noite.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+        elif level == 3:
+            if option == 'A':
+                new_item = 'future_friendship'
+                if rand == 1 or rand == 2:
+                    txt_result = 'Você consegue libertar\no lobinho que corre de volta\npara a mata.'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+                elif rand == 3 or rand == 4:
+                    txt_result = 'Ao libertar o lobinho você se\nmachuca com a armadilha, mas\nconsegue libertar o lobinho que\n' +\
+                                    'corre de volta para a mata.'
+                    losewin_heart = -10
+                    losewin_food = 0
+
+            elif option == 'B':
+                txt_result = 'Nada ocorre, você segue\nem frente.'
+                losewin_heart = 0
+                losewin_food = 0
+
+            elif option == 'C':
+                new_item = 'wolfhide'
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'O lobo dá seu último uivo e\nvocê consegue o seu couro e\ncarne, então você parte em\nfrente.'
+                    losewin_heart = 0
+                    losewin_food = 1
+                elif rand == 4:
+                    txt_result = 'O lobo dá seu último uivo,\nvocê pega o seu couro e carne,\nmas ao longe vem vindo outro\n' +\
+                                    'lobo então você corre, foge,\nmas havia se arranhado na mata.'
+                    losewin_heart = -20
+                    losewin_food = 1
+
+        elif level == 4:
+            if option == 'A':
+                soundEffect(directory, vol, soundEffect = "Door")
+                if rand == 1:
+                    txt_result = 'Em um vão da casa você\nencontra um remédio.'
+                    losewin_heart = 10
+                    losewin_food = 0
+                elif rand == 2:
+                    txt_result = 'Em um vão da casa você\nencontra uma fruta intacta.'
+                    losewin_heart = 0
+                    losewin_food = 1
+                elif rand == 3:
+                    txt_result = 'Em um vão da casa você\ntropeça e se machuca.'
+                    losewin_heart = -10
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Você não acho nada de\ninteressante na casa.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                
+            elif option == 'B':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'A constante chuva a\ndeixou resfriada.'
+                    losewin_heart = -20
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Você andou por debaixo\ndas copas e você nem notou\na chuva constante.'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'A chuva passou e você\nsegue o seu caminho.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'A chuva veio, mas a\ndona aranha continuou a\nsubir e a picou.'
+                    losewin_heart = -20
+                    losewin_food = 0
+         
+        elif level == 5:
+            if option == 'A':
+                if rand == 1 or rand == 2:
+                    txt_result = 'No fim da ponte você\nolha para trás e percebe\nque deu tudo certo.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 3 or rand == 4:
+                    txt_result = 'No fim da ponte, a\nmadeira sobre seu pé racha\nao meio e você cai no riacho,\n' +\
+                                    'próximo a margem você\nconsegue se salvar.'
+                    losewin_heart = -10
+                    losewin_food = 0
+
+            elif option == 'B':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Ao caminhar tanto você\ncomeça a sentir muita fome,\nportanto você come algo\n' +\
+                                    'de sua mochila.'
+                    losewin_heart = 0
+                    losewin_food = -2
+                elif rand == 4:
+                    txt_result = 'Ao caminhar tanto você\ncomeça a sentir muita fome,\nentão você come algo da\n' +\
+                                    'mochila, além disso\nseus pés estão doendo.'
+                    losewin_heart = -10
+                    losewin_food = -2
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Não era tão raso assim...\nA correnteza a leva e você\nse afoga.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                elif rand == 4:
+                    txt_result = 'Shalow Now...\nVocê consegue atravessar\ntranquilamente.'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+        elif level == 6:
+            new_item = 'shotgun'
+            new_key = 'S'
+
+            if option == 'A':
+                txt_result = 'Uma mina explode em sua\nfrente, devido a sua falta\nde cuidado.'
+                losewin_heart = 0
+                losewin_food = 0
+                game_over = True
+
+            elif option == 'B':
+                txt_result = 'É voltando que se pega\nimpulso, você passa pela\narmadilha com calma e tudo\n' +\
+                                'ocorre bem.'
+                losewin_heart = 0
+                losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n' +\
+                                    'decide desarmar, com êxito\nvocê desarma a armadilha.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Você segue até a fonte do\nfio e encontra uma armadilha\nplantada, então você\n' +\
+                                    'decide desarmar, com êxito\na mina terrestre é acionada.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                
+    else:
+        soundEffect(directory, vol, soundEffect = 'Door')
+
 
     items_values['heart'] += losewin_heart
     items_values['food'] += losewin_food
 
+    if new_item != None:
+        items_values[f'item_{new_item}'] = True
+    if new_key != None:
+        items_values[f'key_{new_key}'] = True
+
     resume = {
         'title' : f'Level {world}-{level} {option}', 'txt_result' : txt_result,
+        'new_item' : new_item, 'new_key' : new_key, 'game_over' : game_over,
         'losewin_heart' : losewin_heart, 'losewin_food' : losewin_food}
         
     return resume
@@ -136,7 +326,7 @@ def show_history(history_widgets, page, world):
                             'e não encontraram mais o guia.\n'
 
         elif page == 3:
-            history['text']='Elas gritaram pelo john, o guia, porém\n' +\
+            history['text']='Elas gritaram pelo John, o guia, porém\n' +\
                             'sem respostas, elas se cansam e decidem\n' +\
                             'voltar por onde vieram.\n\n' +\
                             'Após uma hora de caminhada elas se\n' +\
@@ -150,7 +340,7 @@ def show_history(history_widgets, page, world):
                             'isqueiro e algumas comidas na mochila.\n'
     
     elif world == 2:
-        title['text'] = '- Aterrorizada -'
+        title['text'] = '- Pegadas -'
         history['text']=''
 
     elif world == 3:

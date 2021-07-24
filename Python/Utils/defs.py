@@ -265,12 +265,13 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
 
         show_menu_options(items_values['world'], items_values['level'], game_widgets)
 
-        if items_values['heart'] <= 0 or items_values['food'] <= 0:
+        if items_values['heart'] <= 0 or items_values['food'] <= 0 or resume['game_over']:
             Game_Over(window, directory, main_roots)
 
         var_option.set('E')
         toplevel_result(directory, images, title = resume['title'], txt_result = resume['txt_result'],
-                        losewin_heart = resume['losewin_heart'], losewin_food = resume['losewin_food'])
+                        losewin_heart = resume['losewin_heart'], losewin_food = resume['losewin_food'],
+                        new_item = resume['new_item'], new_key = resume['new_key'])
 
     else:
         messagebox.showerror(title = "Escolha", icon = messagebox.INFO,
@@ -625,7 +626,8 @@ def click_gameover_to_menu(window, main_roots, directory, menu_widgets):
 
 #Functions - Result _________________________________________________________________________________________
 
-def toplevel_result(directory, images, title = 'title', txt_result = 'text', losewin_heart = 0, losewin_food = 0):
+def toplevel_result(directory, images, title = 'title', txt_result = 'text', losewin_heart = 0, losewin_food = 0,
+                    new_item = None, new_key = None):
     win_toplevel = Toplevel()
 
     width = 720
@@ -698,20 +700,25 @@ def toplevel_result(directory, images, title = 'title', txt_result = 'text', los
     sleep(0.1)
 
     #Items
+
     lbl_value_item = Label(root_result_items, bg=bg_light, text = '', font = "courier 14 bold")
     lbl_value_item.place(x = 5, y = 5, width = 25, height= 40)
-
-    win_toplevel.update()
-    sleep(0.1)
 
     lbl_img_item_01 = Label(root_result_items, bg=bg_light, image = images['empty_00_dic'])
     lbl_img_item_01.place(x = 30, y = 5, width = 40, height = 40)
 
-    win_toplevel.update()
-    sleep(0.1)
-
     lbl_img_item_02 = Label(root_result_items, bg=bg_light, image = images['empty_00_dic'])
     lbl_img_item_02.place(x = 70, y = 5, width = 40, height= 40)
+
+    if new_item != None or new_key != None:
+        #Text
+        lbl_value_item['text'] = '+'
+        #Item
+        if new_item != None:
+            lbl_img_item_01['image'] = images[f'item_{new_item}_dic']
+        #Key
+        if new_key != None:
+            lbl_img_item_02['image'] = images[f'key_{new_key}_dic']
 
     win_toplevel.update()
     sleep(0.3)
