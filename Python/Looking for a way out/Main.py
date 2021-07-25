@@ -13,7 +13,7 @@ from Utils.defs import history_widgets, tutorial_widgets, end_of_the_game_widget
 #Variables __________________________________________________________________________________________________
 
 title = '- Looking for -\n a way out '
-version = 'Beta v 1.0.2'
+version = 'Beta v 1.1.0'
 directory = os.path.dirname(__file__)
 
 global items_values

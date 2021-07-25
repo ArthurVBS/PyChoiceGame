@@ -73,6 +73,78 @@ def show_menu_options(world, level, game_widgets):
             option_B['text'] = 'Voltar e passar por cima do fio;' 
             option_C['text'] = 'Caminhar até a fonte do fio e\ndesarma-lo;'
 
+    elif world == 2:
+        if level == 1:
+            title['text'] = 'Seguindo pela trilha a fome começa a bater na porta.\n' +\
+                            'Você observa a sua esquerda e a sua direita, alguns\n' +\
+                            'cogumelos de cores distintas - Azuis e Vermelhos -\n' +\
+                            'que estão crescendo nos troncos das árvores.'
+            
+            option_A['text'] = 'Comer o cogumelo Azul;'
+            option_B['text'] = 'Comer o cogumelo Vermelho;'
+            option_C['text'] = 'Pegar alguma comida da mochila;'
+
+        elif level == 2:
+            title['text'] = 'Seguindo em frente você se depara com uma grande\n' +\
+                            'trifurcação, há um caminho cheio de flores com\n' +\
+                            'um aroma forte, há um caminho cheio de espinhos\n' +\
+                            'e também há caminho em direção a um lamaceiro.'
+
+            option_A['text'] = 'Passar pelas flores de aroma\nforte;'
+            option_B['text'] = 'Passar pelo caminho espinhoso;'
+            option_C['text'] = 'Passar por um lamaceiro;'
+
+        elif level == 3:
+            title['text'] = 'Após a trifurcação, você observa um grande urso\n' +\
+                            'passeando pela trilha, estando ele de costas para\n' +\
+                            'você e indo em direção ao pico da montanha, você\n' +\
+                            'decide...'
+
+            option_A['text'] = 'Tentar matar o urso atirando pelas\ncostas e seguir em frente;'
+            option_B['text'] = 'Parar onde está e esperar o urso\nsair da trilha;'
+            option_C['text'] = 'Tentar passar pelo urso arrodeando\npelo matagal ao lado da trilha;'
+
+        elif level == 4:
+            title['text'] = 'Seguindo pela trilha você chega ao fim dela, pois\n' +\
+                            'tornou-se muito ingrime para subir, você observa\n' +\
+                            'ao lado, uma cabana abandonada caindo aos pedaços\n' +\
+                            'que permitirá passar e um local para tentar escalar.'
+
+            option_A['text'] = 'Entrar na cabana, a explorar e ir\naté a saída;'
+            option_B['text'] = 'Entrar na cabana e ir direto para\na saída;'
+            option_C['text'] = 'Tentar escalar pelo muro de gelo;'
+
+        elif level == 5:
+            title['text'] = 'Próximo ao topo da montanha você chega ao antigo\n' +\
+                            'cemitério da capela, você observa um frasco de\n' +\
+                            'remédio em cima de um túmulo e você se questiona\n' +\
+                            'se deve pegá-lo, deixá-lo ali ou jogá-lo fora.'
+
+            option_A['text'] = 'Pegar o remédio e o ingerir;'
+            option_B['text'] = 'Não pegar o remédio e seguir;'
+            option_C['text'] = 'Pegar o remédio e jogá-lo ao longe;'
+
+        elif level == 6:
+            title['text'] = 'Após passar pelo cemitério da capela, você chega\n' +\
+                            'finalmente a capela, ao adentrar você observa que\n' +\
+                            'ela está completamente escura e você sente também\n' +\
+                            'um cheiro esquisito vindo dos fundos...'
+
+            option_A['text'] = 'Usar o isqueiro para iluminar a capela\ne seguir até a saída;'
+            option_B['text'] = 'Tentar seguir até a saída pelo meio\nda capela escura;'
+            option_C['text'] = 'Seguir até fonte do cheiro e depois\nprocurar a saída da capela;'
+
+    elif world == 3:
+        if level == 1:
+            title['text'] = 'Vocês estão caminhando a um certo tempo, tanto que\n' +\
+                            'já está entardecendo, além do mais vocês estão com\n' +\
+                            'bastante fome. Vocês encontram algumas frutinhas\n' +\
+                            'azuis em um arbusto que aparentam ser comestíveis.'
+
+            option_A['text'] = 'Pegar as frutinhas do arbusto e\nsaciar a fome;'
+            option_B['text'] = 'Ignorar as frutinhas e seguir em\nfrente;'
+            option_C['text'] = 'Pegar alguma comida da mochila;'
+
 
 def show_top_level(directory, world, level, option, rand, items_values, vol):
     losewin_heart = losewin_food = 0
@@ -220,8 +292,8 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
                     losewin_heart = 0
                     losewin_food = 0
                 elif rand == 3 or rand == 4:
-                    txt_result = 'No fim da ponte, a\nmadeira sobre seu pé racha\nao meio e você cai no riacho,\n' +\
-                                    'próximo a margem você\nconsegue se salvar.'
+                    txt_result = 'No fim da ponte, a\nmadeira sobre seu pé racha\nao meio e você cai no riacho.\n' +\
+                                    'Próximo a margem você\nconsegue se salvar.'
                     losewin_heart = -10
                     losewin_food = 0
 
@@ -276,14 +348,243 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
                     losewin_heart = 0
                     losewin_food = 0
                     game_over = True
-                
+
+
+    elif world == 2:
+        if level == 1:
+            if option == 'A':
+                if rand == 1 or rand == 2:
+                    txt_result = 'O cogumelo Azul lhe traz uma\nsensação de fraqueza.'
+                    losewin_heart = -10
+                    losewin_food = 0
+                elif rand == 3 or rand == 4:
+                    txt_result = 'O cogumelo Azul lhe traz uma\nsensação de saciedade.'
+                    losewin_heart = 0
+                    losewin_food = 1
+
+            elif option == 'B':
+                if rand == 1 or rand == 2:
+                    txt_result = 'O cogumelo Vermelho lhe\ntraz uma sensação de força.'
+                    losewin_heart = 10
+                    losewin_food = 0
+                elif rand == 3 or rand == 4:
+                    txt_result = 'O cogumelo Vermelho lhe\ntraz uma fome imensa.'
+                    losewin_heart = 0
+                    losewin_food = -1
+
+            elif option == 'C':
+                txt_result = 'Você segue em frente e come\nalgo de sua mochila.'
+                losewin_heart = 0
+                losewin_food = -1
+
+        elif level == 2:
+            if option == 'A':
+                txt_result = 'Ao passar pelas flores você\nsente náuseas.'
+                losewin_heart = 0
+                losewin_food = 0
+                new_item = 'nausea'
+
+            elif option == 'B':
+                if items_values['item_wolfhide']:
+                    txt_result = 'Tudo ocorreu bem, afinal\no couro de lobo a protegeu\ndos espinhos.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                else:
+                    if rand == 1 or rand == 2 or rand == 3:
+                        txt_result = 'Ao passar pelas espinhos\nvocê se corta várias vezes.'
+                        losewin_heart = -20
+                        losewin_food = 0
+                    elif rand == 4:
+                        txt_result = 'Ao passar pelos espinhos\nvocê se arranha levemente.'
+                        losewin_heart = -10
+                        losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'À medida que você caminhava\nno lamaceiro você começa\na afundar até que percebes\n' +\
+                                'que era na verdade\nareia movediça.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                elif rand == 4:
+                    txt_result = 'No meio para o final do\nlamaceiro você começa a\nafundar, porém consegue fugir\n' +\
+                                'da então areia movediça.'
+                    losewin_heart = -10
+                    losewin_food = 0
+
+        elif level == 3:
+            if option == 'A':
+                if items_values['item_future_friendship'] and items_values['item_shotgun']:
+                    txt_result = 'Indo em direção ao urso\nvocê o ataca e tem uma ajuda\nespecial de um certo lobinho\n' +\
+                    'que retribuiu e partiu de\nvolta a mata..'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+                else:
+                    txt_result = 'O urso é atingido, porém\nele vem ferozmente em sua\ndireção. Você tenta atirar,\n' +\
+                    'todavia estava sem munição.\nO urso veio e a pegou.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+            elif option == 'B':
+                txt_result = 'Aguardando pacientemente o\nurso partir, ele parte\ne você segue em frente.'
+                losewin_heart = -10
+                losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Na tentativa de arrodear\nvocê acaba se arranhando,\nmas consegue passar pelo\nurso.'
+                    losewin_heart = -10
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Ao arrodear o urso, você\nconsegue passar ileso\npelo matagal.'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+        elif level == 4:
+            if option == 'A':
+                new_item = 'crowbar'
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Entrando na cabana você\ncomeça a subir para o segundo\nandar, você acha um pé de\n' +\
+                                    'cabra numa quina e\nconsegue sair da cabana.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Entrando na cabana você\ncomeça a subir para o segundo\nandar, você acha um pé de\n' +\
+                                    'cabra numa quina. Ao sair\nvocê se corta gravemente,\nporém você saiu com vida.'
+                    losewin_heart = -20
+                    losewin_food = 0
+
+            elif option == 'B':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Ao entrar na cabana você\ncomeça a subir para o segundo\nandar, você segue em\n' +\
+                                    'direção a saída e tudo\nvai bem.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Ao entrar na cabana você\ncomeça a subir para o segundo\nandar, você segue em\n' +\
+                                    'direção a saída, todavia\num degrau da escada se parte\nvocê despenca e morre.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Ao tentar escalar o muro\nde gelo você escorrega e\ncai de costas no chão,\n' +\
+                                    'sofrendo uma queda fatal.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                elif rand == 4:
+                    txt_result = 'Você conseguiu escalar o\nmuro de gelo...'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+        elif level == 5:
+            if option == 'A':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'O \'Remédio\' estava\nvencido a muitos anos,\ncausando-lhe um infarto.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                elif rand == 4:
+                    txt_result = 'O \'Remédio\' estava\nna validade e te fez\nmuito, mas muito bem.'
+                    losewin_heart = 30
+                    losewin_food = 0
+
+            elif option == 'B':
+                txt_result = 'Você apenas segue em frente.'
+                losewin_heart = 0
+                losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Nada ocorre e você segue\nadiante.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Ao jogar fora aquele \'Remédio\'\nvocê pertubou a cova de\num antigo médico. Por causa\n' +\
+                                    'disso você começa a sentir\numa enorme fraqueza.'
+                    losewin_heart = -40
+                    losewin_food = 0
+
+        elif level == 6:
+            new_key = 'G'
+
+            if option == 'A':
+                txt_result = 'O \'Cheiro estranho\' se\ntratava de um vazamento\nde gás e isso causou uma\ngrande explosão.'
+                losewin_heart = 0
+                losewin_food = 0
+                game_over = True
+
+            elif option == 'B':
+                if rand == 1 or rand == 2:
+                    txt_result = 'Apesar de não enxergar nada\nvocê chega a saída da capela.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 3 or rand == 4:
+                    txt_result = 'Caminhado pela capela você\ntropeça em um banco, contudo\nvocê consegue seguir adiante .'
+                    losewin_heart = -10
+                    losewin_food = 0
+
+            elif option == 'C':
+                if rand == 1 or rand == 2:
+                    txt_result = 'Você não encontra a fonte\ndo cheiro, todavia você\nacha a saída.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 3:
+                    txt_result = 'Você encontra a fonte do\ncheiro, se tratava de um\nvazamento de gás. Após\nisso você vai até a saída.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Ao encontrar a fonte do\ncheiro sua garganta começa\na fechar-se, matando-a\nasfixiada pelo gás.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over == True
+
+
+    elif world == 3:
+        if level == 1:
+            if option == 'A':
+                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                losewin_heart = -10
+                losewin_food = 0
+
+            elif option == 'B':
+                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                losewin_heart = -10
+                losewin_food = 0
+
+            elif option == 'C':
+                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                losewin_heart = -10
+                losewin_food = 0
+
+        elif level == 2:
+            if option == 'A':
+                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                losewin_heart = -10
+                losewin_food = 0
+
+            elif option == 'B':
+                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                losewin_heart = -10
+                losewin_food = 0
+
+            elif option == 'C':
+                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
+                losewin_heart = -10
+                losewin_food = 0
+
     else:
         soundEffect(directory, vol, soundEffect = 'Door')
-
 
     items_values['heart'] += losewin_heart
     items_values['food'] += losewin_food
 
+    if game_over:
+        new_item = new_key = None
     if new_item != None:
         items_values[f'item_{new_item}'] = True
     if new_key != None:

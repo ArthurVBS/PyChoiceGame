@@ -242,32 +242,40 @@ def click_next_level(window, directory, var_option, images, game_widgets, main_r
         resume = show_top_level(directory, items_values["world"], items_values["level"],
                                 var_option.get(), random_number(), items_values, vol)
 
+        #Level up
         items_values['level'] += 1
 
         if items_values['level'] > 6:
+            #World up
             items_values['level'] = 1
             items_values['world'] += 1
 
-            if items_values['world'] > 3:
-                click_history(window, main_roots, directory, history_widgets)
-                click_end_of_the_game(window, main_roots, directory)
-                history = True
-            else:
-                click_history(window, main_roots, directory, history_widgets)
-                history = True
+            #Show history
+            click_history(window, main_roots, directory, history_widgets)
+            history = True
 
+            #End Game
+            if items_values['world'] > 3:
+                click_end_of_the_game(window, main_roots, directory)
+            
+
+        #Show items
         show_items_values(images, game_widgets)
 
+        #Title
         if history:
             window.title('História')
         else:
             window.title(f'Level {items_values["world"]}-{items_values["level"]}')
 
+        #Show menu_options
         show_menu_options(items_values['world'], items_values['level'], game_widgets)
 
+        #If game_over == True
         if items_values['heart'] <= 0 or items_values['food'] <= 0 or resume['game_over']:
-            Game_Over(window, directory, main_roots)
+            click_game_over(window, directory, main_roots)
 
+        #Show toplevel
         var_option.set('E')
         toplevel_result(directory, images, title = resume['title'], txt_result = resume['txt_result'],
                         losewin_heart = resume['losewin_heart'], losewin_food = resume['losewin_food'],
@@ -410,6 +418,15 @@ def click_end_of_the_game(window, main_roots, directory):
     window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
 
     main_roots['root_end_of_the_game'].place(x = 5, y = 5, width = 710, height = 460)
+
+
+def click_game_over(window, directory, main_roots):
+    global vol
+    main_roots['root_main_menu'].place_forget()
+    main_roots['root_history'].place_forget()
+    main_roots['root_game_over'].place(x = 5, y = 5, width = 710, height = 460)
+    soundtrack(directory, vol = vol, soundtrack = -1)
+    window.title('Game Over')
 
 
 def click_options(window, main_roots, directory):
@@ -1387,14 +1404,6 @@ def show_items_values(images, game_widgets):
     items()
     ways()
     scenario()
-
-
-def Game_Over(window, directory, main_roots):
-    global vol
-    main_roots['root_main_menu'].place_forget()
-    main_roots['root_game_over'].place(x = 5, y = 5, width = 710, height = 460)
-    soundtrack(directory, vol = vol, soundtrack = -1)
-    window.title('Game Over')
 
 
 def volume(option, options_widgets):
