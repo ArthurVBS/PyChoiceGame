@@ -136,14 +136,64 @@ def show_menu_options(world, level, game_widgets):
 
     elif world == 3:
         if level == 1:
-            title['text'] = 'Vocês estão caminhando a um certo tempo, tanto que\n' +\
-                            'já está entardecendo, além do mais vocês estão com\n' +\
-                            'bastante fome. Vocês encontram algumas frutinhas\n' +\
-                            'azuis em um arbusto que aparentam ser comestíveis.'
+            title['text'] = 'Ao chegar na mina abandonada você se depara com\n' +\
+                            'um baú bem enferrujado e que apesar de não\n' +\
+                            'possuir uma tranca aparenta ser difícil a sua\n' +\
+                            'abertura...'
 
-            option_A['text'] = 'Pegar as frutinhas do arbusto e\nsaciar a fome;'
-            option_B['text'] = 'Ignorar as frutinhas e seguir em\nfrente;'
-            option_C['text'] = 'Pegar alguma comida da mochila;'
+            option_A['text'] = 'Utilizar algo como uma ferramenta\npara tentar abrir o baú;'
+            option_B['text'] = 'Utilizar alguma pedra próxima para\ntentar abrir o baú;'
+            option_C['text'] = 'Simplesmente ignorar o baú e seguir\nadiante;'
+
+        elif level == 2:
+            title['text'] = 'Seguindo pela parte iluminada da mina você chega\n' +\
+                            'a uma outra trifurcação, o primeiro caminho é de\n' +\
+                            'dar arrepios, o segundo está envolto numa neblina,\n' +\
+                            'já o terceiro ouve-se um som agudo e distante.'
+
+            option_A['text'] = 'Ir pelo caminho que dá arrepios;'
+            option_B['text'] = 'Ir pelo caminho cheio de neblina;'
+            option_C['text'] = 'Ir pelo caminho que ouve-se um\nsom agudo e distante;'
+
+        elif level == 3:
+            title['text'] = 'Em uma parte do caminho você chega a uma porta\n' +\
+                            'trancada que só poderá ser liberada apertando\n' +\
+                            'o botão com a resposta correta, sendo a charada\n' +\
+                            'a seguinte: 7+6=1; 8+8=4; então 9+5 é igual a?'
+
+            option_A['text'] = 'A resposta é 14;'
+            option_B['text'] = 'A resposta é 1;'
+            option_C['text'] = 'A resposta é 2;'
+
+        elif level == 4:
+            title['text'] = 'Seguindo um caminho na mina você se depara com\n' +\
+                            'o corpo de um animal morto... Após vomitar\n' +\
+                            'de nojo, você percebe que há alguma coisa\n' +\
+                            'brilhante dentro do animal.'
+
+            option_A['text'] = 'Seguir como se nada tivesse ocorrido;'
+            option_B['text'] = 'Ir em direção ao animal e procurar\npela coisa brilhante;'
+            option_C['text'] = 'Comer a carne daquele animal;'
+
+        elif level == 5:
+            title['text'] = 'Você finalmente chega a um local que parece um\n' +\
+                            'laboratório, nele você observa a sua amiga presa\n' +\
+                            'em uma cela com o cadiado cor de ouro e também\n' +\
+                            'um homem solitário e maluco no meio do caminho.'
+
+            option_A['text'] = 'Jogar uma pedra ao longe para\ndistraí-lo;'
+            option_B['text'] = 'Atacar aquele homem por trás;'
+            option_C['text'] = 'Tentar passar sem ser vista e\nir até a cela;'
+
+        elif level == 6:
+            title['text'] = 'Após libertar a sua amiga e sair correndo dali\n' +\
+                            'o cara maluco percebe o que você fez e grita:\n' +\
+                            '\'Vocês nunca escaparão com vida\' e puxa uma\n' +\
+                            'alavanca que faz desmoronar aquele laboratório.' 
+
+            option_A['text'] = 'Tentar fugir pelo elevador que\nvocê veio;'
+            option_B['text'] = 'Tentar fugir por uma saída\nalternativa da mina;'
+            option_C['text'] = 'Tentar fugir pelos carrinhos da\nmina abandonada;'
 
 
 def show_top_level(directory, world, level, option, rand, items_values, vol):
