@@ -119,20 +119,20 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
                     losewin_food = 0
                     game_over = True
                 else:
-                    txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de sua amiga.\n' +\
+                    txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de Annie.\n' +\
                                 'Você observa o óculos dela\nquebrado em uma direção...'
                     losewin_heart = 0
                     losewin_food = 0
 
             elif option == 'B':
-                txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de sua amiga.\n' +\
+                txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de Annie.\n' +\
                             'Você observa o óculos dela\nquebrado em uma direção...'
                 losewin_heart = 0
                 losewin_food = 0
 
             elif option == 'C':
                 if rand == 1 or rand == 2 or rand == 3:
-                    txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de sua amiga.\n' +\
+                    txt_result = 'A longa noite passou num\ninstante, mas você se dá\nconta do sumiço de Annie.\n' +\
                                 'Você observa o óculos dela\nquebrado em uma direção...'
                     losewin_heart = 0
                     losewin_food = 0
@@ -341,7 +341,28 @@ def show_history(history_widgets, page, world):
     
     elif world == 2:
         title['text'] = '- Pegadas -'
-        history['text']=''
+        if page == 0:
+            history['text']='Após passar pela armadilha, Sam\n' +\
+                            'encontra um posto militar em ruínas,\n' +\
+                            'ao adentrar ela encontra uma chave\n' +\
+                            'cor de prata, além de uma espingarda.\n'
+
+        elif page == 1:
+            history['text']='Após passar pelo posto militar, Sam\n' +\
+                            'encontra a mochila de Annie próximo\n' +\
+                            'a um portão enferrujado e trancado.\n\n'
+
+        elif page == 2:
+            history['text']='Sam pega a mochila de Annie e começa\n' +\
+                            'a vasculhar, porém ela não encontra\n' +\
+                            'nada. Então ela decide seguir pelo\n' +\
+                            'portão enferrujado.\n'
+
+        elif page == 3:
+            history['text']='Sam inseri a chave cor de prata no\n' +\
+                            'portão e consegue abri-lo.\n\n' +\
+                            'O portão dá numa trilha que a guiará\n' +\
+                            'em direção ao topo de uma montanha.'
 
     elif world == 3:
         title['text'] = '- Um caminho -'
