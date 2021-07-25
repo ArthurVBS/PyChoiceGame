@@ -667,7 +667,30 @@ def show_history(history_widgets, page, world):
 
     elif world == 3:
         title['text'] = '- Um caminho -'
-        history['text']=''
+        if page == 0:
+            history['text']='No alto da montanha Sam chega a uma\n' +\
+                            'casa bem pequena e nela ela encontra\n' +\
+                            'uma chave bem peculiar da cor do ouro.\n\n'
+
+        elif page == 1:
+            history['text']='Em um outro vão da casa Sam encontra um\n' +\
+                            'elevador e próximo a porta há marcas de\n'+\
+                            'sangue na parede na direção do elevador.\n\n'
+
+        elif page == 2:
+            history['text']='Sem pestanejar, Sam decide seguir para\n' +\
+                            'o elevador em busca de sua amiga, afinal\n' +\
+                            'essa é a única pista do sumiço dela.\n\n'
+
+        elif page == 3:
+            history['text']='O elevador possui somente os botões de\n' +\
+                            'descer e de subir, estando no topo de\n' +\
+                            'uma montanha Sam opta por descer.\n\n'
+
+        elif page == 4:
+            history['text']='Ao chegar na parte mais baixa do\n' +\
+                            'elevador, Sam encontra uma antiga mina\n' +\
+                            'abandonada, todavia bem iluminada...\n\n'
 
     elif world == 4:
         title['text'] = '- Uma saída -'

@@ -1198,7 +1198,7 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
         #Main_roots
         main_roots['root_history'].place_forget()
 
-    elif items_values['world'] == 3 and page == 6:
+    elif items_values['world'] == 3 and page == 5:
         page_number_his = 0
         #Sound
         soundtrack(directory, vol = vol, soundtrack = 3)
