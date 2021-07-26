@@ -156,16 +156,6 @@ def show_menu_options(world, level, game_widgets):
             option_C['text'] = 'Ir pelo caminho que ouve-se um\nsom agudo e distante;'
 
         elif level == 3:
-            title['text'] = 'Em uma parte do caminho você chega a uma porta\n' +\
-                            'trancada que só poderá ser liberada apertando\n' +\
-                            'o botão com a resposta correta, sendo a charada\n' +\
-                            'a seguinte: 7+6=1; 8+8=4; então 9+5 é igual a?'
-
-            option_A['text'] = 'A resposta é 14;'
-            option_B['text'] = 'A resposta é 1;'
-            option_C['text'] = 'A resposta é 2;'
-
-        elif level == 4:
             title['text'] = 'Seguindo um caminho na mina você se depara com\n' +\
                             'o corpo de um animal morto... Após vomitar\n' +\
                             'de nojo, você percebe que há alguma coisa\n' +\
@@ -174,6 +164,16 @@ def show_menu_options(world, level, game_widgets):
             option_A['text'] = 'Seguir como se nada tivesse ocorrido;'
             option_B['text'] = 'Ir em direção ao animal e procurar\npela coisa brilhante;'
             option_C['text'] = 'Comer a carne daquele animal;'
+
+        elif level == 4:
+            title['text'] = 'Em uma parte do caminho você chega a uma porta\n' +\
+                            'trancada que só poderá ser liberada apertando\n' +\
+                            'o botão com a resposta correta, sendo a charada\n' +\
+                            'a seguinte: 7+6=1; 8+8=4; então 9+5 é igual a?'
+
+            option_A['text'] = 'A resposta é 14;'
+            option_B['text'] = 'A resposta é 1;'
+            option_C['text'] = 'A resposta é 2;'
 
         elif level == 5:
             title['text'] = 'Você finalmente chega a um local que parece um\n' +\
@@ -597,38 +597,187 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
     elif world == 3:
         if level == 1:
             if option == 'A':
-                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
-                losewin_heart = -10
-                losewin_food = 0
+                if items_values['item_crowbar']:
+                    txt_result = 'Ao utilizar o pé de cabra\nvocê consegue com muito\nesforço abrir o baú e\nencontrar uma chave de fenda.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    new_item = 'screwdriver'
+                else:
+                    txt_result = 'Somente com uma ferramenta\nvocê conseguiria abrir o\nbaú, todavia você não o\ntem e então segue adiante.'
+                    losewin_heart = 0
+                    losewin_food = 0
 
             elif option == 'B':
-                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
-                losewin_heart = -10
-                losewin_food = 0
+                if rand == 1 or rand == 2:
+                    txt_result = 'Apesar da força excessiva\nvocê não consegue abrir o\nbaú e segue adiante.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 3:
+                    txt_result = 'Tentando forçar a abertura\nvocê acabou se machucando e\nfrustado você segue adiante.'
+                    losewin_heart = -10
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Após muito tentar você\nconsegue abrir o baú e\nnele você encontra uma\nvelha chave de fenda.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    new_item = 'screwdriver'
 
             elif option == 'C':
-                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
-                losewin_heart = -10
+                txt_result = 'Você apenas segue em frente.'
+                losewin_heart = 0
                 losewin_food = 0
 
         elif level == 2:
             if option == 'A':
-                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
-                losewin_heart = -10
+                txt_result = 'Afinal quem nunca se arrepiou\n por causa do frio?\n\nEntão você segue adiante.'
+                losewin_heart = 0
                 losewin_food = 0
 
             elif option == 'B':
-                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
-                losewin_heart = -10
-                losewin_food = 0
+                if items_values['item_nausea']:
+                    txt_result = 'Ao caminhar você começa a\nver coisas no meio da\nneblina até que você chega\n' +\
+                                    'a um precipício e se joga...\n\nO efeito das flores a deu\ncoragem para pular.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                else:
+                    if rand == 1 or rand == 2:
+                        txt_result = 'A neblina logo passa e nada\nlhe acontece.'
+                        losewin_heart = 0
+                        losewin_food = 0
+                    elif rand == 3 or rand == 4:
+                        txt_result = 'Caminhando pela neblina você\ntropeça numa pedra, mas\na neblina logo passou.'
+                        losewin_heart = -10
+                        losewin_food = 0
 
             elif option == 'C':
-                txt_result = 'As frutinhas não eram tão\ncomestíveis assim.'
-                losewin_heart = -10
+                if items_values['item_nausea']:
+                    txt_result = 'Ao caminhar você começa a\nseguir o som e ver coisas\naté que você chega a um\n' +\
+                                    'precipício e se joga...\n\nO efeito das flores a deu\ncoragem para pular.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                else:
+                    txt_result = 'Seguindo o som agudo você\napenas segue e não encontra\na fonte daquele som.'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+        elif level == 3:
+            if option == 'A':
+                txt_result = 'Você apenas segue em frente.'
+                losewin_heart = 0
                 losewin_food = 0
 
-    else:
-        soundEffect(directory, vol, soundEffect = 'Door')
+            elif option == 'B':
+                txt_result = 'Ao se aproximar do animal você\nencontra a coisa brilhante que\nse tratava de uma engrenagem.'
+                losewin_heart = 0
+                losewin_food = 0
+                new_item = 'gear'
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Ao comer a carne daquele\nanimal você passa mal e\nmorre, simples assim...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                elif rand == 4:
+                    txt_result = 'Por incrível que parece você\nnão passou mal ou morreu.\n\nVocê se sente bem e satisfeito.'
+                    losewin_heart = 10
+                    losewin_food = 10
+
+        elif level == 4:
+            if option == 'A':
+                txt_result = 'A resposta está incorreta\ne abaixo de você abri-se um\nburaco cheio de espinhos e\n' +\
+                                'nele você encontra seu fim...'
+                losewin_heart = 0
+                losewin_food = 0
+                game_over = True
+
+            elif option == 'B':
+                txt_result = 'A resposta está incorreta\ne abaixo de você abri-se um\nburaco cheio de espinhos e\n' +\
+                                'nele você encontra seu fim...'
+                losewin_heart = 0
+                losewin_food = 0
+                game_over = True
+
+            elif option == 'C':
+                txt_result = 'A resposta está correta,\npois 9am + 5 horas = 2pm.\n\nA porta se abre e você segue.'
+                losewin_heart = 0
+                losewin_food = 0
+
+        elif level == 5:
+            if option == 'A':
+                txt_result = 'Ao ouvir um barulho ao longe\no homem vai lá verificar\npermitindo que você chegue\n' +\
+                                'até a cela de sua amiga e\na libertar...'
+                losewin_heart = 0
+                losewin_food = 0
+
+            elif option == 'B':
+                txt_result = 'Ao tentar atacar aquele homem\npelas costas, você o atinge,\nmas ele sabe revidar e te mata.'
+                losewin_heart = 0
+                losewin_food = 0
+                game_over = True
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Como um ninja você consegue\npassar pelo homem e abrir a\ncela de sua amiga.'
+                    losewin_heart = 0
+                    losewin_food = 0
+                elif rand == 4:
+                    txt_result = 'Tentando passar pelo homem você\nacaba fazendo muito barulho.\n\nAo perceber, o homem te pega\n' +\
+                                    'e te mata...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+        elif level == 6:
+            if option == 'A':
+                txt_result = 'Subir enquanto tudo está\ncaindo não foi uma boa ideia.\n\nVocê e sua amiga acabam morrendo\n' +\
+                                'esmagadas...'
+                losewin_heart = 0
+                losewin_food = 0
+                game_over = True
+
+            elif option == 'B':
+                if items_values['item_screwdriver'] and items_values['item_gear']:
+                    txt_result = 'Chegando a porta ela estava\nfaltando uma engrenagem e\nhavia um parafuso solto.\n\n' +\
+                                    'Utilizando a chave de fenda\ne a engrenagem você consegue\nabrir a porta e fugir...'
+                    losewin_heart = 0
+                    losewin_food = 0
+
+                elif items_values['item_screwdriver'] and not items_values['item_gear']:
+                    txt_result = 'Chegando a porta ela estava\nfaltando uma engrenagem e\nhavia um parafuso solto.\n\n' +\
+                                    'Mesmo com a chave de fendas\nvocês não conseguem abrir a\nporta e morrem subterradas...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+                elif not items_values['item_screwdriver'] and items_values['item_gear']:
+                    txt_result = 'Chegando a porta ela estava\nfaltando uma engrenagem e\nhavia um parafuso solto.\n\n' +\
+                                    'Mesmo com a engrenagem\nvocês não conseguem abrir a\nporta e morrem subterradas...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+                else:
+                    txt_result = 'Chegando a porta ela estava\nfaltando uma engrenagem e\nhavia um parafuso solto.\n\n' +\
+                                    'Sem a chave de fenda e sem a\nengrenagem a porta não abre\ne vocês morrem subterradas...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+
+            elif option == 'C':
+                if rand == 1 or rand == 2 or rand == 3:
+                    txt_result = 'Ao tentar ir em um carrinho\nda antiga mina, vocês acabam\nseguindo por um caminho\n' +\
+                                    'descontinuado e acabam\nmorrendo subterradas...'
+                    losewin_heart = 0
+                    losewin_food = 0
+                    game_over = True
+                elif rand == 4:
+                    txt_result = 'Indo pelo carrinho da antiga\nmina, vocês seguem por um\ncaminho correto e conseguem\n' +\
+                                    'escapar daquele lugar...'
+                    losewin_heart = 0
+                    losewin_food = 0
 
     items_values['heart'] += losewin_heart
     items_values['food'] += losewin_food
