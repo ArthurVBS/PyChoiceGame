@@ -13,15 +13,15 @@ def soundtrack(directory, vol = 1, soundtrack = 0):
     mixer.music.set_volume(vol) #0 -> 1
     
     if soundtrack == 0:
-        mixer.music.load(directory + '\Sound\soundtrack_00.mp3')
+        mixer.music.load(directory + '/Sounds/Soundtracks/soundtrack_00.mp3')
     elif soundtrack == 1:
-        mixer.music.load(directory + '\Sound\soundtrack_01.mp3')
+        mixer.music.load(directory + '/Sounds/Soundtracks/soundtrack_01.mp3')
     elif soundtrack == 2:
-        mixer.music.load(directory + '\Sound\soundtrack_02.mp3')
+        mixer.music.load(directory + '/Sounds/Soundtracks/soundtrack_02.mp3')
     elif soundtrack == 3:
-        mixer.music.load(directory + '\Sound\soundtrack_03.mp3')
+        mixer.music.load(directory + '/Sounds/Soundtracks/soundtrack_03.mp3')
     elif soundtrack == -1:
-        mixer.music.load(directory + '\Sound\game_over.mp3')
+        mixer.music.load(directory + '/Sounds/Voice/voice_game_over.mp3')
         mixer.music.play(1)
         return vol
 
@@ -37,7 +37,7 @@ def soundEffect(directory, vol = 1, soundEffect = None):
 
     if soundEffect != None:
         if soundEffect == 'Door':
-            se = mixer.Sound(directory + '\Sound\sound_effect_Door.wav')
+            se = mixer.Sound(directory + '/Sounds/Sound effects/sound_effect_Door.wav')
         se.play()
         se.set_volume(vol)
     else:
@@ -45,9 +45,9 @@ def soundEffect(directory, vol = 1, soundEffect = None):
 
 
 def mixer_pm(vol, plus_or_minus):
-    if plus_or_minus == "plus":
+    if plus_or_minus == 'plus':
         vol += 0.05
-    elif plus_or_minus == "minus":
+    elif plus_or_minus == 'minus':
         vol -= 0.05
 
     if vol > 1:
@@ -75,10 +75,10 @@ def connected():
 def voice_over(directory, msg = 'Insira o texto'):
     if connected() == True:
         tts = gTTS(text = msg, lang = 'pt-br', slow=False)
-        filename = directory + r'/Sound/voice.mp3'
+        filename = directory + r'/Sounds/Voice/voice.mp3'
         tts.save(filename)
         playsound(filename)
     else:
-        filename = directory + r'/Sound/voice_default.mp3'
+        filename = directory + r'/Sounds/Voice/voice_default.mp3'
         playsound(filename)
 

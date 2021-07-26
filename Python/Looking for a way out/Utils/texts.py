@@ -1,9 +1,9 @@
 #Import - Packages __________________________________________________________________________________________
 
 try:
-    from sound import soundEffect
+    from sounds import soundEffect
 except:
-    from Utils.sound import soundEffect
+    from Utils.sounds import soundEffect
 
 #Functions - Texts __________________________________________________________________________________________
 
@@ -865,7 +865,7 @@ def show_history(history_widgets, page, world):
                             'em direção ao topo de uma montanha.'
 
     elif world == 3:
-        title['text'] = '- Um caminho -'
+        title['text'] = '- O caminho -'
         if page == 0:
             history['text']='No alto da montanha Sam chega a uma\n' +\
                             'casa bem pequena e nela ela encontra\n' +\
@@ -892,8 +892,11 @@ def show_history(history_widgets, page, world):
                             'abandonada, todavia bem iluminada...\n\n'
 
     elif world == 4:
-        title['text'] = '- Uma saída -'
-        history['text']=''
+        title['text'] = '- A saída -'
+        if page == 0:
+            history['text']='Após sair daquela mina abandonada\n' +\
+                            'que estava desabando, Sam e Annie\n' +\
+                            'conseguem finalmente achar uma saída\n\n'
     
 
 def show_tutorial(tutorial_widgets, page):

@@ -9,11 +9,11 @@ from time import sleep
 #Import - Packages __________________________________________________________________________________________
 
 try:
-    from sound import  mixer_pm, soundtrack, voice_over
-    from txt import show_menu_options, show_top_level, show_tutorial, show_history
+    from sounds import mixer_pm, soundtrack, voice_over
+    from texts import show_menu_options, show_top_level, show_tutorial, show_history
 except:
-    from Utils.sound import mixer_pm, soundtrack, voice_over
-    from Utils.txt import show_menu_options, show_top_level, show_tutorial, show_history
+    from Utils.sounds import mixer_pm, soundtrack, voice_over
+    from Utils.texts import show_menu_options, show_top_level, show_tutorial, show_history
 
 #Variables __________________________________________________________________________________________________
 
@@ -414,8 +414,10 @@ def click_history(window, main_roots, directory, history_widgets):
 
 
 def click_end_of_the_game(window, main_roots, directory):
+    global vol
     window.title('Fim de Jogo')
     window.iconbitmap(directory + '/Assets/Icons/icon_02.ico')
+    soundtrack(directory, vol, soundtrack=0)
 
     main_roots['root_end_of_the_game'].place(x = 5, y = 5, width = 710, height = 460)
 
@@ -1212,7 +1214,7 @@ def pages_history(window, main_roots, directory, page, action, history_widgets):
         #Main_roots
         main_roots['root_history'].place_forget()
 
-    elif items_values['world'] == 4 and page == 2:
+    elif items_values['world'] == 4 and page == 1:
         page_number_his = 0
         #Sound
         soundtrack(directory, vol = vol, soundtrack = 3)
