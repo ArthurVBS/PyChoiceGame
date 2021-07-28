@@ -359,7 +359,7 @@ def menu_widgets(window, main_roots, directory, default, version, images, game_w
 
 def click_new_game(window, main_roots, directory, default, images, game_widgets, menu_widgets, history_widgets):
     ok_cancel_newgame = messagebox.askokcancel(title = "Novo Jogo", message = "Desejas Iniciar um novo Jogo?",
-    detail = "Caso possua um Save anterior ele será sobrescito")
+    detail = "Caso possua um Save anterior ele será sobrescrito")
     if ok_cancel_newgame:
         default(window, images, game_widgets)
         show_items_values(images, game_widgets)
@@ -463,7 +463,7 @@ def credits_widgets(window, main_roots, directory, version, title):
     lbl_credits_version.place(x = 275, y = 430, width = 160, height = 30)
 
     lbl_credits = Label(main_roots['root_credits'], font = 'courier 20 italic', text='Aluno: Arthur Vinícius Bezerra da Silva\n' +\
-                        'Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.--.--', bg=bg)
+                        'Curso: ADS - IFPE - 1º período - 2021.1\n\nInício: 2021.05.31      Fim: 2021.07.28', bg=bg)
     lbl_credits.place(x = 5, y = 170, width = 700, height = 250)
 
     lbl_credits_line_01 = Label(main_roots['root_credits'], bg=bg_dark)
