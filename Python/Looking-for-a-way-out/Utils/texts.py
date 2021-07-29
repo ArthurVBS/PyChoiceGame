@@ -591,7 +591,7 @@ def show_top_level(directory, world, level, option, rand, items_values, vol):
                     txt_result = 'Ao encontrar a fonte do\ncheiro sua garganta começa\na fechar-se, matando-a\nasfixiada pelo gás.'
                     losewin_heart = 0
                     losewin_food = 0
-                    game_over == True
+                    game_over = True
 
 
     elif world == 3:
