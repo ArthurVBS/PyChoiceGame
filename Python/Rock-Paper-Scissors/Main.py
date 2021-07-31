@@ -28,6 +28,6 @@ window.resizable(False,False)
 window['background'] = '#000'
 
 show(window, directory, roots, assets)
-click_show(window, directory, roots, 'menu')
+click_show(window, directory, roots, assets, 'menu')
 
 window.mainloop()
