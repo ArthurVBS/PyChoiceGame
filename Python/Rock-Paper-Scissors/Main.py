@@ -27,7 +27,7 @@ window.geometry(f'{width}x{height}+{pos_x}+{pos_y}')
 window.resizable(False,False)
 window['background'] = '#000'
 
-show(window, directory, roots, assets)
-click_show(window, directory, roots, assets, 'menu')
+build(window, directory, roots, assets)
+click_show(window, directory, roots, 'menu')
 
 window.mainloop()
