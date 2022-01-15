@@ -1,3 +1,0 @@
-pygame==2.0.1
-playsound==1.2.2
-gTTS==2.2.3
